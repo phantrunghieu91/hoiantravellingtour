@@ -1,0 +1,66 @@
+.accordion {
+  $class: &;
+  --_item-padding-block: clamp(.5rem, 2cqi, 1rem);
+  --_item-padding-inline: clamp(1rem, 2cqi, 1.5rem);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--_space-between-items, 0);
+
+  &__item {
+    display: grid;
+    transition: grid-template-rows 300ms;
+
+    &:has([aria-hidden="true"]) {
+      grid-template-rows: min-content 0fr;
+    }
+
+    &:has([aria-hidden="false"]) {
+      grid-template-rows: min-content 1fr;
+
+      #{$class}__button {
+        --_border-color: var(--primary-color-500);
+        background-color: var(--gray-color-50);
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__button {
+    all: unset;
+    cursor: pointer;
+
+    border-top: .125rem solid var(--_border-color, var(--gray-color-50));
+    padding-block: var(--_item-padding-block);
+    padding-inline: var(--_item-padding-inline);
+    background-color: var(--tertiary-color-50);
+    color: var(--primary-color-500);
+    font-size: clamp(.875rem, 1.5cqi, 1rem);
+
+    transition: color 300ms, background-color 300ms;
+
+    @include d-flex($justify: space-between, $align: center,);
+
+    &:hover {
+      color: var(--gray-color-500);
+    }
+  }
+
+  &__panel {
+    background-color: var(--tertiary-color-50);
+    overflow: hidden;
+    padding-inline: var(--_item-padding-inline);
+    font-size: clamp(.875rem, 1.5cqi, 1rem);
+
+    transition: padding 0ms 200ms;
+    
+    &:is([aria-hidden="false"]) {
+      transition: padding-block 150ms;
+      padding-block: var(--_item-padding-inline);
+    }
+
+    p {
+      margin-bottom: .625rem;
+    }
+  }
+}

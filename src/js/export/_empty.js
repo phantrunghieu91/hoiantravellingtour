@@ -1,0 +1,1 @@
+// Prevent Rollup error when no JS entries exist.
