@@ -6,7 +6,7 @@
 namespace gpweb\inc\controller;
 class CompanyInfo {
   private static CompanyInfo $instance;
-  private string $address;
+  private array $office;
   private string $email;
   private string $phone;
   private array $socials;
@@ -22,15 +22,15 @@ class CompanyInfo {
       return;
     }
     $companyInfo = get_field('company_information', 'gpw_settings');
-    $this->address = $companyInfo['address'] ?? '';
+    $this->office = $companyInfo['office'] ?? [];
     $this->email = $companyInfo['email'] ?? '';
     $this->phone = $companyInfo['phone_number'] ?? '';
     $this->socials = $companyInfo['social'] ?? [];
   }
-  public function getAddress() {
-    return $this->address;
+  public function getOffice(): array {
+    return $this->office;
   }
-  public function getPhoneNumber() {
+  public function getPhoneNumber(): string {
     return $this->phone;
   }
 }
