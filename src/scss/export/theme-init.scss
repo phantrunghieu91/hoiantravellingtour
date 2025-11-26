@@ -12,9 +12,9 @@
   @each $i, $color in $secondaryColors {
     --secondary-color-#{$i}: #{$color};
   }
-  // @each $i, $color in $tertiaryColors {
-  //   --tertiary-color-#{$i}: #{$color};
-  // }
+  @each $i, $color in $tertiaryColors {
+    --tertiary-color-#{$i}: #{$color};
+  }
   @each $i, $color in $successColors {
     --success-color-#{$i}: #{$color};
   }
@@ -39,8 +39,7 @@
 
   // text color
   --base-color: var(--gray-color-950);
-  --heading-color: var(--secondary-color-500);
-  --sub-heading-color: var(--primary-color-300);
+  --heading-color: var(--primary-color-500);
 }
 html > body {
   color: var(--base-color);
@@ -74,13 +73,55 @@ html > body {
   }
 }
 
+.section__sub-title {
+  display: block;
+  color: var(--primary-color-500);
+  font-size: var(--fs-md);
+  font-weight: bold;
+
+  &--center {
+    text-align: center;
+  }
+
+  &--secondary {
+    color: var(--secondary-color-500);
+  }
+}
+
 .section__title {
   font-size: var(--fs-xl);
   line-height: 1.2;
   color: var(--heading-color);
+  text-transform: capitalize;
+  margin-bottom: var(--spacing-2xl);
 
   &--center {
     text-align: center;
+  }
+
+  &--with-highlight {
+    .highlight {
+      color: var(--secondary-color-500);
+    }
+  }
+
+  &--has-separator {
+    --_separator-color: var(--secondary-color-500);
+    --_separator-width: 6.25rem;
+    --_separator-height: 0.1875rem;
+    position: relative;
+    padding-bottom: 1.25rem;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: var(--_separator-width);
+      height: var(--_separator-height);
+      background-color: var(--_separator-color);
+    }
   }
 }
 
