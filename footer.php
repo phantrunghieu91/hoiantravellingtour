@@ -9,6 +9,10 @@
 
 <footer id="footer" class="footer">
 
+	<?php get_template_part( 'gpw-templates/footer/partners-section' ) ?>
+
+	<?php get_template_part( 'gpw-templates/footer/subscribe-form-block' ) ?>
+
 	<?php get_template_part( 'gpw-templates/footer/bottom-section' ) ?>
 
 	<?php
