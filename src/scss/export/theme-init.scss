@@ -12,9 +12,9 @@
   @each $i, $color in $secondaryColors {
     --secondary-color-#{$i}: #{$color};
   }
-  // @each $i, $color in $tertiaryColors {
-  //   --tertiary-color-#{$i}: #{$color};
-  // }
+  @each $i, $color in $tertiaryColors {
+    --tertiary-color-#{$i}: #{$color};
+  }
   @each $i, $color in $successColors {
     --success-color-#{$i}: #{$color};
   }
