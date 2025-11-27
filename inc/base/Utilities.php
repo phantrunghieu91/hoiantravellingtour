@@ -37,7 +37,7 @@ class Utilities
     if( $url instanceof \WP_Error ) {
       $url = '';
     }
-    $return = !empty($url) && $url != '' ? esc_url($url) : 'javascript:void(0);';
+    $return = !empty($url) && $url != '' ? esc_url($url) : ($linkData['label'] != '' ? 'javascript:void(0);' : false);
     return $return;
   }
   public static function renderResponseImage( $images, $class = '' ) {
