@@ -1,0 +1,65 @@
+.header {
+  &.header {
+    container: header / inline-size;
+  }
+
+  & &-top {
+    background-color: var(--primary-color-500);
+
+    .certificate-list {
+      padding-block: 0.3125rem;
+
+      img {
+        max-height: 1.875rem;
+        max-width: 12.5rem;
+        object-fit: contain;
+      }
+    }
+
+    & .nav-small.nav > li.html {
+      font-size: var(--fs-sm);
+    }
+  }
+
+  &-main {
+    .header-nav-main {
+      &.nav-left {
+        flex: 1 0 auto;
+        justify-content: center;
+
+        & > .menu-item {
+          & > a {
+            color: var(--primary-color-500);
+            font-size: var(--fs-normal);
+          }
+
+          &:is(.current-menu-item, :hover) > a {
+            color: var(--secondary-color-500);
+          }
+        }
+      }
+    }
+  }
+
+  .nav > li > &__hotline-btn {
+    --_icon-size: 3.125rem;
+
+    display: grid;
+    grid-template-areas: 'icon text' 'icon phone';
+    grid-template-columns: var(--_icon-size, 3.125rem) minmax(0, 1fr);
+    grid-template-rows: repeat(2, calc( var(--_icon-size) / 2 - .25rem ));
+    justify-items: center;
+    gap: .25rem 1rem;
+
+    .material-symbols-outlined {
+      grid-area: icon;
+      width: calc(100% - .625rem);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-image: linear-gradient(to right, var(--secondary-color-500), var(--primary-color-500));
+      display: grid;
+      place-items: center;
+      color: #fff;
+    }
+  }
+}
