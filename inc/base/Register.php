@@ -47,6 +47,7 @@ class Register extends BaseController
     $this->shortcodes = [
       new \gpweb\shortcodes\ImgById('img_by_id'),
       new \gpweb\shortcodes\LinkTo('link_to'),
+      new \gpweb\shortcodes\CertificateList('certificate_list_sc'),
     ];
   }
 
@@ -61,6 +62,7 @@ class Register extends BaseController
     $this->enqueueStyle('theme-init', time());
     $this->enqueueStyle('google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
+    $this->enqueueStyle('gpw-header', time());
     $this->enqueueStyle('gpw-footer', time());
 
     // * Enqueue swiper for page that needs it

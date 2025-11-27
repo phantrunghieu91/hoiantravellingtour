@@ -1,0 +1,125 @@
+.header {
+  &.header {
+    container: header / inline-size;
+  }
+
+  & &-top {
+    background-color: var(--primary-color-500);
+
+    .certificate-list {
+      padding-block: 0.3125rem;
+
+      img {
+        max-height: 1.875rem;
+        max-width: 12.5rem;
+        object-fit: contain;
+      }
+    }
+
+    & .nav-small.nav > li.html {
+      font-size: var(--fs-sm);
+    }
+  }
+
+  &-main {
+    .header-nav-main {
+      &.nav-left {
+        flex: 1 0 auto;
+        justify-content: center;
+
+        & > .menu-item {
+          & > a {
+            position: relative;
+            color: var(--primary-color-500);
+            font-size: var(--fs-normal);
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              width: 100%;
+              height: .0625rem;
+              background-color: currentColor;
+              transform: scaleX(0);
+              transform-origin: left;
+
+              transition: transform 250ms ease;
+            }
+          }
+
+          &:is(.current-menu-item, :hover) > a {
+            color: var(--secondary-color-500);
+          }
+
+          &:hover > a:before {
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+  }
+
+  .nav > li > &__hotline-btn {
+    --_icon-size: 3.125rem;
+
+    display: grid;
+    grid-template-areas: 'icon text' 'icon phone';
+    grid-template-columns: var(--_icon-size, 3.125rem) minmax(0, 1fr);
+    grid-template-rows: repeat(2, calc( var(--_icon-size) / 2 - .25rem ));
+    gap: .25rem .75rem;
+    
+    font-size: var(--fs-normal);
+    line-height: 1;
+
+    &:after {
+      content: '';
+      grid-area: icon;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: .0625rem solid var(--tertiary-color-500);
+      
+      animation: pulse-border 1.5s infinite;
+    }
+
+    .material-symbols-outlined {
+      z-index: 2;
+      grid-area: icon;
+      align-self: center;
+      justify-self: center;
+      width: calc(100% - .625rem);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-image: linear-gradient(to right, var(--secondary-color-500), var(--primary-color-500));
+      display: grid;
+      place-items: center;
+      color: #fff;
+    }
+
+    .header__hotline-btn-text {
+      grid-area: text;
+      align-self: end;
+      color: var(--primary-color-500);
+      text-transform: capitalize;
+      font-weight: 400;
+    }
+
+    .header__hotline-btn-phone {
+      align-self: start;
+      grid-area: phone;
+      font-weight: 700;
+      color: var(--secondary-color-500);
+    }
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
