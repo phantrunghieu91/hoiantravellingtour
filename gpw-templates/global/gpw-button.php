@@ -28,6 +28,7 @@ $buttonClasses[] = match ($buttonPosition) {
 };
 match ($buttonStyle) {
   'primary' => $buttonClasses[] = 'gpw-button__primary',
+  'secondary' => $buttonClasses[] = 'gpw-button__secondary',
   'white-primary' => $buttonClasses[] = 'gpw-button__white-primary',
   'outline' => $buttonClasses[] = 'gpw-button__outlined',
   default => $buttonClasses[] = '',
