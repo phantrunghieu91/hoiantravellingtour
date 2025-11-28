@@ -57,6 +57,101 @@
 /* =============================== */
 /* =           Solutions         = */
 /* =============================== */
-.solutions {
+.our-solutions {
+  --_transition-duration: 250ms;
+  --_transition-func: ease-in-out;
   padding-block: 3.125rem;  
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--_cols, 2), minmax(0, 1fr));
+    gap: .625rem;
+  }
+
+  .our-solution {
+    --_padding: 1.25rem;
+    display: grid;
+    grid-template-areas: 'solution-stack';
+    overflow: hidden;
+
+    &__image, &__content, &:after {
+      grid-area: solution-stack;
+    }
+
+    &__image {
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    &:after {
+      content: '';
+      opacity: 0;
+      z-index: 2;
+
+      transition: opacity var(--_transition-duration) var(--_transition-func);
+    }
+
+    &:after {
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgb( 0 0 0 / .25);
+    }
+
+    &__content {
+      position: relative;
+      z-index: 3;
+      padding: var(--_padding);
+      display: grid;
+      align-items: end;
+      transition: align-items var(--_transition-duration) var(--_transition-func);
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: var(--_padding);
+        left: var(--_padding);
+        width: calc(100% - (var(--_padding) * 2));
+        height: calc(100% - (var(--_padding) * 2));
+        border: .0625rem solid #fff;
+        opacity: 0;
+        pointer-events: none;
+
+        transition: opacity var(--_transition-duration) var(--_transition-func);
+      }
+    }
+
+    &__title {
+      position: relative;
+      top: 0;
+      text-align: center;
+      margin: 0;
+      color: #fff;
+
+      transition: top var(--_transition-duration) var(--_transition-func), transform 0s 0s;
+    }
+
+    &:hover {
+      &:after {
+        opacity: 1;
+      }
+
+      .our-solution__title {
+        top: -50%;
+        transform: translateY(50%);
+      }
+      
+      .our-solution__content {
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    --_cols: 4;
+  }
 }
