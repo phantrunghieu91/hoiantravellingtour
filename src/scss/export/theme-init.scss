@@ -99,10 +99,8 @@ html > body {
     text-align: center;
   }
 
-  &--with-highlight {
-    .highlight {
-      color: var(--secondary-color-500);
-    }
+  .highlight {
+    color: var(--secondary-color-500);
   }
 
   &--has-separator {
@@ -139,7 +137,8 @@ html > body {
   aspect-ratio: 16/9;
 }
 
-.gpw-response-image, .gpw-response-image > img {
+.gpw-response-image,
+.gpw-response-image > img {
   display: block;
   width: 100%;
   height: auto;

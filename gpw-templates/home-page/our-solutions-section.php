@@ -12,7 +12,7 @@ if( empty( $sectionData['solution'] ) ) {
 ?>
 <section class="our-solutions">
   <div class="section__inner">
-    <h2 class="section__title section__title--center section__title--with-highlight section__title--has-separator"><?= wp_kses_post( $sectionData['title'] ) ?></h2>
+    <h2 class="section__title section__title--center section__title--has-separator"><?= wp_kses_post( $sectionData['title'] ) ?></h2>
     <div class="our-solutions__grid">
       <?php foreach( $sectionData['solution'] as $solution ) : 
         $url = Utils::getUrl( $solution['link_to'] );
@@ -28,7 +28,7 @@ if( empty( $sectionData['solution'] ) ) {
           <div class="our-solution__content">
 
             <h3 class="our-solution__title"><?= esc_html( $title ) ?></h3>
-            
+
           </div>
 
         </a>
