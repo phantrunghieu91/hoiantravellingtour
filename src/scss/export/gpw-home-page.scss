@@ -1,3 +1,4 @@
+@use '../components/gpw-tabs';
 /* =============================== */
 /* =             Hero            = */
 /* =============================== */
@@ -153,5 +154,34 @@
 
   @include container-query(content, md, gt) {
     --_cols: 4;
+  }
+}
+/* =============================== */
+/* =           Core Value        = */
+/* =============================== */
+.core-value {
+  .section__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: var(--spacing-xl) var(--spacing-3xl);
+  }
+
+  &__description {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .tabs__nav-item {
+    font-weight: 700;
+  }
+
+  &__tabs {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  @include container-query(content, md, gt) {
+    .section__inner {
+      grid-template-columns: 40% minmax(0, 1fr);
+    }
   }
 }
