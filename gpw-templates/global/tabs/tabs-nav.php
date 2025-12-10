@@ -17,8 +17,8 @@ $navItems = $args['nav_items'] ?? [];
 $hasAos = $args['has_aos'] ?? false;
 $activeIndex = $args['active_index'] ?? 0;
 $orientation = $args['orientation'] ?? 'horizontal';
-$style = $args['style'] ?? 'underline';
-$validStyles = ['underline', 'pills', 'dot-after'];
+$style = $args['style'] ?? 'default';
+$validStyles = ['default', 'underline', 'pills', 'dot-after'];
 if (empty($navItems)) {
   return;
 }

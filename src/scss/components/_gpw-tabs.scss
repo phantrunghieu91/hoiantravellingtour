@@ -1,4 +1,12 @@
 .tabs {
+  $class: &;
+
+  &:has(&__nav--default) {
+    --_border-color: var(--_text-color, var(--gray-color-500));
+    --_border-width: 0.0625rem;
+    --_active-bg-color: var(--gray-color-100);
+  }
+
   &__nav {
     &-menu {
       list-style: none;
@@ -18,7 +26,7 @@
       cursor: pointer;
       font-size: var(--fs-normal);
 
-      color: var( --_text-color, var(--gray-color-500) );
+      color: var(--_text-color, var(--gray-color-500));
 
       transition: all 200ms;
     }
@@ -49,8 +57,8 @@
     &:is(&--pills) {
       .tabs__nav-item {
         padding: 0.3125rem 1rem;
-        border: .0625rem solid var(--_border-color, var(--gray-color-100));
-        border-radius: var(--_border-radius, 2rem );
+        border: 0.0625rem solid var(--_border-color, var(--gray-color-100));
+        border-radius: var(--_border-radius, 2rem);
         background-color: var(--_background-color, transparent);
 
         &[aria-selected='true'] {
@@ -62,6 +70,30 @@
         &[aria-selected='false']:hover {
           --_text-color: var(--primary-color-500);
           --_border-color: var(--_text-color);
+        }
+      }
+    }
+
+    &:is(&--default) {
+      position: relative;
+
+      #{$class}__nav-menu {
+        position: relative;
+        z-index: 2;
+        gap: 0;
+        margin-bottom: calc(-1 * var(--_border-width));
+      }
+
+      #{$class}__nav-item {
+        padding: 0.875rem 0.9375rem;
+        color: var(--base-color);
+
+        &[aria-selected='true'] {
+          border-style: solid;
+          border-color: var(--_border-color);
+          border-width: var(--_border-width) var(--_border-width) 0 var(--_border-width);
+          background-color: var(--_active-bg-color);
+          color: var(--secondary-color-500);
         }
       }
     }
@@ -85,5 +117,16 @@
       z-index: -1;
       opacity: 0;
     }
+  }
+
+  &:has(&__nav--default) &__content {
+    background-color: var(--_active-bg-color);
+    position: relative;
+    z-index: 1;
+    border: var(--_border-width) solid var(--_border-color);
+  }
+  
+  &:has(&__nav--default) &__panel {
+    padding: clamp( .875rem, 2cqi, 1.25rem );
   }
 }
