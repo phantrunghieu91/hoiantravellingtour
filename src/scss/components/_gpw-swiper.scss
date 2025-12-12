@@ -52,12 +52,13 @@
   &.swiper-pagination-bullets {
     padding-block: .3125rem;
 
-    @include d-flex(row, center);
+    display: flex;
+    justify-content: center;
 
     .swiper-pagination-bullet {
-      --swiper-pagination-bullet-inactive-color: #fff;
+      --swiper-pagination-bullet-inactive-color: var(--primary-color-500);
       --swiper-pagination-bullet-inactive-opacity: .65;
-      --swiper-pagination-color: #fff;
+      --swiper-pagination-color: var(--primary-color-500);
       --swiper-pagination-bullet-size: .5rem;
       --swiper-pagination-bullet-border-radius: calc( var(--swiper-pagination-bullet-size) / 2 );
       --swiper-pagination-bullet-horizontal-gap: .2rem;
