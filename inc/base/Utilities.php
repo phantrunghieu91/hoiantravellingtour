@@ -105,7 +105,7 @@ class Utilities
       return '';
     }
     echo sprintf(
-      '<video class="gpw-video-block %s" muted loop playsinline%s>
+      '<video class="gpw-video-block %s" muted playsinline%s>
           <source src="%s" type="%s">
           Your browser does not support the video tag.
         </video>', 
