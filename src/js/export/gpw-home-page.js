@@ -1,4 +1,5 @@
 import GPWTabs from "../components/gpw-tabs";
+import Testimonial from "../components/testimonial";
 document.addEventListener('DOMContentLoaded', function() {
   new GPWTabs();
 
@@ -75,4 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 50);      
     }
   }.init();
+
+  new Testimonial();
 });

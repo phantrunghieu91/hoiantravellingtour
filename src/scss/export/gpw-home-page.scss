@@ -1,14 +1,13 @@
 @use '../components/gpw-tabs';
+@use '../components/gpw-swiper';
+@use '../components/testimonial-section';
 /* =============================== */
 /* =             Hero            = */
 /* =============================== */
 .hero {
   --_text-color: #fff;
 
-  height: calc(100svh - var(--_gpw-header-height, 8.125rem));
-
   .section__inner {
-    height: 100%;
     display: grid;
     grid-template-areas: 'hero-stack';
 
@@ -27,8 +26,6 @@
 
   &__background-video {
     z-index: 1;
-    height: 100%;
-    object-fit: cover;
   }
 
   &__content {
