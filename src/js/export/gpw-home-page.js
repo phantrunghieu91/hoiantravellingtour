@@ -78,4 +78,44 @@ document.addEventListener('DOMContentLoaded', function() {
   }.init();
 
   new Testimonial();
+
+  // Blogs carousel
+  const blogsSection = {
+    init() {
+      try {
+        this.cachedDOM();
+        this.initSwiper();
+      } catch (error) {
+        console.error('BLOGS SECTION:', error);
+      }
+    },
+    cachedDOM() {
+      this.swiperEl = document.querySelector('.blogs__post-grid .swiper');
+      if(!this.swiperEl) {
+        throw new Error('Swiper element not found');
+      }
+    },
+    initSwiper() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error('Swiper is not loaded');
+      }
+      this.swiper = new Swiper(this.swiperEl, {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          draggable: true,
+        },
+        breakpoints: {
+          550: {
+            slidesPerView: 2,
+          },
+          850: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          }
+        }
+      });
+    }
+  }.init();
 });
