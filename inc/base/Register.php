@@ -72,7 +72,7 @@ class Register extends BaseController
     }
 
     if (is_front_page()) {
-      // $this->enqueueScript('gpw-home-page', time());
+      $this->enqueueScript('gpw-home-page', time());
       $this->enqueueStyle('gpw-home-page', time());
     }
   }
