@@ -30,7 +30,8 @@
     --_title-height: calc(var(--_title-fs) * var(--_title-leading) * 2);
     --_desc-fs: var(--fs-normal);
     --_desc-leading: 1.5;
-    --_desc-height: calc(var(--_desc-fs) * var(--_desc-leading) * 2);
+    // --_desc-height: calc(var(--_desc-fs) * var(--_desc-leading) * 2);
+    --_desc-height: auto;
     --_separator-height: .1875rem;
     --_title-color: var(--primary-color-500);
     --_text-color: var(--base-color);
@@ -77,7 +78,7 @@
       display: grid;
       grid-template-rows: var(--_card-icon-size) var(--_title-height) var(--_separator-height) var(--_desc-height) auto;
       gap: 1.25rem;
-      padding: clamp(1.875rem, 2.5cqi, 2.5rem) 1.25rem;
+      padding: clamp(1.875rem, 2.5cqi, 2.5rem) clamp(.9375rem, 2cqi, 1.25rem);
 
       text-align: center;
     }
