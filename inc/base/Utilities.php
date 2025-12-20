@@ -37,7 +37,7 @@ class Utilities
     if( $url instanceof \WP_Error ) {
       $url = '';
     }
-    $return = !empty($url) && $url != '' ? esc_url($url) : 'javascript:void(0);';
+    $return = !empty($url) && $url != '' ? esc_url($url) : ($linkData['label'] != '' ? 'javascript:void(0);' : false);
     return $return;
   }
   public static function renderResponseImage( $images, $class = '' ) {
@@ -66,7 +66,7 @@ class Utilities
     $amount = floatval( $amount );
     return $fmt->formatCurrency( $amount, 'USD' );
   }
-  public static function renderYoutubeEmbed( $youtubeLink ) {
+  public static function renderYoutubeEmbed( $youtubeLink, $autoplay = false ) {
     if( empty( $youtubeLink ) ) {
       return '';
     }
@@ -90,10 +90,10 @@ class Utilities
     }
     $embedUrl = "https://www.youtube.com/embed/{$youtubeVideoID}";
     echo sprintf('<div class="youtube-embed">
-      <iframe src="%s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>', esc_url( $embedUrl ) );
+      <iframe src="%s" title="YouTube video player" frameborder="0" allow="accelerometer;%s clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>', esc_url( $embedUrl ), $autoplay ? ' autoplay;' : '' );
   }
-  public static function renderVideoBlock( $videoData, $class = '' ) {
+  public static function renderVideoBlock( $videoData, $class = '', $autoplay = true ) {
     if( (!is_array($videoData) && empty($videoData)) || (is_array($videoData) && empty($videoData['id'])) ) {
       return '';
     }
@@ -105,11 +105,12 @@ class Utilities
       return '';
     }
     echo sprintf(
-      '<video class="gpw-video-block %s" autoplay muted loop playsinline>
+      '<video class="gpw-video-block %s" muted playsinline%s>
           <source src="%s" type="%s">
           Your browser does not support the video tag.
         </video>', 
       esc_attr( $class ),
+      $autoplay ? ' autoplay' : '',
       esc_url( $videoSrc ),
       esc_attr( $videoType )
     );

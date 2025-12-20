@@ -70,6 +70,11 @@ class Register extends BaseController
       $this->enqueueScript('swiper');
       $this->enqueueStyle('swiper');
     }
+
+    if (is_front_page()) {
+      $this->enqueueScript('gpw-home-page', time());
+      $this->enqueueStyle('gpw-home-page', time());
+    }
   }
 
   /**

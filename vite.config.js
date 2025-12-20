@@ -18,6 +18,14 @@ const scriptEntries = fs
   .filter(file => file.endsWith('.js'))
   .map(file => file.replace('.js', ''));
 
+if (scriptEntries.length > 1) {
+  // remove _empty entry if there are other script entries
+  const emptyIndex = scriptEntries.indexOf('_empty');
+  if (emptyIndex > -1) {
+    scriptEntries.splice(emptyIndex, 1);
+  }
+}
+
 const scssEntries = fs
   .readdirSync(path.resolve(__dirname, 'src/scss/export'))
   .filter(file => file.endsWith('.scss'))
@@ -26,12 +34,10 @@ const scssEntries = fs
 const generateInputs = (entries, type) => {
   const input = {};
   entries.forEach(name => {
-    input[name] = path.resolve(__dirname, `src/${type}/export/${name}.${type}`);
+    input[`${type}:${name}`] = path.resolve(__dirname, `src/${type}/export/${name}.${type}`);
   });
   return input;
 };
-
-
 
 // ------------------------------
 // SFTP Upload Logic (same as gulp-sftp-up4)
@@ -80,7 +86,7 @@ const uploadDirToSFTP = async (localDir, remoteDir) => {
 // ------------------------------
 // Vite Config
 // ------------------------------
-export default defineConfig({
+const config = defineConfig({
   root: './src',
   build: {
     outDir: '../assets',
@@ -90,16 +96,22 @@ export default defineConfig({
 
     rollupOptions: {
       input: {
-        ...scriptEntries.length > 0 ? generateInputs(scriptEntries, SCRIPT_TYPE) : { empty: path.resolve(__dirname, 'src/js/export/_empty.js') },
+        ...(scriptEntries.length > 0 ? generateInputs(scriptEntries, SCRIPT_TYPE) : { empty: path.resolve(__dirname, 'src/js/export/_empty.js') }),
         ...generateInputs(scssEntries, STYLE_TYPE),
       },
 
       output: {
-        entryFileNames: 'js/[name].min.js',
+        entryFileNames: info => {
+          const name = info.name.replace(/^js[:_]/, '').replace(/^scss[:_]/, '');
+          return `js/${name}.min.js`;
+        },
 
         assetFileNames: assetInfo => {
           if (assetInfo.name.endsWith('.css')) {
-            const clean = assetInfo.name.replace('.css', '');
+            const clean = assetInfo.name
+              .replace(/^js[:_]/, '')
+              .replace(/^scss[:_]/, '')
+              .replace('.css', '');
             return `css/${clean}.min.css`;
           }
           return '[name].[ext]';
@@ -143,3 +155,5 @@ export default defineConfig({
     },
   ],
 });
+
+export default config;

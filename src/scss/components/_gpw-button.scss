@@ -8,8 +8,8 @@
   --_gpw-button-font-weight: 700;
   --_gpw-button-line-height: 1.5;
 
-  --_gpw-button-padding-inline: 0rem;
-  --_gpw-button-padding-block: 0rem;
+  --_gpw-button-padding-inline: var(--spacing-lg);
+  --_gpw-button-padding-block: var(--spacing-md);
 
   --_gpw-button-hover-text-color: var(--primary-color-500);
   --_gpw-button-hover-background-color: transparent;
@@ -24,11 +24,12 @@
   background-color: var(--_gpw-button-background-color);
   color: var(--_gpw-button-text-color);
   border: 0.0625rem solid var(--_gpw-button-border-color);
+  border-radius: var(--_gpw-button-border-radius, .3125rem);
   font-size: var(--_gpw-button-font-size);
   font-weight: var(--_gpw-button-font-weight);
   line-height: var(--_gpw-button-line-height);
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: uppercase;
 
   transition-duration: 200ms;
   transition-property: background-color, color, border-color;
@@ -43,11 +44,6 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-  }
-
-  &:is(#{$class}__outlined, #{$class}__primary) {
-    --_gpw-button-padding-inline: var(--spacing-2xl);
-    --_gpw-button-padding-block: var(--spacing-sm);
   }
 
   &__outlined {
@@ -96,6 +92,15 @@
     --_gpw-button-hover-background-color: var(--primary-color-400);
     --_gpw-button-hover-border-color: var(--primary-color-400);
     --_gpw-button-hover-text-color: #fff;
+  }
+
+  &__secondary {
+    --_gpw-button-text-color: #fff;
+    --_gpw-button-background-color: var(--secondary-color-500);
+    --_gpw-button-border-color: var(--secondary-color-500);
+    --_gpw-button-hover-background-color: #fff;
+    --_gpw-button-hover-border-color: var(--secondary-color-500);
+    --_gpw-button-hover-text-color: var(--primary-color-500);
   }
 
   &--center {
