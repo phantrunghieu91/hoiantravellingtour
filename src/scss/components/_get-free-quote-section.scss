@@ -1,0 +1,43 @@
+@use '../abstracts/' as *;
+.get-free-quote {
+  --_overlay-gradient-color: oklch( from var(--primary-color-500) l c h / .65 );
+  padding-block: 6.25rem;
+
+  background: linear-gradient( to right, var(--_overlay-gradient-color) 0%, var(--_overlay-gradient-color) 100%), var(--_background-image, none);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .section__inner {
+    --_section-inner-max-width: 50rem;
+
+    padding: clamp(1.875rem, 4cqi, 2.8125rem);
+    background-color: #fff;
+    border-radius: 1.5rem;
+  }
+
+  .wpcf7 {
+    &-form {
+      margin-bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(var(--_form-cols, 1), minmax(0, 1fr));
+      gap: clamp( .9375rem, 2cqi, 1.25rem );
+    }
+
+    &-form-control {
+      margin-bottom: 0;
+    }
+
+    &-form-control-wrap:is([data-name=your-name], [data-name=subject], [data-name=your-message]), &-submit, &-response-output {
+      grid-column: 1 / -1;
+    }
+
+    & form .wpcf7-response-output {
+      margin-block: 0;
+    }
+  }
+
+  @include container-query( content, sm, gt ) {
+    --_form-cols: 2;
+  }
+}

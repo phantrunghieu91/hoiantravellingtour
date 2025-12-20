@@ -16,6 +16,8 @@ get_template_part( 'gpw-templates/home-page/statistic-section' );
 
 get_template_part( 'gpw-templates/home-page/value-proposition-section' );
 
+get_template_part( 'gpw-templates/global/get-free-quote-section' );
+
 get_template_part( 'gpw-templates/global/testimonial-section');
 
 get_template_part( 'gpw-templates/home-page/blogs-section' );
