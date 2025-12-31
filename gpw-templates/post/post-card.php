@@ -2,14 +2,31 @@
 /**
  * @author Hieu "Jin" Phan Trung
  * * Template: Post - Post card
+ * Args:
+ *  - orientation: 'vertical' | 'horizontal' (default: 'vertical')
+ *  - show_excerpt: bool (default: true)
+ *  - is_featured: bool (default: false)
+ *  - footer_display: 'none' | 'meta' | 'read-more' (default: 'none')
  */
+$orientation = $args['orientation'] ?? 'vertical';
+$showExcerpt = $args['show_excerpt'] ?? true;
+$isFeatured = $args['is_featured'] ?? false;
+$footerDisplay = $args['footer_display'] ?? 'none';
+
 $postID = get_the_ID();
 $title = get_the_title();
 $excerpt = get_the_excerpt();
 $permalink = get_permalink();
+$authorName = get_the_author();
+$publishDate = get_the_date( 'F j, Y' );
 $featuredImageID = get_post_thumbnail_id() ?: PLACEHOLDER_IMAGE_ID;
+
+$classes = [ 'post-card', "post-card--{$orientation}", "post-card--{$postID}" ];
+if( $isFeatured ) {
+  $classes[] = 'post-card--featured';
+}
 ?>
-<article class="post-card post-card--<?= esc_attr( $postID ) ?>">
+<article class="<?= esc_attr( implode( ' ', $classes ) ) ?>">
   <a href="<?= esc_url( $permalink ) ?>" class="post-card__thumbnail">
     <?= wp_get_attachment_image( $featuredImageID, 'medium_large', false, [ 'class' => 'post-card__image', 'alt' => esc_attr( $title ) ] ) ?>
   </a>
@@ -17,17 +34,28 @@ $featuredImageID = get_post_thumbnail_id() ?: PLACEHOLDER_IMAGE_ID;
     <h3 class="post-card__title line-clamp">
       <a href="<?= esc_url( $permalink ) ?>"><?= esc_html( $title ) ?></a>
     </h3>
-    <?php if ( ! empty( $excerpt ) ): ?>
+    <?php if ( $showExcerpt && !empty( $excerpt ) ): ?>
       <div class="post-card__excerpt line-clamp">
         <?= esc_html( $excerpt ) ?>
       </div>
     <?php endif; ?>
-    <a href="<?= esc_url( $permalink ) ?>" class="post-card__read-more">
-      <span><?php esc_html_e( 'Read More', 'gpw' ); ?></span>
-      <span class="material-symbols-outlined">arrow_right_alt</span>
-    </a>
+    <?php if( $footerDisplay === 'read-more' ): ?>
+
+      <a href="<?= esc_url( $permalink ) ?>" class="post-card__read-more">
+        <span><?php esc_html_e( 'Read More', 'gpw' ); ?></span>
+        <span class="material-symbols-outlined">arrow_right_alt</span>
+      </a>
+
+    <?php elseif( $footerDisplay === 'meta' ): ?>
+
+      <ul class="post-card__meta">
+        <li class="post-card__meta-item author"><?= esc_html( $authorName ) ?></li>
+        <li class="post-card__meta-item date"><?= esc_html( $publishDate ) ?></li>
+      </ul>
+
+    <?php endif ?>
   </div>
 </article>
 <?php 
 // ! Cleanup variables
-unset( $postID, $title, $excerpt, $permalink, $featuredImageID );
+unset( $postID, $title, $excerpt, $permalink, $featuredImageID, $authorName, $publishDate, $orientation, $showExcerpt, $isFeatured, $footerDisplay, $classes );
