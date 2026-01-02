@@ -2,14 +2,16 @@
 /**
  * @author Hieu "Jin" Phan Trung
  * * Template: Post - Post card
- * Args:
+ * ! Args:
  *  - orientation: 'vertical' | 'horizontal' (default: 'vertical')
+ *  - show_category: bool (default: false)
  *  - show_excerpt: bool (default: true)
  *  - is_featured: bool (default: false)
  *  - footer_display: 'none' | 'meta' | 'read-more' (default: 'none')
  */
 $orientation = $args['orientation'] ?? 'vertical';
 $showExcerpt = $args['show_excerpt'] ?? true;
+$showCategory = $args['show_category'] ?? false;
 $isFeatured = $args['is_featured'] ?? false;
 $footerDisplay = $args['footer_display'] ?? 'none';
 
@@ -20,17 +22,31 @@ $permalink = get_permalink();
 $authorName = get_the_author();
 $publishDate = get_the_date( 'F j, Y' );
 $featuredImageID = get_post_thumbnail_id() ?: PLACEHOLDER_IMAGE_ID;
+$categories = get_the_category();
+$primaryCategory = get_post_meta( $postID, 'rank_math_primary_category', true );
+$primaryCategory = $primaryCategory 
+  ? get_term( $primaryCategory ) 
+  : ( has_category() ? $categories[0] : null );
 
 $classes = [ 'post-card', "post-card--{$orientation}", "post-card--{$postID}" ];
 if( $isFeatured ) {
   $classes[] = 'post-card--featured';
 }
 ?>
-<article class="<?= esc_attr( implode( ' ', $classes ) ) ?>">
+<article class="<?= esc_attr( implode( ' ', $classes ) ) ?>" 
+  data-cat="<?= esc_attr( implode( ',', wp_list_pluck( $categories, 'term_id' ) ) ) ?>"
+>
   <a href="<?= esc_url( $permalink ) ?>" class="post-card__thumbnail">
     <?= wp_get_attachment_image( $featuredImageID, 'medium_large', false, [ 'class' => 'post-card__image', 'alt' => esc_attr( $title ) ] ) ?>
   </a>
   <div class="post-card__content">
+    <?php if( $showCategory && $primaryCategory ): ?>
+
+      <a href="<?= esc_url( get_category_link( $primaryCategory->term_id ) ) ?>" class="post-card__category">
+        <?= esc_html( $primaryCategory->name ) ?>
+      </a>
+
+    <?php endif ?>
     <h3 class="post-card__title line-clamp">
       <a href="<?= esc_url( $permalink ) ?>"><?= esc_html( $title ) ?></a>
     </h3>
