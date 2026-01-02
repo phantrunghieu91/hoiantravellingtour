@@ -7,6 +7,7 @@
  *  - show_category: bool (default: false)
  *  - show_excerpt: bool (default: true)
  *  - is_featured: bool (default: false)
+ *  - is_template: bool (default: false)
  *  - footer_display: 'none' | 'meta' | 'read-more' (default: 'none')
  */
 $orientation = $args['orientation'] ?? 'vertical';
@@ -14,6 +15,7 @@ $showExcerpt = $args['show_excerpt'] ?? true;
 $showCategory = $args['show_category'] ?? false;
 $isFeatured = $args['is_featured'] ?? false;
 $footerDisplay = $args['footer_display'] ?? 'none';
+$isTemplate = $args['is_template'] ?? false;
 
 $postID = get_the_ID();
 $title = get_the_title();
@@ -28,36 +30,47 @@ $primaryCategory = $primaryCategory
   ? get_term( $primaryCategory ) 
   : ( has_category() ? $categories[0] : null );
 
-$classes = [ 'post-card', "post-card--{$orientation}", "post-card--{$postID}" ];
+$classes = [ 'post-card', "post-card--{$orientation}" ];
+$classes[] = $isTemplate ? 'post-card--template' : "post-card--{$postID}";
+
 if( $isFeatured ) {
   $classes[] = 'post-card--featured';
 }
 ?>
+<?php if( $isTemplate ) {
+  echo '<template class="post-card__template">';
+} ?>
 <article class="<?= esc_attr( implode( ' ', $classes ) ) ?>" 
-  data-cat="<?= esc_attr( implode( ',', wp_list_pluck( $categories, 'term_id' ) ) ) ?>"
+  <?php if( !$isTemplate ) echo sprintf('data-cat="%s"', esc_attr( implode( ',', wp_list_pluck( $categories, 'term_id' ) ) ) ) ?>
 >
   <a href="<?= esc_url( $permalink ) ?>" class="post-card__thumbnail">
-    <?= wp_get_attachment_image( $featuredImageID, 'medium_large', false, [ 'class' => 'post-card__image', 'alt' => esc_attr( $title ) ] ) ?>
+    <?= $isTemplate ? '<img src="" alt="" class="post-card__image" />'
+      : wp_get_attachment_image( $featuredImageID, 'medium_large', false, [ 'class' => 'post-card__image', 'alt' => esc_attr( $title ) ] ) ?>
   </a>
   <div class="post-card__content">
-    <?php if( $showCategory && $primaryCategory ): ?>
+    <?php if( $showCategory && $primaryCategory ) {
+      echo $isTemplate ? ''
+        : sprintf('<a href="%s" class="post-card__category">%s</a>',
+            esc_url( get_category_link( $primaryCategory->term_id ) ),
+            esc_html( $primaryCategory->name )
+          );
+    } ?>
 
-      <a href="<?= esc_url( get_category_link( $primaryCategory->term_id ) ) ?>" class="post-card__category">
-        <?= esc_html( $primaryCategory->name ) ?>
-      </a>
-
-    <?php endif ?>
     <h3 class="post-card__title line-clamp">
-      <a href="<?= esc_url( $permalink ) ?>"><?= esc_html( $title ) ?></a>
+
+      <?= sprintf('<a href="%s">%s</a>', 
+        $isTemplate ? '' : esc_url( $permalink ), 
+        $isTemplate ? '' : esc_html( $title ) ) ?>
+
     </h3>
     <?php if ( $showExcerpt && !empty( $excerpt ) ): ?>
       <div class="post-card__excerpt line-clamp">
-        <?= esc_html( $excerpt ) ?>
+        <?= $isTemplate ? '' : esc_html( $excerpt ) ?>
       </div>
     <?php endif; ?>
     <?php if( $footerDisplay === 'read-more' ): ?>
 
-      <a href="<?= esc_url( $permalink ) ?>" class="post-card__read-more">
+      <a href="<?= $isTemplate ? '' : esc_url( $permalink ) ?>" class="post-card__read-more">
         <span><?php esc_html_e( 'Read More', 'gpw' ); ?></span>
         <span class="material-symbols-outlined">arrow_right_alt</span>
       </a>
@@ -65,13 +78,17 @@ if( $isFeatured ) {
     <?php elseif( $footerDisplay === 'meta' ): ?>
 
       <ul class="post-card__meta">
-        <li class="post-card__meta-item author"><?= esc_html( $authorName ) ?></li>
-        <li class="post-card__meta-item date"><?= esc_html( $publishDate ) ?></li>
+        <li class="post-card__meta-item author"><?= $isTemplate ? '' : esc_html( $authorName ) ?></li>
+        <li class="post-card__meta-item date"><?= $isTemplate ? '' : esc_html( $publishDate ) ?></li>
       </ul>
 
     <?php endif ?>
   </div>
 </article>
 <?php 
+if( $isTemplate ) {
+  echo '</template>';
+}
+
 // ! Cleanup variables
 unset( $postID, $title, $excerpt, $permalink, $featuredImageID, $authorName, $publishDate, $orientation, $showExcerpt, $isFeatured, $footerDisplay, $classes );

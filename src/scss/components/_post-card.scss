@@ -153,7 +153,7 @@
     --_shadow-spread: 0.625rem;
   }
 
-  #{$class}--vertical:hover {
+  &--vertical:not(&--featured):hover {
     transform: translateY(-0.3125rem);
   }
 
