@@ -1,0 +1,55 @@
+@use '../components/post-card';
+/* =============================== */
+/* =       Category header       = */
+/* =============================== */
+.category-header {
+  padding-block: 1.5rem;
+  
+  &__title {
+    font-size: var(--fs-2xl);
+    color: var(--primary-color-500);
+  }
+}
+/* =============================== */
+/* =         Latest posts        = */
+/* =============================== */
+.latest-posts {
+  padding-block: calc(var(--spacing-3xl) - 1.5rem) var(--spacing-3xl);
+
+  .section__inner {
+    display: grid;
+    align-content: start;
+    gap: var(--spacing-lg) var(--spacing-xl);
+  }
+
+  .post-card {
+    &__excerpt {
+      --_line-clamp: 3;
+    }
+  }
+
+  @include container-query( content, md, gt ) {
+    .section__inner {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      grid-template-rows: repeat( 4, auto );
+    }
+
+    .post-card {
+      &--featured {
+        grid-column: 1 / 5;
+        grid-row: 1 / -1;
+      }
+
+      &--horizontal {
+        grid-column: 5 / 8;
+      }
+    }
+  }
+}
+/* =============================== */
+/* =          Posts grid         = */
+/* =============================== */
+.posts-grid {
+  padding-block: var(--spacing-3xl);
+  background-color: var(--primary-color-50);
+}
