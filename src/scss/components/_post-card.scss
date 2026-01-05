@@ -157,6 +157,10 @@
     transform: translateY(-0.3125rem);
   }
 
+  &[aria-hidden=true] {
+    display: none;
+  }
+
   @container (width > 850px) {
     --_padding-inline: 1.25rem;
   }
