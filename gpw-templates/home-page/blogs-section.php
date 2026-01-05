@@ -18,7 +18,7 @@ $slideItems = [];
 foreach ($posts as $post) {
   setup_postdata($post);
   ob_start();
-  get_template_part('gpw-templates/post/post-card');
+  get_template_part('gpw-templates/post/post-card', null, [ 'footer_display' => 'read-more' ]);
   $slideItems[] = ob_get_clean();
 }
 wp_reset_postdata();

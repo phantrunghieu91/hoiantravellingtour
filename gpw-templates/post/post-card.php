@@ -2,32 +2,93 @@
 /**
  * @author Hieu "Jin" Phan Trung
  * * Template: Post - Post card
+ * ! Args:
+ *  - orientation: 'vertical' | 'horizontal' (default: 'vertical')
+ *  - show_category: bool (default: false)
+ *  - show_excerpt: bool (default: true)
+ *  - is_featured: bool (default: false)
+ *  - is_template: bool (default: false)
+ *  - footer_display: 'none' | 'meta' | 'read-more' (default: 'none')
  */
-$postID = get_the_ID();
-$title = get_the_title();
-$excerpt = get_the_excerpt();
-$permalink = get_permalink();
-$featuredImageID = get_post_thumbnail_id() ?: PLACEHOLDER_IMAGE_ID;
+$orientation = $args['orientation'] ?? 'vertical';
+$showExcerpt = $args['show_excerpt'] ?? true;
+$showCategory = $args['show_category'] ?? false;
+$isFeatured = $args['is_featured'] ?? false;
+$footerDisplay = $args['footer_display'] ?? 'none';
+$isTemplate = $args['is_template'] ?? false;
+
+$postID = $isTemplate ? 0 : get_the_ID();
+$title = $isTemplate ? 'Post template' : get_the_title();
+$excerpt = $isTemplate ? 'Excerpt template' : get_the_excerpt();
+$permalink = $isTemplate ? '#' : get_permalink();
+$authorName = $isTemplate ? 'Author' : get_the_author_meta( 'display_name', get_post_field( 'post_author', $postID ) );
+$publishDate = $isTemplate ? '01/01/2025' : get_the_date( 'F j, Y', $postID );
+$featuredImageID = $isTemplate ? PLACEHOLDER_IMAGE_ID : get_post_thumbnail_id( $postID );
+$categories = get_the_category( $postID );
+$primaryCategory = get_post_meta( $postID, 'rank_math_primary_category', true );
+$primaryCategory = $primaryCategory 
+  ? get_term( $primaryCategory ) 
+  : ( has_category( '', $postID ) ? $categories[0] : null );
+
+$classes = [ 'post-card', "post-card--{$orientation}" ];
+
+if( $isFeatured ) {
+  $classes[] = 'post-card--featured';
+}
 ?>
-<article class="post-card post-card--<?= esc_attr( $postID ) ?>">
+<?php if( $isTemplate ) {
+  echo '<template class="post-card__template">';
+} ?>
+<article class="<?= esc_attr( implode( ' ', $classes ) ) ?>" 
+  <?php if( !$isTemplate ) echo sprintf('data-cat="%s"', esc_attr( implode( ',', wp_list_pluck( $categories, 'term_id' ) ) ) ) ?>
+  <?php if( !$isTemplate ) echo sprintf('data-id="%d"', esc_attr( $postID ) ) ?>
+>
   <a href="<?= esc_url( $permalink ) ?>" class="post-card__thumbnail">
-    <?= wp_get_attachment_image( $featuredImageID, 'medium_large', false, [ 'class' => 'post-card__image', 'alt' => esc_attr( $title ) ] ) ?>
+    <?= $isTemplate ? '<img src="" alt="" class="post-card__image" />'
+      : wp_get_attachment_image( $featuredImageID, 'medium_large', false, [ 'class' => 'post-card__image', 'alt' => esc_attr( $title ) ] ) ?>
   </a>
   <div class="post-card__content">
+    <?php if( ($showCategory && $primaryCategory) || $isTemplate ) {
+      echo $isTemplate ? '<a href="#" class="post-card__category">Category</a>'
+        : sprintf('<a href="%s" class="post-card__category">%s</a>',
+            esc_url( get_category_link( $primaryCategory->term_id ) ),
+            esc_html( $primaryCategory->name )
+          );
+    } ?>
+
     <h3 class="post-card__title line-clamp">
-      <a href="<?= esc_url( $permalink ) ?>"><?= esc_html( $title ) ?></a>
+
+      <?= sprintf('<a href="%s">%s</a>', 
+        esc_url( $permalink ), 
+        esc_html( $title ) ) ?>
+
     </h3>
-    <?php if ( ! empty( $excerpt ) ): ?>
+    <?php if ( $showExcerpt && !empty( $excerpt ) ): ?>
       <div class="post-card__excerpt line-clamp">
         <?= esc_html( $excerpt ) ?>
       </div>
     <?php endif; ?>
-    <a href="<?= esc_url( $permalink ) ?>" class="post-card__read-more">
-      <span><?php esc_html_e( 'Read More', 'gpw' ); ?></span>
-      <span class="material-symbols-outlined">arrow_right_alt</span>
-    </a>
+    <?php if( $footerDisplay === 'read-more' ): ?>
+
+      <a href="<?= esc_url( $permalink ) ?>" class="post-card__read-more">
+        <span><?php esc_html_e( 'Read More', 'gpw' ); ?></span>
+        <span class="material-symbols-outlined">arrow_right_alt</span>
+      </a>
+
+    <?php elseif( $footerDisplay === 'meta' ): ?>
+
+      <ul class="post-card__meta">
+        <li class="post-card__meta-item author"><?= esc_html( $authorName ) ?></li>
+        <li class="post-card__meta-item date"><?= esc_html( $publishDate ) ?></li>
+      </ul>
+
+    <?php endif ?>
   </div>
 </article>
 <?php 
+if( $isTemplate ) {
+  echo '</template>';
+}
+
 // ! Cleanup variables
-unset( $postID, $title, $excerpt, $permalink, $featuredImageID );
+unset( $postID, $title, $excerpt, $permalink, $featuredImageID, $authorName, $publishDate, $orientation, $showExcerpt, $isFeatured, $footerDisplay, $classes );
