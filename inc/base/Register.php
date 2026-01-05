@@ -75,6 +75,20 @@ class Register extends BaseController
       $this->enqueueScript('gpw-home-page', time());
       $this->enqueueStyle('gpw-home-page', time());
     }
+
+    if( is_home() || is_category() ) {
+      $postController = \gpweb\inc\controller\PostController::getInstance();
+      $action = $postController->getAction();
+      $this->enqueueScript('gpw-post-category-page', time());
+      $this->enqueueStyle('gpw-post-category-page', time());
+      wp_localize_script( 'gpw-post-category-page', 'gpwObject', [
+        'url' => admin_url( 'admin-ajax.php' ),
+        'action' => $action,
+        'nonce' => wp_create_nonce( $action ),
+      ]);
+
+      unset( $action, $postController );
+    }
   }
 
   /**
