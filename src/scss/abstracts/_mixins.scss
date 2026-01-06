@@ -1,6 +1,26 @@
 @use 'sass:map';
 @use 'variables' as *;
 
+@mixin post-card-category() {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.75rem;
+  width: fit-content;
+  border-radius: 0.25rem;
+  background-color: var(--primary-color-50);
+  color: var(--primary-color-500);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+
+  transition: background-color var(--_transition-duration, 400ms) var(--_transition-function, cubic-bezier(0.4, 0, 0.2, 1)),
+    color var(--_transition-duration, 400ms) var(--_transition-function, cubic-bezier(0.4, 0, 0.2, 1));
+
+  &:hover {
+    background-color: var(--primary-color-500);
+    color: #fff;
+  }
+}
+
 /**
  * * Mixin for creating a flex container with customizable properties.
  *

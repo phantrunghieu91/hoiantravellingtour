@@ -1,3 +1,4 @@
+@use '../abstracts/' as *;
 .post-card {
   $class: &;
 
@@ -94,22 +95,7 @@
   }
 
   &__category {
-    display: block;
-    padding: .25rem .5rem;
-    margin-bottom: .75rem;
-    width: fit-content;
-    border-radius: .25rem;
-    background-color: var(--primary-color-50);
-    color: var(--primary-color-500);
-    font-size: var(--fs-xs);
-    font-weight: 600;
-
-    transition: background-color var(--_transition-duration) var(--_transition-function), color var(--_transition-duration) var(--_transition-function);
-
-    &:hover {
-      background-color: var(--primary-color-500);
-      color: #fff;
-    }
+    @include post-card-category();
   }
 
   &__title {
