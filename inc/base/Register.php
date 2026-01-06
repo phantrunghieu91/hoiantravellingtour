@@ -89,6 +89,10 @@ class Register extends BaseController
 
       unset( $action, $postController );
     }
+
+    if( is_singular( 'post' ) ) {
+      $this->enqueueStyle('gpw-post-single-page', time());
+    }
   }
 
   /**
