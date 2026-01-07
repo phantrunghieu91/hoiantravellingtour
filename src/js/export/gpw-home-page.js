@@ -1,5 +1,6 @@
 import GPWTabs from "../components/gpw-tabs";
 import Testimonial from "../components/testimonial";
+import ServicesCarousel from "../components/services-carousel";
 document.addEventListener('DOMContentLoaded', function() {
   new GPWTabs();
 
@@ -78,6 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }.init();
 
   new Testimonial();
+
+  new ServicesCarousel();
 
   // Blogs carousel
   const blogsSection = {

@@ -14,7 +14,7 @@ get_template_part( 'gpw-templates/home-page/core-value-section' );
 
 get_template_part( 'gpw-templates/home-page/statistic-section' );
 
-get_template_part( 'gpw-templates/home-page/value-proposition-section' );
+get_template_part( 'gpw-templates/global/services-section', null, [ 'has_view_all_button' => true ] );
 
 get_template_part( 'gpw-templates/global/get-free-quote-section' );
 
