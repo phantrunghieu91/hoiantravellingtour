@@ -4,8 +4,9 @@
  * * Template: Global - Hero section with content
  */
 use gpweb\inc\base\Utilities as Utils;
-$heroData = get_field( 'hero', get_the_ID() );
-if( !$heroData || empty($heroData['background_video']) ) {
+$heroData = get_field( 'hero', is_archive() ? 'gpw_settings' : get_the_ID() );
+dump($heroData);
+if( !$heroData || ( $heroData['video_type'] == 'upload' && empty($heroData['background_video']) ) && ( $heroData['video_type'] == 'youtube' && empty($heroData['background_video']['youtube_link']) ) ) {
   do_action('qm/error', 'Hero section: Missing background video' );
   return;
 }
@@ -14,7 +15,9 @@ $url = Utils::getUrl($heroData['link_to']);
 <section class="hero hero--with-content">
   <div class="section__inner section__inner--full">
 
-    <?php Utils::renderVideoBlock($heroData['background_video'], 'hero__background-video') ?>
+    <?php $heroData['video_type'] == 'upload' 
+      ? Utils::renderVideoBlock($heroData['background_video'], 'hero__background-video') 
+      : Utils::renderYoutubeEmbed( $heroData['youtube_link'], true, 'hero__background-video' ) ?>
 
     <div class="hero__content">
       <?php if( !empty($heroData['sub_title']) ): ?>
