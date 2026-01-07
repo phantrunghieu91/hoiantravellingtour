@@ -98,8 +98,8 @@ class Register extends BaseController
     }
 
     if (is_post_type_archive('logistics-solution')) {
-      $this->enqueueScript('gpw-logistics-solution-archive-page', time(), true);
-      $this->enqueueStyle('gpw-logistics-solution-archive-page', time());
+      $this->enqueueScript('gpw-services-page', time(), true);
+      $this->enqueueStyle('gpw-services-page', time());
     }
   }
   public function setTypeForModuleScripts() {
