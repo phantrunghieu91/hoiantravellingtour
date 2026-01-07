@@ -97,7 +97,7 @@ class Register extends BaseController
       $this->enqueueStyle('gpw-post-single-page', time());
     }
 
-    if (is_post_type_archive('logistics-solution')) {
+    if ( is_post_type_archive('logistics-solution') || is_singular('logistics-solution') ) {
       $this->enqueueScript('gpw-services-page', time(), true);
       $this->enqueueStyle('gpw-services-page', time());
     }
