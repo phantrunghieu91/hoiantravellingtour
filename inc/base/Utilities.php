@@ -66,7 +66,7 @@ class Utilities
     $amount = floatval( $amount );
     return $fmt->formatCurrency( $amount, 'USD' );
   }
-  public static function renderYoutubeEmbed( $youtubeLink, $autoplay = false ) {
+  public static function renderYoutubeEmbed( $youtubeLink, $autoplay = false, $class = '' ) {
     if( empty( $youtubeLink ) ) {
       return '';
     }
@@ -89,9 +89,9 @@ class Utilities
       return '';
     }
     $embedUrl = "https://www.youtube.com/embed/{$youtubeVideoID}";
-    echo sprintf('<div class="youtube-embed">
+    echo sprintf('<div class="youtube-embed%s">
       <iframe src="%s" title="YouTube video player" frameborder="0" allow="accelerometer;%s clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>', esc_url( $embedUrl ), $autoplay ? ' autoplay;' : '' );
+    </div>', $class == '' ? '' : " $class", esc_url( $embedUrl . ($autoplay ? "?autoplay=1&mute=1&controls=0&loop=1&playlist={$youtubeVideoID}" : '') ), $autoplay ? ' autoplay;' : '' );
   }
   public static function renderVideoBlock( $videoData, $class = '', $autoplay = true ) {
     if( (!is_array($videoData) && empty($videoData)) || (is_array($videoData) && empty($videoData['id'])) ) {
