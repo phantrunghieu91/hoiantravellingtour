@@ -5,7 +5,6 @@
  */
 use gpweb\inc\base\Utilities as Utils;
 $heroData = get_field( 'hero', is_archive() ? 'gpw_settings' : get_the_ID() );
-dump($heroData);
 if( !$heroData || ( $heroData['video_type'] == 'upload' && empty($heroData['background_video']) ) && ( $heroData['video_type'] == 'youtube' && empty($heroData['background_video']['youtube_link']) ) ) {
   do_action('qm/error', 'Hero section: Missing background video' );
   return;
