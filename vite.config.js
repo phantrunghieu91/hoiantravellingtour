@@ -52,34 +52,46 @@ const uploadDirToSFTP = async (localDir, remoteDir) => {
     port: process.env.PORT,
   });
 
-  const files = fs.readdirSync(localDir);
-  for (const file of files) {
-    const localPath = path.join(localDir, file);
-    const remotePath = `${remoteDir}/${file}`;
-    // Check if remote file exists
-    let skip = false;
-
-    try {
-      const stat = await client.stat(remotePath);
-
-      const localSize = fs.statSync(localPath).size;
-      const remoteSize = stat.size;
-
-      if (localSize === remoteSize) {
-        skip = true; // identical → skip upload
+  const uploadRecursive = async (localPath, remotePath) => {
+    const stat = fs.statSync(localPath);
+    // Ignore .DS_Store files
+    if (path.basename(localPath) === '.DS_Store') return;
+    if (stat.isDirectory()) {
+      // Ensure remote directory exists
+      try { await client.mkdir(remotePath, true); } catch (e) {}
+      const files = fs.readdirSync(localPath);
+      for (const file of files) {
+        await uploadRecursive(
+          path.join(localPath, file),
+          `${remotePath}/${file}`
+        );
       }
-    } catch (e) {
-      // file does not exist on remote → upload it
-    }
-
-    if (!skip) {
-      await client.put(localPath, remotePath);
-      console.log(`✔ Uploaded: ${file}`);
     } else {
-      // console.log(`↪ Skipped (unchanged): ${file}`);
+      // Check if remote file exists and is identical
+      let skip = false;
+      try {
+        const stat = await client.stat(remotePath);
+        const localSize = fs.statSync(localPath).size;
+        const remoteSize = stat.size;
+        if (localSize === remoteSize) {
+          skip = true; // identical → skip upload
+        }
+      } catch (e) {
+        // file does not exist on remote → upload it
+      }
+      if (!skip) {
+        // Ensure parent directory exists
+        const remoteDirPath = path.dirname(remotePath);
+        try { await client.mkdir(remoteDirPath, true); } catch (e) {}
+        await client.put(localPath, remotePath);
+        console.log(`✔ Uploaded: ${remotePath}`);
+      } else {
+        // console.log(`↪ Skipped (unchanged): ${remotePath}`);
+      }
     }
-  }
+  };
 
+  await uploadRecursive(localDir, remoteDir);
   await client.end();
 };
 
@@ -101,9 +113,14 @@ const config = defineConfig({
       },
 
       output: {
+        manualChunks: undefined,
         entryFileNames: info => {
           const name = info.name.replace(/^js[:_]/, '').replace(/^scss[:_]/, '');
           return `js/${name}.min.js`;
+        },
+
+        chunkFileNames: chunkInfo => {
+          return `js/components/${chunkInfo.name}-chunk.min.js`;
         },
 
         assetFileNames: assetInfo => {
