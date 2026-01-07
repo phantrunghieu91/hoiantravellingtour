@@ -1,3 +1,36 @@
 @use '../components/gpw-swiper';
 @use '../components/hero-section';
 @use '../components/services-section';
+/* =============================== */
+/* =         Introduction        = */
+/* =============================== */
+.introduction {
+  --_border-radius: 1rem;
+  padding-block: var(--spacing-3xl);
+
+  .section__inner {
+    background-color: var(--gray-color-200);
+    display: grid;
+    grid-template-columns: repeat( var(--_cols, 1), minmax( 0, 1fr ) );
+    align-content: center;
+    align-items: center;
+    border-radius: var(--_border-radius);
+    overflow: hidden;
+  }
+
+  .section__title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  &__content {
+    padding: var(--spacing-lg);
+  }
+
+  @include container-query(content, md, gt) {
+    --_cols: 2;
+
+    &__content {
+      padding: var(--spacing-2xl);
+    }
+  }
+}
