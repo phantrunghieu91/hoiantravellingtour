@@ -13,6 +13,7 @@ class Register extends BaseController
    * @var array
    */
   protected $shortcodes;
+  protected $module_scripts = [];
 
   /**
    * Registers the necessary actions and filters.
@@ -20,6 +21,7 @@ class Register extends BaseController
   public function register()
   {
     add_action('wp_enqueue_scripts', [$this, 'enqueue']);
+    add_action('wp_enqueue_scripts', [$this, 'setTypeForModuleScripts']);
     // Add AOS init script in the header
     add_action('wp_footer', function () {
       echo '<script> AOS.init(); </script>';
@@ -35,8 +37,9 @@ class Register extends BaseController
   {
     ?>
     <div id="fb-root"></div>
-    <script id="fb-root-script" async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v24.0&appId=APP_ID"></script>
-  <?php
+    <script id="fb-root-script" async defer crossorigin="anonymous"
+      src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v24.0&appId=APP_ID"></script>
+    <?php
   }
 
   /**
@@ -56,7 +59,7 @@ class Register extends BaseController
    */
   public function enqueue()
   {
-    $this->enqueueScript('aos', null, '', [], false);
+    $this->enqueueScript('aos', null, false, '', [], false);
     $this->enqueueStyle('aos', null);
 
     $this->enqueueStyle('theme-init', time());
@@ -66,40 +69,59 @@ class Register extends BaseController
     $this->enqueueStyle('gpw-footer', time());
 
     // * Enqueue swiper for page that needs it
-    if (is_front_page()) {
+    if (is_front_page() || is_post_type_archive('logistics-solution') || is_singular('logistics-solution')) {
       $this->enqueueScript('swiper');
       $this->enqueueStyle('swiper');
     }
 
     if (is_front_page()) {
-      $this->enqueueScript('gpw-home-page', time());
+      $this->enqueueScript('gpw-home-page', time(), true);
       $this->enqueueStyle('gpw-home-page', time());
     }
 
-    if( is_home() || is_category() ) {
+    if (is_home() || is_category()) {
       $postController = \gpweb\inc\controller\PostController::getInstance();
       $action = $postController->getAction();
       $this->enqueueScript('gpw-post-category-page', time());
       $this->enqueueStyle('gpw-post-category-page', time());
-      wp_localize_script( 'gpw-post-category-page', 'gpwObject', [
-        'url' => admin_url( 'admin-ajax.php' ),
+      wp_localize_script('gpw-post-category-page', 'gpwObject', [
+        'url' => admin_url('admin-ajax.php'),
         'action' => $action,
-        'nonce' => wp_create_nonce( $action ),
+        'nonce' => wp_create_nonce($action),
       ]);
 
-      unset( $action, $postController );
+      unset($action, $postController);
     }
 
-    if( is_singular( 'post' ) ) {
+    if (is_singular('post')) {
       $this->enqueueStyle('gpw-post-single-page', time());
     }
+
+    if (is_post_type_archive('logistics-solution')) {
+      $this->enqueueScript('gpw-logistics-solution-archive-page', time(), true);
+      $this->enqueueStyle('gpw-logistics-solution-archive-page', time());
+    }
+  }
+  public function setTypeForModuleScripts() {
+    if( empty( $this->module_scripts ) ) {
+      return;
+    }
+    add_filter('script_loader_tag', function( $tag, $handle, $src ) {
+      if( in_array( $handle, $this->module_scripts ) ) {
+        $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+      }
+      return $tag;
+    }, 10, 3);
   }
 
   /**
    ** Enqueue single script 
    */
-  protected function enqueueScript(string $script_name, ?string $version = null, string $url = '', array $dependencies = [], bool $in_footer = true)
+  protected function enqueueScript(string $script_name, ?string $version = null, bool $is_module = false, string $url = '', array $dependencies = [], bool $in_footer = true)
   {
+    if( $is_module ) {
+      $this->module_scripts[] = $script_name;
+    }
     $url = $url === '' ? "{$this->theme_url}/assets/js/{$script_name}.min.js" : $url;
     wp_enqueue_script($script_name, $url, $dependencies, $version, $in_footer);
   }
