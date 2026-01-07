@@ -1,6 +1,6 @@
 import GPWTabs from "../components/gpw-tabs";
 import Testimonial from "../components/testimonial";
-import ServicesCarousel from "../components/services-carousel";
+import ServicesCarousel from "../components/gpw-services-carousel";
 document.addEventListener('DOMContentLoaded', function() {
   new GPWTabs();
 
