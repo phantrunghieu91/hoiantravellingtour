@@ -1,6 +1,7 @@
 @use '../components/gpw-swiper';
 @use '../components/hero-section';
 @use '../components/services-section';
+@use '../components/gpw-accordion';
 /* =============================== */
 /* =         Introduction        = */
 /* =============================== */
@@ -31,6 +32,73 @@
 
     &__content {
       padding: var(--spacing-2xl);
+    }
+  }
+}
+/* =============================== */
+/* =          Expertise          = */
+/* =============================== */
+.expertise {
+  padding-block: var(--spacing-3xl);
+
+  &__features {
+    display: grid;
+    grid-template-columns: repeat( var(--_cols, 1), minmax( 0, 1fr ) );
+    align-items: start;
+    gap: var(--spacing-lg) var(--spacing-2xl);
+
+    &-imgs {
+      order: 1;
+      display: grid;
+      grid-template-areas: 'feature-img-stack';
+    }
+
+    &-img {
+      grid-area: feature-img-stack;
+      border-radius: .75rem;
+      width: 100%;
+      aspect-ratio: 3/2;
+
+      transition: opacity 300ms;
+
+      &[aria-hidden=true] {
+        z-index: 1;
+        opacity: 0;
+      }
+
+      &[aria-hidden=false] {
+        z-index: 2;
+        opacity: 1;
+      }
+    }
+  }
+
+  .accordion {
+    --_accordion-btn-bg-clr: transparent;
+    --_accordion-panel-bg-clr: transparent;
+
+    &__item {
+      &:has([aria-hidden=false]) {
+        --_accordion-btn-bg-clr: transparent;
+      }
+
+      &:has( + .accordion__item ) {
+        border-bottom: .125rem solid var(--gray-color-200);
+      }
+    }
+
+    &__button {
+      border-top: none;
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    --_cols: 2;
+
+    &__features {
+      &-imgs {
+        order: 2;
+      }
     }
   }
 }
