@@ -1,7 +1,11 @@
 export default class ServicesCarousel {
   constructor() {
-    this.cachedElements();
-    this.initSwiper();
+    try {
+      this.cachedElements();
+      this.initSwiper();
+    } catch (error) {
+      console.warn('SERVICE CAROUSEL ERROR: ', error);
+    }
   }
   cachedElements() {
     this.swiperEl = document.querySelector('.services__carousel .swiper');
