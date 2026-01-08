@@ -14,12 +14,35 @@ export default class GPWAccordion {
    * Set up a single accordion with event listeners
    * @param {HTMLElement} accordion - The accordion container element
    */
+  /**
+   * Initializes the accordion functionality for the given accordion element.
+   * Sets up event listeners on accordion buttons to toggle panels and dispatches
+   * a custom event ('gpw_accordion:toggle') when a button is clicked.
+   *
+   * @param {HTMLElement} accordion - The root element of the accordion component.
+   */
   initAccordion(accordion) {
     const buttons = accordion.querySelectorAll('.accordion__button');
     const panels = accordion.querySelectorAll('.accordion__panel');
 
+    // bind custom event listeners
+    accordion.addEventListener('gpw_accordion:toggle', event => {
+      const { button, buttons, panels } = event.detail;
+      this.handleButtonClick(button, buttons, panels);
+    });
+
     buttons.forEach(button => {
-      button.addEventListener('click', () => this.handleButtonClick(button, buttons, panels));
+      button.addEventListener('click', () => {
+        const toggleEvent = new CustomEvent('gpw_accordion:toggle', {
+          detail: {
+            button: button,
+            buttons: buttons,
+            panels: panels
+          }, 
+        });
+
+        accordion.dispatchEvent(toggleEvent);
+      });
     });
   }
 
