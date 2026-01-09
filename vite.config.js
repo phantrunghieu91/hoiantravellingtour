@@ -120,7 +120,8 @@ const config = defineConfig({
         },
 
         chunkFileNames: chunkInfo => {
-          return `js/components/${chunkInfo.name}-chunk.min.js`;
+          const version = '0.0.1';
+          return `js/components/${chunkInfo.name}-chunk-v${version}.min.js`;
         },
 
         assetFileNames: assetInfo => {
