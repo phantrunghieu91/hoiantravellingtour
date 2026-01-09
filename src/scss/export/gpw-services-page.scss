@@ -143,7 +143,7 @@
 
       &:hover {
         .why-choose-us__reason-icon {
-          transform: scale(1.1);
+          transform: scale(1.25);
         }
       }
     }
@@ -173,6 +173,66 @@
       --_icon-size: 9.375rem;
       
       padding-inline: 1rem;
+    }
+  }
+}
+/* =============================== */
+/* =      Suitable industry      = */
+/* =============================== */
+.suitable-industry {
+  padding-block: var(--spacing-3xl);
+
+  &__carousel {
+    .swiper-slide {
+      --_slides-per-view: 1;
+      --_space-between: 1.25rem;
+      height: auto;
+      width: calc( ( 100% - var(--_space-between) * ( var(--_slides-per-view) - 1 ) ) / var(--_slides-per-view) );
+      margin-right: var(--_space-between);
+    }
+  }
+
+  .industry {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    &__img {
+      position: relative;
+      z-index: 1;
+      display: block;
+      aspect-ratio: 8/5;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    &__content {
+      position: absolute;
+      padding: clamp(.75rem, 2cqi, 1.25rem);
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    &__title {
+      color: #fff;
+      margin-bottom: 0;
+    }
+  }
+
+  @include container-query( content, sm, gt ) {
+    &__carousel {
+      .swiper-slide {
+        --_slides-per-view: 2;
+      }
+    }
+  }
+
+  @include container-query( content, md, gt ) {
+    &__carousel {
+      .swiper-slide {
+        --_slides-per-view: 3;
+      }
     }
   }
 }
