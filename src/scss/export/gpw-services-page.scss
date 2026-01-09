@@ -2,6 +2,7 @@
 @use '../components/hero-section';
 @use '../components/services-section';
 @use '../components/gpw-accordion';
+@use '../components/gpw-tabs';
 /* =============================== */
 /* =         Introduction        = */
 /* =============================== */
@@ -12,7 +13,7 @@
   .section__inner {
     background-color: var(--gray-color-200);
     display: grid;
-    grid-template-columns: repeat( var(--_cols, 1), minmax( 0, 1fr ) );
+    grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
     align-content: center;
     align-items: center;
     border-radius: var(--_border-radius);
@@ -43,7 +44,7 @@
 
   &__features {
     display: grid;
-    grid-template-columns: repeat( var(--_cols, 1), minmax( 0, 1fr ) );
+    grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
     align-items: start;
     gap: var(--spacing-lg) var(--spacing-2xl);
 
@@ -55,18 +56,18 @@
 
     &-img {
       grid-area: feature-img-stack;
-      border-radius: .75rem;
+      border-radius: 0.75rem;
       width: 100%;
       aspect-ratio: 3/2;
 
       transition: opacity 300ms;
 
-      &[aria-hidden=true] {
+      &[aria-hidden='true'] {
         z-index: 1;
         opacity: 0;
       }
 
-      &[aria-hidden=false] {
+      &[aria-hidden='false'] {
         z-index: 2;
         opacity: 1;
       }
@@ -78,12 +79,12 @@
     --_accordion-panel-bg-clr: transparent;
 
     &__item {
-      &:has([aria-hidden=false]) {
+      &:has([aria-hidden='false']) {
         --_accordion-btn-bg-clr: transparent;
       }
 
-      &:has( + .accordion__item ) {
-        border-bottom: .125rem solid var(--gray-color-200);
+      &:has(+ .accordion__item) {
+        border-bottom: 0.125rem solid var(--gray-color-200);
       }
     }
 
@@ -126,9 +127,9 @@
     --_icon-size: 4.6875rem;
 
     padding-block: 1rem 0;
-    padding-inline: .5rem;
+    padding-inline: 0.5rem;
     margin-bottom: 0;
-    flex: 0 0 calc( 100% / var(--_cols, 2) );
+    flex: 0 0 calc(100% / var(--_cols, 2));
 
     &-icon-wrapper {
       width: var(--_icon-size);
@@ -139,7 +140,7 @@
       background-color: #fff;
       display: grid;
       place-items: center;
-      padding: clamp(.3125rem, 1cqi, .625rem);
+      padding: clamp(0.3125rem, 1cqi, 0.625rem);
 
       &:hover {
         .why-choose-us__reason-icon {
@@ -161,17 +162,17 @@
     }
   }
 
-  @include container-query( content, sm, gt ) {
+  @include container-query(content, sm, gt) {
     &__reason {
       --_icon-size: 6.25rem;
     }
   }
 
-  @include container-query( content, md, gt ) {
+  @include container-query(content, md, gt) {
     &__reason {
       --_cols: 4;
       --_icon-size: 9.375rem;
-      
+
       padding-inline: 1rem;
     }
   }
@@ -187,7 +188,7 @@
       --_slides-per-view: 1;
       --_space-between: 1.25rem;
       height: auto;
-      width: calc( ( 100% - var(--_space-between) * ( var(--_slides-per-view) - 1 ) ) / var(--_slides-per-view) );
+      width: calc((100% - var(--_space-between) * (var(--_slides-per-view) - 1)) / var(--_slides-per-view));
       margin-right: var(--_space-between);
     }
   }
@@ -208,7 +209,7 @@
 
     &__content {
       position: absolute;
-      padding: clamp(.75rem, 2cqi, 1.25rem);
+      padding: clamp(0.75rem, 2cqi, 1.25rem);
       bottom: 0;
       left: 0;
       z-index: 2;
@@ -220,7 +221,7 @@
     }
   }
 
-  @include container-query( content, sm, gt ) {
+  @include container-query(content, sm, gt) {
     &__carousel {
       .swiper-slide {
         --_slides-per-view: 2;
@@ -228,10 +229,60 @@
     }
   }
 
-  @include container-query( content, md, gt ) {
+  @include container-query(content, md, gt) {
     &__carousel {
       .swiper-slide {
         --_slides-per-view: 3;
+      }
+    }
+  }
+}
+/* =============================== */
+/* =       Service details       = */
+/* =============================== */
+.service-details {
+  padding-block: var(--spacing-3xl);
+
+  .tabs {
+    &__nav {
+      margin-bottom: var(--spacing-2xl);
+    }
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+    align-items: center;
+    gap: var(--spacing-lg) var(--spacing-2xl);
+
+    &-img {
+      border-radius: 1rem;
+      width: 100%;
+      aspect-ratio: 8/5;
+    }
+
+    &-title {
+      font-size: var(--fs-lg);
+      color: var(--primary-color-500);
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    --_cols: 2;
+
+    .tabs__panel:nth-child(even) {
+      .service-details__item {
+        &-img, &-content {
+          grid-row: 1;
+        }
+        
+        &-img {
+          order: 2;
+        }
+
+        &-content {
+          order: 1;
+        }
       }
     }
   }
