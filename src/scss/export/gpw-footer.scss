@@ -152,6 +152,76 @@
     align-items: center;
   }
 }
+/* =============================== */
+/* =          Consultant         = */
+/* =============================== */
+.consultant {
+  --_bg-clr: var(--primary-color-500);
+
+  container-type: inline-size;
+
+  .section__inner {
+    background-color: var(--_bg-clr);
+    display: grid;
+    grid-template-areas: 'consultant-stack';
+    border-radius: .5rem;
+    overflow: hidden;
+  }
+
+  &__image-wrapper, &__content {
+    grid-area: consultant-stack;
+  }
+
+  &__image-wrapper {
+    z-index: 1;
+    justify-self: end;
+    position: relative;
+  }
+
+  &__arc {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    fill: var(--_bg-clr);
+  }
+  
+  &__image {
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 100%;
+    width: auto;
+    max-height: 18.75rem;
+  }
+
+  &__content {
+    z-index: 2;
+    padding: 4.375rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__title {
+    color: #fff;
+    font-size: var(--fs-lg);
+  }
+
+  @container (width <= #{map.get($breakpoints, 'md')}) {
+    &__arc {
+      display: none;
+    }
+
+    &__content {
+      background: linear-gradient(to right, var(--_bg-clr) 40%, transparent);
+      padding: 1.5rem;
+    }
+  }
+}
+
 .footer {
   &.footer {
     --_footer-color: #fff;
