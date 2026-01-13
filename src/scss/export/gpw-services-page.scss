@@ -327,17 +327,44 @@
     }
 
     &__content {
+      position: relative;
       align-self: end;
       z-index: 2;
       padding-block: clamp(6.25rem, 5cqi, 7.5rem) clamp(1.25rem, 2cqi, 1.875rem);
       padding-inline: var(--_content-padding);
-      clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
-      background-color: var(--primary-color-500);
       color: #fff;
       display: grid;
       grid-template-rows: auto 0fr;
-
+      
       transition: grid-template-rows 500ms;
+      
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
+      }
+      
+      &:before {
+        z-index: 2;
+        top: .5rem;
+        height: calc(100% - .5rem);
+        background-color: var(--primary-color-500);
+      }
+
+      &:after {
+        z-index: 1;
+        top: 0;
+        height: 100%;
+        background-color: var(--secondary-color-500);
+      }
+    }
+
+    &__title, &__description {
+      position: relative;
+      z-index: 3;
     }
 
     &__title {
