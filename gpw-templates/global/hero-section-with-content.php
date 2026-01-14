@@ -10,6 +10,7 @@ if( !$heroData || ( $heroData['video_type'] == 'upload' && empty($heroData['back
   return;
 }
 $url = Utils::getUrl($heroData['link_to']);
+$title = isset( $heroData['title'] ) && !empty( $heroData['title'] ) ? $heroData['title'] : ( is_archive() ? get_the_archive_title() : get_the_title() );
 ?>
 <section class="hero hero--with-content">
   <div class="section__inner section__inner--full">
@@ -23,7 +24,7 @@ $url = Utils::getUrl($heroData['link_to']);
         <span class="hero__sub-title"><?= esc_html($heroData['sub_title']) ?></span>
       <?php endif; ?>
       
-      <h1 class="hero__title"><?= esc_html($heroData['title']) ?></h1>
+      <h1 class="hero__title"><?= esc_html($title) ?></h1>
 
       <?php if( !empty($heroData['description']) ): ?>
 
