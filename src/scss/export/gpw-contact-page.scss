@@ -1,0 +1,9 @@
+@use '../components/hero-section';
+/* =============================== */
+/* =            Hero             = */
+/* =============================== */
+.hero {
+  &__title {
+    text-align: center;
+  }
+}
