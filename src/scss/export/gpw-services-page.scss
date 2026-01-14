@@ -3,6 +3,7 @@
 @use '../components/services-section';
 @use '../components/gpw-accordion';
 @use '../components/gpw-tabs';
+@use '../components/post-card';
 /* =============================== */
 /* =         Introduction        = */
 /* =============================== */
@@ -59,6 +60,7 @@
       border-radius: 0.75rem;
       width: 100%;
       aspect-ratio: 3/2;
+      object-fit: cover;
 
       transition: opacity 300ms;
 
@@ -259,6 +261,7 @@
       border-radius: 1rem;
       width: 100%;
       aspect-ratio: 8/5;
+      object-fit: cover;
     }
 
     &-title {
@@ -326,17 +329,44 @@
     }
 
     &__content {
+      position: relative;
       align-self: end;
       z-index: 2;
       padding-block: clamp(6.25rem, 5cqi, 7.5rem) clamp(1.25rem, 2cqi, 1.875rem);
       padding-inline: var(--_content-padding);
-      clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
-      background-color: var(--primary-color-500);
       color: #fff;
       display: grid;
       grid-template-rows: auto 0fr;
-
+      
       transition: grid-template-rows 500ms;
+      
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
+      }
+      
+      &:before {
+        z-index: 2;
+        top: .5rem;
+        height: calc(100% - .5rem);
+        background-color: var(--primary-color-500);
+      }
+
+      &:after {
+        z-index: 1;
+        top: 0;
+        height: 100%;
+        background-color: var(--secondary-color-500);
+      }
+    }
+
+    &__title, &__description {
+      position: relative;
+      z-index: 3;
     }
 
     &__title {
@@ -363,6 +393,69 @@
   @include container-query( content, md, gt ) {
     &__carousel {
       --_slides-per-view: 3;
+    }
+  }
+}
+/* =============================== */
+/* =        Related posts        = */
+/* =============================== */
+.related-posts {
+  --_transition-duration: 400ms;
+  --_transition-func: ease-in-out;
+
+  padding-block: var(--spacing-3xl);
+  background-color: var(--gray-color-50);
+
+  &__nav {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+
+    &-list {
+      margin-inline: auto;
+      margin-bottom: 0;
+      list-style: none;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    &-item {
+      cursor: pointer;
+      margin-bottom: 0;
+      white-space: nowrap;
+      padding-block: 0.25rem;
+      padding-inline: var(--spacing-md);
+      border-radius: 2rem;
+      color: var(--primary-color-500);
+      font-weight: 700;
+
+      transition: background var(--_transition-duration) var(--_transition-func), color var(--_transition-duration) var(--_transition-func);
+
+      &--active {
+        background: linear-gradient(to right, var(--primary-color-500), var(--secondary-color-500));
+        color: #fff;
+      }
+
+      &:not(&--active):hover {
+        color: var(--secondary-color-500);
+      }
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+    gap: clamp(1.25rem, 3cqi, 2.5rem);
+  }
+
+  &__view-all-btn.gpw-button:is(a) {
+    margin-top: 1.875rem;
+  }
+
+  @include container-query(content, md, gt) {
+    &__grid {
+      --_cols: 3;
     }
   }
 }
