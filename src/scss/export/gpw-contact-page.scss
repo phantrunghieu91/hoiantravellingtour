@@ -67,3 +67,49 @@
     --_items-per-row: 3;
   }
 }
+/* =============================== */
+/* =        Contact form         = */
+/* =============================== */
+.contact-form {
+  padding-block: var(--spacing-3xl);
+
+  .wpcf7 {
+    &-form {
+      display: grid;
+      grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+      gap: 0 var(--spacing-lg);
+    }
+
+    &__form-group {
+      &:has([data-name=full-name], [data-name=your-message], .gpw-button) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    &-form-control:is(input[type=text], input[type=email], textarea, input[type=tel], input[type=date], select) {
+      font-size: var(--fs-normal);
+      height: auto;
+      padding: var(--spacing-md) var(--spacing-lg);
+      box-shadow: none;
+      border: .0625rem solid var(--gray-color-200);
+      border-radius: .3125rem;
+
+      &:hover, &:focus-visible {
+        border-color: var(--primary-color-500);
+      }
+    }
+
+    label > i {
+      color: var(--secondary-color-500);
+      margin-left: .25rem;
+    }
+
+    .gpw-button:is(button) {
+      --_gpw-button-padding-inline: var(--spacing-2xl);
+    }
+  }
+
+  @include container-query(content, sm, gt) {
+    --_cols: 2;
+  }
+}
