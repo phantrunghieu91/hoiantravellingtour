@@ -102,6 +102,11 @@ class Register extends BaseController
       $this->enqueueStyle('gpw-services-page', time());
     }
 
+    if( is_singular('industry') ) {
+      $this->enqueueScript('gpw-industry-single-page', time(), true);
+      $this->enqueueStyle('gpw-industry-single-page', time());
+    }
+
     if( is_page( [14] ) ) {
       $this->enqueueStyle('gpw-contact-page', time());
     }
