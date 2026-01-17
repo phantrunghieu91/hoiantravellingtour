@@ -21,6 +21,13 @@
     padding: var(--spacing-lg);
   }
 
+  &__image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center;
+  }
+
   @include container-query(content, md, gt) {
     --_cols: 2;
 
