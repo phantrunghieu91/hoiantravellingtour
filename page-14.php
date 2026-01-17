@@ -12,4 +12,6 @@ get_template_part( 'gpw-templates/contact-page/contact-info-section' );
 
 get_template_part( 'gpw-templates/contact-page/contact-form-section' );
 
+get_template_part( 'gpw-templates/contact-page/connect-with-experts-section' );
+
 get_template_part( 'gpw-templates/global/footer' );
