@@ -9,7 +9,8 @@ if( !$heroData || ( $heroData['video_type'] == 'upload' && empty($heroData['back
   do_action('qm/error', 'Hero section: Missing background video' );
   return;
 }
-$url = Utils::getUrl($heroData['link_to']);
+$url = isset($heroData['link_to']) ? Utils::getUrl($heroData['link_to']) : '';
+$title = isset( $heroData['title'] ) && !empty( $heroData['title'] ) ? $heroData['title'] : ( is_archive() ? get_the_archive_title() : get_the_title() );
 ?>
 <section class="hero hero--with-content">
   <div class="section__inner section__inner--full">
@@ -23,7 +24,7 @@ $url = Utils::getUrl($heroData['link_to']);
         <span class="hero__sub-title"><?= esc_html($heroData['sub_title']) ?></span>
       <?php endif; ?>
       
-      <h1 class="hero__title"><?= esc_html($heroData['title']) ?></h1>
+      <h1 class="hero__title"><?= esc_html($title) ?></h1>
 
       <?php if( !empty($heroData['description']) ): ?>
 
@@ -31,7 +32,7 @@ $url = Utils::getUrl($heroData['link_to']);
 
       <?php endif; ?>
 
-      <?php if( $heroData['link_to']['label'] && $url ) {
+      <?php if( isset($heroData['link_tp']) && $heroData['link_to']['label'] && $url ) {
         get_template_part( 'gpw-templates/global/gpw-button', null, [
           'label' => $heroData['link_to']['label'],
           'url' => $url,

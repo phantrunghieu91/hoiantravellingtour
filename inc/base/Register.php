@@ -101,6 +101,10 @@ class Register extends BaseController
       $this->enqueueScript('gpw-services-page', time(), true);
       $this->enqueueStyle('gpw-services-page', time());
     }
+
+    if( is_page( [14] ) ) {
+      $this->enqueueStyle('gpw-contact-page', time());
+    }
   }
   public function setTypeForModuleScripts() {
     if( empty( $this->module_scripts ) ) {

@@ -1,0 +1,148 @@
+@use '../components/hero-section';
+/* =============================== */
+/* =            Hero             = */
+/* =============================== */
+.hero {
+  &__title {
+    text-align: center;
+  }
+}
+/* =============================== */
+/* =        Company Info         = */
+/* =============================== */
+.company-info {
+  --_icon-size: 6.25rem;
+  --_items-per-row: 1;
+  --_space-between-items: var(--spacing-xl);
+
+  padding-block: calc( var(--_icon-size) / 2 + var(--spacing-3xl)) var(--spacing-3xl);
+
+  .section__inner {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: var(--_space-between-items);
+  }
+
+  &__item {
+    flex: 0 0 calc( (100% - (var(--_space-between-items) * (var(--_items-per-row) - 1))) / var(--_items-per-row) );
+    background-color: var(--tertiary-color-200);
+    padding-inline: var(--spacing-xl);
+    padding-block: calc( var(--_icon-size) / 2 + var(--spacing-xl)) var(--spacing-xl);
+    text-align: center;
+    position: relative;
+    border-radius: 1rem;
+
+    &-icon {
+      position: absolute;
+      z-index: 2;
+      top: calc( var(--_icon-size) / 2 * -1 );
+      left: 50%;
+      transform: translate(-50%, 0);
+      background-color: var(--secondary-color-500);
+      outline: .625rem solid #fff;
+      outline-offset: 0;
+      color: #fff;
+      width: var(--_icon-size);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+
+      .material-symbols-outlined {
+        font-size: calc( var(--_icon-size) / 2 );
+      }
+    }
+
+    &-content {
+      font-size: var(--fs-md);
+    }
+  }
+
+  @include container-query(content, sm, gt) {
+    --_items-per-row: 2;
+  }
+
+  @include container-query(content, md, gt) {
+    --_items-per-row: 3;
+  }
+}
+/* =============================== */
+/* =        Contact form         = */
+/* =============================== */
+.contact-form {
+  padding-block: var(--spacing-3xl);
+
+  .wpcf7 {
+    &-form {
+      display: grid;
+      grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+      gap: 0 var(--spacing-lg);
+    }
+
+    &__form-group {
+      &:has([data-name=full-name], [data-name=your-message], .gpw-button) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    &-form-control:is(input[type=text], input[type=email], textarea, input[type=tel], input[type=date], select) {
+      font-size: var(--fs-normal);
+      height: auto;
+      padding: var(--spacing-md) var(--spacing-lg);
+      box-shadow: none;
+      border: .0625rem solid var(--gray-color-200);
+      border-radius: .3125rem;
+
+      &:hover, &:focus-visible {
+        border-color: var(--primary-color-500);
+      }
+    }
+
+    label > i {
+      color: var(--secondary-color-500);
+      margin-left: .25rem;
+    }
+
+    .gpw-button:is(button) {
+      --_gpw-button-padding-inline: var(--spacing-2xl);
+    }
+  }
+
+  @include container-query(content, sm, gt) {
+    --_cols: 2;
+  }
+}
+/* =============================== */
+/* =    Connect with experts     = */
+/* =============================== */
+.connect-with-expert {
+  padding-block: var(--spacing-3xl);
+
+  &__wrapper {
+    width: min( 100%, 50rem );
+    margin-inline: auto;
+    box-shadow: 0 0 .625rem rgb( 0 0 0 / .2 );
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: var(--spacing-lg) var(--spacing-2xl);
+  }
+
+  .section__title {
+    font-size: var(--fs-lg);
+    margin-bottom: 1em;
+  }
+
+  .section__description {
+    margin-bottom: 2em;
+  }
+
+  @include container-query(content, sm, gt) {
+    &__wrapper {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    }
+  }
+}
