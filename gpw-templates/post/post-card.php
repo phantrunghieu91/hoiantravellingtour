@@ -8,6 +8,7 @@
  *  - show_excerpt: bool (default: true)
  *  - is_featured: bool (default: false)
  *  - is_template: bool (default: false)
+ *  - is_hidden: bool (default: false)
  *  - footer_display: 'none' | 'meta' | 'read-more' (default: 'none')
  */
 $orientation = $args['orientation'] ?? 'vertical';
@@ -16,6 +17,7 @@ $showCategory = $args['show_category'] ?? false;
 $isFeatured = $args['is_featured'] ?? false;
 $footerDisplay = $args['footer_display'] ?? 'none';
 $isTemplate = $args['is_template'] ?? false;
+$isHidden = $args['is_hidden'] ?? false;
 
 $postID = $isTemplate ? 0 : get_the_ID();
 $title = $isTemplate ? 'Post template' : get_the_title();
@@ -42,6 +44,7 @@ if( $isFeatured ) {
 <article class="<?= esc_attr( implode( ' ', $classes ) ) ?>" 
   <?php if( !$isTemplate ) echo sprintf('data-cat="%s"', esc_attr( implode( ',', wp_list_pluck( $categories, 'term_id' ) ) ) ) ?>
   <?php if( !$isTemplate ) echo sprintf('data-id="%d"', esc_attr( $postID ) ) ?>
+  <?= sprintf('aria-hidden="%s"', esc_attr( $isHidden ? 'true' : 'false' )) ?>
 >
   <a href="<?= esc_url( $permalink ) ?>" class="post-card__thumbnail">
     <?= $isTemplate ? '<img src="" alt="" class="post-card__image" />'
