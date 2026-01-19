@@ -6,8 +6,8 @@
 $logisticSolutions = get_posts([
   'post_type' => 'logistics-solution',
   'numberposts' => -1,
-  'orderby' => 'DATE',
-  'order' => 'DESC',
+  'orderby' => 'menu_order',
+  'order' => 'ASC',
 ]);
 $sectionTitle = isset($args['title']) ? $args['title'] : sprintf( '%s <span class="highlight">%s</span>', __('Our value', GPW_TEXT_DOMAIN), __('proposition', GPW_TEXT_DOMAIN) );
 $hasViewAllButton = $args['has_view_all_button'] ?? false;
