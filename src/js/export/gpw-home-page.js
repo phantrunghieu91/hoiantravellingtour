@@ -82,43 +82,76 @@ document.addEventListener('DOMContentLoaded', function() {
 
   new ServicesCarousel();
 
-  // Blogs carousel
-  const blogsSection = {
+  // BLOGS
+  const blogs = {
     init() {
       try {
-        this.cachedDOM();
-        this.initSwiper();
-      } catch (error) {
-        console.error('BLOGS SECTION:', error);
+        this.initState();
+        this.cacheElements();
+        this.bindEvents();
+      } catch( error ) {
+        console.warn( 'BLOGS SECTION:', error.message );
       }
     },
-    cachedDOM() {
-      this.swiperEl = document.querySelector('.blogs__post-grid .swiper');
-      if(!this.swiperEl) {
-        throw new Error('Swiper element not found');
-      }
-    },
-    initSwiper() {
-      if( typeof Swiper === 'undefined' ) {
-        throw new Error('Swiper is not loaded');
-      }
-      this.swiper = new Swiper(this.swiperEl, {
-        slidesPerView: 1,
-        spaceBetween: 10,
-        scrollbar: {
-          el: '.swiper-scrollbar',
-          draggable: true,
-        },
-        breakpoints: {
-          550: {
-            slidesPerView: 2,
-          },
-          850: {
-            slidesPerView: 3,
-            spaceBetween: 20,
+    initState() {
+      this.state = new Proxy({
+        currentCategory: '0', // '0' means all categories
+      }, {
+        set: (target, key, value) => {
+          if (key === 'currentCategory') {
+            this.indexedNavItems[target[key]].classList.remove('blogs__nav-item--active');
+            this.indexedNavItems[value].classList.add('blogs__nav-item--active');
+            target[key] = value;
+            this.filterPostsByCategory();
+            return true;
           }
         }
       });
+    },
+    cacheElements() {
+      this.navItems = [...document.querySelectorAll('.blogs__nav-item')];
+      this.postCards = [...document.querySelectorAll('.blogs .post-card')];
+      if( this.navItems.length == 0 ) {
+        throw new Error('No blogs nav items found.');
+      }
+      if( this.postCards.length == 0 ) {
+        throw new Error('No blogs post cards found.');
+      }
+      this.indexedNavItems = this.navItems.reduce((acc, navItem) => {
+        const categoryId = navItem.dataset.cat || '0';
+        acc[categoryId] = navItem;
+        return acc;
+      }, {});
+    },
+    bindEvents() {
+      this.navItems.forEach(navItem => {
+        navItem.addEventListener('click', () => {
+          const selectedCat = navItem.dataset.cat || '0';
+          if( this.state.currentCategory == selectedCat ) return;
+          this.state.currentCategory = selectedCat;
+        });
+      });
+    },
+    filterPostsByCategory() {
+      if (this.postCards.length == 0) {
+        throw new Error('No post cards found to switch category.');
+      }
+      if (this.state.currentCategory === '0') {
+        this.postCards.forEach((postCard, idx) => {
+          postCard.setAttribute('aria-hidden', idx < 6 ? 'false' : 'true');
+        });
+      } else {
+        this.postCards.forEach(postCard => {
+          postCard.setAttribute('aria-hidden', 'true');
+        });
+        let visibleCount = 0;
+        this.postCards.forEach(postCard => {
+          const postCatIds = postCard.dataset.cat ?? '0';
+          if( visibleCount >= 6 ) return;
+          postCard.setAttribute('aria-hidden', postCatIds.includes(this.state.currentCategory) ? 'false' : 'true');
+          visibleCount += postCatIds.includes(this.state.currentCategory) ? 1 : 0;
+        });
+      }
     }
   }.init();
 });

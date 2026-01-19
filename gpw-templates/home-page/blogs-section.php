@@ -3,25 +3,39 @@
  * @author Hieu "JIN" Phan Trung
  * * Template: Home page - Blogs section
  */
-const BLOGS_TERM_ID = 1;
 $sectionData = get_field('blogs', get_the_ID());
-$posts = get_posts([
+$args = [
   'post_type' => 'post',
-  'numberposts' => 3,
+  'numberposts' => 6,
   'post_status' => 'publish',
+];
+
+$posts = [];
+$addedPostIds = [];
+
+$categories = get_categories([
+  'taxonomy' => 'category',
+  'hide_empty' => true,
+  'orderby' => 'term_id',
+  'order' => 'ASC',
 ]);
+
+foreach( $categories as $category ) {
+  $cat_posts = get_posts( array_merge( $args, [
+    'category' => $category->term_id,
+  ] ) );
+  foreach( $cat_posts as $post ) {
+    if( !in_array( $post->ID, $addedPostIds ) ) {
+      $posts[] = $post;
+      $addedPostIds[] = $post->ID;
+    }
+  }
+}
+
 if (empty($posts)) {
   error_log('BLOGS SECTION - Don\'t have posts data!!');
   return;
 }
-$slideItems = [];
-foreach ($posts as $post) {
-  setup_postdata($post);
-  ob_start();
-  get_template_part('gpw-templates/post/post-card', null, [ 'footer_display' => 'read-more' ]);
-  $slideItems[] = ob_get_clean();
-}
-wp_reset_postdata();
 ?>
 <section class="blogs">
   <div class="section__inner">
@@ -45,17 +59,42 @@ wp_reset_postdata();
 
     <?php endif; ?>
 
-    <div class="blogs__post-grid">
+    <nav class="blogs__nav">
+      <ul class="blogs__nav-list">
 
-      <?php get_template_part( 'gpw-templates/global/swiper-template', null, [ 'slide_items' => $slideItems, 'has_scrollbar' => true ]) ?>
+        <li class="blogs__nav-item blogs__nav-item--active" data-cat="0">
+          <?php _e('All', GPW_TEXT_DOMAIN) ?>
+        </li>
 
-    </div>
+        <?php foreach ($categories as $category): ?>
+
+          <li class="blogs__nav-item" data-cat="<?= esc_attr($category->term_id) ?>">
+
+            <?= esc_html($category->name) ?>
+
+          </li>
+
+        <?php endforeach ?>
+
+      </ul>
+    </nav>
+
+    <main class="blogs__grid">
+
+      <?php foreach ($posts as $idx => $post) {
+        setup_postdata($post);
+        get_template_part( 'gpw-templates/post/post-card', null, [ 'show_category' => true, 'footer_display' => 'meta', 'is_hidden' => $idx > 5 ] );
+      } 
+      wp_reset_postdata(); ?>
+
+    </main>
 
     <?php if (!empty($sectionData['button_label'])) {
       get_template_part('gpw-templates/global/gpw-button', null, [
+        'class' => 'blogs__view-all-btn',
         'label' => $sectionData['button_label'],
-        'url' => get_term_link(BLOGS_TERM_ID, 'category'),
-        'style' => 'secondary',
+        'url' => get_permalink( get_option( 'page_for_posts' ) ),
+        'style' => 'primary',
         'position' => 'center',
       ]);
     } ?>
@@ -64,4 +103,4 @@ wp_reset_postdata();
 </section>
 <?php
 // ! Cleanup variables
-unset($sectionData, $posts);
+unset($sectionData, $posts, $addedPostIds, $categories);
