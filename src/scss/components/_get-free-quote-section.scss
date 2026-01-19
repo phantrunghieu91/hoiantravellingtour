@@ -1,35 +1,54 @@
 @use '../abstracts/' as *;
 .get-free-quote {
   --_overlay-gradient-color: oklch( from var(--primary-color-500) l c h / .65 );
-  padding-block: 6.25rem;
+  padding-block: var(--spacing-3xl);
 
-  background: linear-gradient( to right, var(--_overlay-gradient-color) 0%, var(--_overlay-gradient-color) 100%), var(--_background-image, none);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background: linear-gradient( to right, var(--_overlay-gradient-color) 0%, var(--_overlay-gradient-color) 100%), var(--_background-image, none);
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
 
-  .section__inner {
-    --_section-inner-max-width: 50rem;
+  // .section__inner {
+  //   --_section-inner-max-width: 50rem;
 
-    padding: clamp(1.875rem, 4cqi, 2.8125rem);
-    background-color: #fff;
-    border-radius: 1.5rem;
-  }
+  //   padding: clamp(1.875rem, 4cqi, 2.8125rem);
+  //   background-color: #fff;
+  //   border-radius: 1.5rem;
+  // }
 
   .wpcf7 {
     &-form {
-      margin-bottom: 0;
       display: grid;
-      grid-template-columns: repeat(var(--_form-cols, 1), minmax(0, 1fr));
-      gap: clamp( .9375rem, 2cqi, 1.25rem );
+      grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+      gap: 0 var(--spacing-lg);
     }
 
-    &-form-control {
-      margin-bottom: 0;
+    &__form-group {
+      &:has([data-name=full-name], [data-name=your-message], .gpw-button) {
+        grid-column: 1 / -1;
+      }
     }
 
-    &-form-control-wrap:is([data-name=your-name], [data-name=subject], [data-name=your-message]), &-submit, &-response-output {
-      grid-column: 1 / -1;
+    &-form-control:is(input[type=text], input[type=email], textarea, input[type=tel], input[type=date], select) {
+      font-size: var(--fs-normal);
+      height: auto;
+      padding: var(--spacing-md) var(--spacing-lg);
+      box-shadow: none;
+      border: .0625rem solid var(--gray-color-200);
+      border-radius: .3125rem;
+
+      &:hover, &:focus-visible {
+        border-color: var(--primary-color-500);
+      }
+    }
+
+    label > i {
+      color: var(--secondary-color-500);
+      margin-left: .25rem;
+    }
+
+    .gpw-button:is(button) {
+      --_gpw-button-padding-inline: var(--spacing-2xl);
     }
 
     & form .wpcf7-response-output {
@@ -38,6 +57,6 @@
   }
 
   @include container-query( content, sm, gt ) {
-    --_form-cols: 2;
+    --_cols: 2;
   }
 }
