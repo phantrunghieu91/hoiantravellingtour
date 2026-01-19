@@ -1,8 +1,114 @@
 @use '../components/gpw-accordion';
+@use '../components/gpw-swiper';
 @use '../components/hero-section';
 @use '../components/introduction-section';
 @use '../components/expertise-section';
 @use '../components/why-choose-us-section';
 /* =============================== */
-/* =            Hero             = */
+/* =          Products           = */
 /* =============================== */
+.products {
+  padding-block: var(--spacing-3xl);
+
+  &__carousel {
+    --_slides-per-view: 1;
+    --_space-between: 1.25rem;
+  }
+
+  .product {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    &__images-carousel {
+      position: relative;
+      z-index: 1;
+
+      .swiper {
+        z-index: 1;
+
+        &:after {
+          content: '';
+          position: absolute;
+          z-index: 1;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, transparent, var(--primary-color-500));
+        }
+      }
+
+    }
+
+    &__title {
+      position: absolute;
+      z-index: 2;
+      bottom: clamp(0.625rem, 2cqi, 1.25rem);
+      left: clamp(0.625rem, 2cqi, 1.25rem);
+      right: clamp(0.625rem, 2cqi, 1.25rem);
+      width: calc(100% - (clamp(0.625rem, 2cqi, 1.25rem) * 2));
+      text-align: center;
+      margin-bottom: 0;
+      color: #fff;
+    }
+
+    &__image {
+      width: 100%;
+      aspect-ratio: 4/3;
+    }
+
+    .gpw-nav-btn {
+      z-index: 2;
+      opacity: 0;
+
+      transition: opacity 300ms;
+    }
+
+    &:hover {
+      .gpw-nav-btn {
+        opacity: 1;
+      }
+    }
+
+    .gpw-pagination.swiper-pagination-bullets .swiper-pagination-bullet {
+      --swiper-pagination-bullet-inactive-color: #fff;
+      --swiper-pagination-color: #fff;
+    }
+  }
+
+  @include container-query(content, sm) {
+    &__carousel {
+      & > .swiper > .swiper-wrapper > .swiper-slide {
+        width: calc((100% - (var(--_space-between) * (var(--_slides-per-view) - 1))) / var(--_slides-per-view));
+        margin-right: var(--_space-between);
+      }
+
+      & > .swiper > .gpw-pagination {
+        position: static;
+        margin-top: .9375rem;
+      }
+    }
+  }
+
+  @include container-query(content, sm, gt) {
+    &__carousel {
+      --_slides-per-view: 2;
+
+      & > .swiper > .swiper-wrapper {
+        display: grid;
+        grid-template-columns: repeat(var(--_slides-per-view), minmax(0, 1fr));
+        gap: var(--_space-between);
+      }
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    &__carousel {
+      --_slides-per-view: 3;
+
+      & > .swiper > .gpw-nav-btn {
+        display: none;
+      }
+    }
+  }
+}
