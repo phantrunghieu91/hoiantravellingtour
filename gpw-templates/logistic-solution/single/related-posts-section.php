@@ -11,12 +11,9 @@ $args = [
   'numberposts' => 6,
   'post_status' => 'publish',
 ];
-$related_posts = get_posts($args);
-
-if (empty($related_posts)) {
-  do_action('qm/debug', 'Related posts not found');
-  return;
-}
+// $related_posts = get_posts($args);
+$relatedPosts = [];
+$addedPostIds = [];
 
 $categories = get_categories([
   'taxonomy' => 'category',
@@ -24,6 +21,23 @@ $categories = get_categories([
   'orderby' => 'term_id',
   'order' => 'ASC',
 ]);
+
+foreach( $categories as $category ) {
+  $cat_posts = get_posts( array_merge( $args, [
+    'category' => $category->term_id,
+  ] ) );
+  foreach( $cat_posts as $post ) {
+    if( !in_array( $post->ID, $addedPostIds ) ) {
+      $relatedPosts[] = $post;
+      $addedPostIds[] = $post->ID;
+    }
+  }
+}
+
+if (empty($relatedPosts)) {
+  do_action('qm/debug', 'Related posts not found');
+  return;
+}
 ?>
 <section class="related-posts">
   <div class="section__inner">
@@ -49,9 +63,9 @@ $categories = get_categories([
     </nav>
     <main class="related-posts__grid">
 
-      <?php foreach ($related_posts as $post) {
+      <?php foreach ($relatedPosts as $idx => $post) {
         setup_postdata($post);
-        get_template_part( 'gpw-templates/post/post-card', null, [ 'show_category' => true, 'footer_display' => 'meta' ] );
+        get_template_part( 'gpw-templates/post/post-card', null, [ 'show_category' => true, 'footer_display' => 'meta', 'is_hidden' => $idx > 5 ] );
       } 
       wp_reset_postdata(); ?>
         

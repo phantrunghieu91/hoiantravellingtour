@@ -155,13 +155,19 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error('POST CONTROLLER: No post cards found to switch category.');
       }
       if (this.state.currentCategory === '0') {
-        this.postCards.forEach(postCard => {
-          postCard.setAttribute('aria-hidden', 'false');
+        this.postCards.forEach((postCard, idx) => {
+          postCard.setAttribute('aria-hidden', idx < 6 ? 'false' : 'true');
         });
       } else {
         this.postCards.forEach(postCard => {
+          postCard.setAttribute('aria-hidden', 'true');
+        });
+        let visibleCount = 0;
+        this.postCards.forEach(postCard => {
           const postCatIds = postCard.dataset.cat ?? '0';
+          if( visibleCount >= 6 ) return;
           postCard.setAttribute('aria-hidden', postCatIds.includes(this.state.currentCategory) ? 'false' : 'true');
+          visibleCount += postCatIds.includes(this.state.currentCategory) ? 1 : 0;
         });
       }
     }

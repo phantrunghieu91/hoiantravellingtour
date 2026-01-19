@@ -103,10 +103,11 @@
 
     .tabs__panel:nth-child(even) {
       .service-details__item {
-        &-img, &-content {
+        &-img,
+        &-content {
           grid-row: 1;
         }
-        
+
         &-img {
           order: 2;
         }
@@ -136,14 +137,15 @@
   }
 
   .other-service {
-    --_content-padding: clamp(.8375rem, 2cqi, 1.25rem);
+    --_content-padding: clamp(0.8375rem, 2cqi, 1.25rem);
     border-radius: 1rem;
     overflow: hidden;
     display: grid;
     grid-template-areas: 'other-service-stack';
     aspect-ratio: 7/9;
 
-    &__image, &__content {
+    &__image,
+    &__content {
       grid-area: other-service-stack;
     }
 
@@ -165,10 +167,10 @@
       color: #fff;
       display: grid;
       grid-template-rows: auto 0fr;
-      
       transition: grid-template-rows 500ms;
-      
-      &:before, &:after {
+
+      &:before,
+      &:after {
         content: '';
         position: absolute;
         left: 0;
@@ -176,11 +178,10 @@
         width: 100%;
         clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
       }
-      
       &:before {
         z-index: 2;
-        top: .5rem;
-        height: calc(100% - .5rem);
+        top: 0.5rem;
+        height: calc(100% - 0.5rem);
         background-color: var(--primary-color-500);
       }
 
@@ -192,7 +193,8 @@
       }
     }
 
-    &__title, &__description {
+    &__title,
+    &__description {
       position: relative;
       z-index: 3;
     }
@@ -212,13 +214,13 @@
     }
   }
 
-  @include container-query( content, sm, gt ) {
+  @include container-query(content, sm, gt) {
     &__carousel {
       --_slides-per-view: 2;
     }
   }
 
-  @include container-query( content, md, gt ) {
+  @include container-query(content, md, gt) {
     &__carousel {
       --_slides-per-view: 3;
     }
@@ -258,7 +260,9 @@
       color: var(--primary-color-500);
       font-weight: 700;
 
-      transition: background var(--_transition-duration) var(--_transition-func), color var(--_transition-duration) var(--_transition-func);
+      transition:
+        background var(--_transition-duration) var(--_transition-func),
+        color var(--_transition-duration) var(--_transition-func);
 
       &--active {
         background: linear-gradient(to right, var(--primary-color-500), var(--secondary-color-500));
