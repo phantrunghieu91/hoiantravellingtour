@@ -97,4 +97,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Logistics Solutions Tabs
   new GPWTabs();
+
+  // Related Industries Carousel
+  const relatedIndustries = {
+    init() {
+      try {
+        this.cacheElements();
+        this.initSwiper();
+      } catch (error) {
+        console.warn('RELATED INDUSTRIES SECTION: ', error.message);
+      }
+    },
+    cacheElements() {
+      this.swiperEl = document.querySelector('.related-industries__carousel .swiper');
+      if( !this.swiperEl ) {
+        throw new Error('Related industries swiper not found');
+      }
+    },
+    initSwiper() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error('Swiper is not defined');
+      }
+      new Swiper(this.swiperEl, {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        breakpoints: {
+          550: {
+            slidesPerView: 2,
+          },
+          850: {
+            slidesPerView: 3,
+          }
+        },
+        navigation: {
+          nextEl:  '.related-industries__carousel .gpw-nav-btn__next',
+          prevEl: '.related-industries__carousel .gpw-nav-btn__prev',
+        }
+      });
+    }
+  }.init();
 });

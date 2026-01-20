@@ -18,4 +18,6 @@ get_template_part( 'gpw-templates/industry/single/products-section' );
 
 get_template_part( 'gpw-templates/industry/single/corresponding-logistics-solutions-section' );
 
+get_template_part( 'gpw-templates/industry/single/related-industries-section' );
+
 get_template_part( 'gpw-templates/global/footer' );
