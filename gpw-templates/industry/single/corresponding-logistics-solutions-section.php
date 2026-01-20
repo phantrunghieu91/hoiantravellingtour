@@ -9,15 +9,15 @@ if( empty( $sectionData['logistics_solution'] )) {
   return;
 }
 foreach( $sectionData['logistics_solution'] as $logisticsSolution ) {
-  $postID = $logisticsSolution['solution'];
-  $id = get_post_field( 'post_name', $postID );
+  $postID = $logisticsSolution['solution'] ?: null;
+  $id = $postID ? get_post_field( 'post_name', $postID ) : sanitize_title( $logisticsSolution['title'] );
   $title = !empty( $logisticsSolution['title'] ) ? $logisticsSolution['title'] : get_the_title( $postID );
-  $imgID = !empty( $logisticsSolution['image'] ) ? $logisticsSolution['image'] : get_post_thumbnail_id( $postID );
+  $imgID = !empty( $logisticsSolution['image'] ) ? $logisticsSolution['image'] : ( $postID ? get_post_thumbnail_id( $postID ) : PLACEHOLDER_IMAGE_ID );
   $navItems[] = [
     'id' => $id,
     'title' => $title,
   ];
-  $permalink = get_permalink( $postID );
+  $permalink = $postID ? get_permalink( $postID ) : false;
   ob_start();
   ?>
   <article class="logistics-solutions__item">
@@ -25,11 +25,17 @@ foreach( $sectionData['logistics_solution'] as $logisticsSolution ) {
     <div class="logistics-solutions__item-content">
       <h3 class="logistics-solutions__item-title"><?= esc_html( $title ) ?></h3>
       <div class="logistics-solutions__item-description"><?= wp_kses_post( $logisticsSolution['description'] ) ?></div>
-      <?php get_template_part( 'gpw-templates/global/gpw-button', null, [
-        'label' => __('Tìm hiểu thêm', GPW_TEXT_DOMAIN),
-        'url' => $permalink,
-        'style' => 'primary',
-      ]) ?>
+      
+      <?php 
+        if( $permalink ) {
+          get_template_part( 'gpw-templates/global/gpw-button', null, [
+            'label' => __('Tìm hiểu thêm', GPW_TEXT_DOMAIN),
+            'url' => $permalink,
+            'style' => 'primary',
+          ]); 
+        }
+      ?>
+
     </div>
   </article>
   <?php
