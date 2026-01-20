@@ -1,4 +1,5 @@
 import GPWAccordion from "../components/gpw-accordion";
+import GPWTabs from '../components/gpw-tabs';
 document.addEventListener('DOMContentLoaded', function() {
   const gpwAccordion = new GPWAccordion();
   if( gpwAccordion.accordions.length > 0 ) {
@@ -93,4 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }.init();
+
+  // Logistics Solutions Tabs
+  new GPWTabs();
 });

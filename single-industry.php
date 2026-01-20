@@ -16,4 +16,6 @@ get_template_part( 'gpw-templates/logistic-solution/single/why-choose-us-section
 
 get_template_part( 'gpw-templates/industry/single/products-section' );
 
+get_template_part( 'gpw-templates/industry/single/corresponding-logistics-solutions-section' );
+
 get_template_part( 'gpw-templates/global/footer' );

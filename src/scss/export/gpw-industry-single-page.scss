@@ -1,5 +1,6 @@
 @use '../components/gpw-accordion';
 @use '../components/gpw-swiper';
+@use '../components/gpw-tabs';
 @use '../components/hero-section';
 @use '../components/introduction-section';
 @use '../components/expertise-section';
@@ -108,6 +109,62 @@
 
       & > .swiper > .gpw-nav-btn {
         display: none;
+      }
+    }
+  }
+}
+/* ===================================== */
+/* = Corresponding Logistics Solutions = */
+/* ===================================== */
+.logistics-solutions {
+  padding-block: var(--spacing-3xl);
+
+  .tabs {
+    &__nav {
+      margin-bottom: var(--spacing-2xl);
+    }
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+    align-items: center;
+    gap: var(--spacing-lg) var(--spacing-2xl);
+
+    &-img {
+      border-radius: 1rem;
+      width: 100%;
+      aspect-ratio: 8/5;
+      object-fit: cover;
+    }
+
+    &-title {
+      font-size: var(--fs-lg);
+      color: var(--primary-color-500);
+    }
+
+    &-description {
+      margin-bottom: var(--spacing-lg);
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    --_cols: 2;
+
+    .tabs__panel:nth-child(even) {
+      .logistics-solutions__item {
+        &-img,
+        &-content {
+          grid-row: 1;
+        }
+
+        &-img {
+          order: 2;
+        }
+
+        &-content {
+          order: 1;
+        }
       }
     }
   }
