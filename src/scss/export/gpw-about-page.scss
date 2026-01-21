@@ -1,0 +1,51 @@
+@use '../components/hero-section';
+/* =============================== */
+/* =            Hero             = */
+/* =============================== */
+.hero {
+  &__title {
+    text-align: center;
+  }
+}
+/* =============================== */
+/* =            Hero             = */
+/* =============================== */
+.principle {
+  padding-block: var(--spacing-3xl);
+
+  &.our-vision {
+    background-color: var(--tertiary-color-100);
+  }
+
+  .section__inner {
+    display: grid;
+    grid-template-columns: repeat( var(--_cols, 1), minmax(0, 1fr) );
+    align-items: center;
+    gap: var(--spacing-xl) var(--spacing-3xl);
+  }
+
+  &__image {
+    border-radius: 0 var(--spacing-lg);
+  }
+
+  .section__title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  @include container-query( content, sm, gt ) {
+    .section__inner {
+      --_cols: 2;
+    }
+
+    &.our-mission {
+      .principle__image {
+        grid-row: 1;
+        grid-column: 2;
+      }
+      .principle__content {
+        grid-row: 1;
+        grid-column: 1;
+      }
+    }
+  }
+}
