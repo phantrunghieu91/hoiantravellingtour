@@ -8,9 +8,10 @@ if( empty( $sectionData['industry'] ) ) {
   do_action( 'qm/error', 'No Suitable Products section data found for Logistics Solution ID ' . get_the_ID() );
   return;
 }
-foreach( $sectionData['industry'] as $industryID ) {
-  $industryImgID = get_post_thumbnail_id( $industryID ) ?: PLACEHOLDER_IMAGE_ID;
-  $industryTitle = get_the_title( $industryID );
+foreach( $sectionData['industry'] as $industry ) {
+  $industryID = $industry['industry'] ?: false;
+  $industryImgID = $industryID ? get_post_thumbnail_id( $industryID ) : ( $industry['image'] ?: PLACEHOLDER_IMAGE_ID );
+  $industryTitle = !empty($industry['title']) ? $industry['title'] : get_the_title( $industryID );
   ob_start();
   ?>
   <article class="industry">
