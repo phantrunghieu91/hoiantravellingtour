@@ -5,7 +5,7 @@
  */
 $sectionData = get_field( 'suitable_products', get_the_ID());
 if( empty( $sectionData['industry'] ) ) {
-  do_action( 'qm/error', 'No Suitable Products section data found for Logistics Solution ID ' . get_the_ID() );
+  do_action( 'qm/warn', 'No Suitable Products section data found for Logistics Solution ID ' . get_the_ID() );
   return;
 }
 foreach( $sectionData['industry'] as $industry ) {
