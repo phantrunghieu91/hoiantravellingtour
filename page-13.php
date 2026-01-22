@@ -9,4 +9,6 @@ get_template_part( 'gpw-templates/global/hero-section', 'with-content' );
 
 get_template_part( 'gpw-templates/about-page/vision-mission-section' );
 
+get_template_part( 'gpw-templates/about-page/our-value-section' );
+
 get_template_part( 'gpw-templates/global/footer' );
