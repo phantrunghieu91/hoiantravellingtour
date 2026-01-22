@@ -15,4 +15,6 @@ get_template_part( 'gpw-templates/about-page/statistic-section' );
 
 get_template_part( 'gpw-templates/about-page/team-members-section' );
 
+get_template_part( 'gpw-templates/global/get-free-quote-section' );
+
 get_template_part( 'gpw-templates/global/footer' );
