@@ -13,4 +13,6 @@ get_template_part( 'gpw-templates/about-page/our-value-section' );
 
 get_template_part( 'gpw-templates/about-page/statistic-section' );
 
+get_template_part( 'gpw-templates/about-page/team-members-section' );
+
 get_template_part( 'gpw-templates/global/footer' );

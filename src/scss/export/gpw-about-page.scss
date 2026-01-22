@@ -245,3 +245,67 @@
     }
   }
 }
+/* =============================== */
+/* =        Team members         = */
+/* =============================== */
+.team-members {
+  padding-block: var(--spacing-3xl);
+
+  .section__sub-title {
+    text-transform: capitalize;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat( var(--_cols, 1), minmax(0, 31.25rem) );
+    justify-content: center;
+    gap: var(--spacing-xl);
+  }
+
+  .team-member {
+    background-color: var(--tertiary-color-100);
+    padding: var(--spacing-lg);
+    text-align: center;
+
+    &__avatar {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      margin-bottom: var(--spacing-md);
+    }
+
+    &__name, &__position {
+      color: var(--primary-color-500);
+    }
+
+    &__name {
+      font-size: var(--fs-md);
+    }
+
+    &__position {
+      position: relative;
+      display: block;
+      font-weight: 700;
+      padding-bottom: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background-color: var(--primary-color-500);
+        height: .0625rem;
+        width: 6.25rem;
+      }
+    }
+  }
+
+  @include container-query( content, md, gt ) {
+    .team-members__grid {
+      --_cols: 3;
+    }
+  }
+}
