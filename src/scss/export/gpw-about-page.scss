@@ -187,3 +187,61 @@
     --_line-offset-bottom: 4.375rem;
   }
 }
+/* =============================== */
+/* =          Statistic          = */
+/* =============================== */
+.statistic {
+  &__numbers {
+    --_slides-per-view: 2;
+    --_gap: clamp(0.857rem, 2cqi, 1.25rem);
+
+    padding-block: 3.125rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) repeat(var(--_slides-per-view), calc(min(100%, var(--screen-lg)) / var(--_slides-per-view))) minmax(0, 1fr);
+    gap: var(--_gap) 0;
+    background: radial-gradient(circle at center, var(--secondary-color-500), var(--primary-color-500));
+  }
+
+  &__number {
+    display: grid;
+    justify-content: center;
+
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    
+    &-value {
+      font-size: clamp(2.25rem, 6cqi, 4.375rem);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    &-label {
+      font-size: var(--fs-xl);
+      line-height: 1.2;
+    }
+  }
+
+  @include container-query(content, md) {
+    &__number {
+      &:nth-child(odd) {
+        grid-column: 2 / span 1;
+      }
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    &__numbers {
+      --_slides-per-view: 4;
+
+      padding-block: 10rem;
+      grid-row: 2 / 4;
+    }
+
+    &__number {
+      &:first-child {
+        grid-column: 2 / span 1;
+      }
+    }
+  }
+}

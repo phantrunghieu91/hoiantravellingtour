@@ -112,6 +112,7 @@ class Register extends BaseController
     }
 
     if( is_page( [13] ) ) {
+      $this->enqueueScript('gpw-about-page', time(), true);
       $this->enqueueStyle('gpw-about-page', time());
     }
   }
