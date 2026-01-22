@@ -99,6 +99,14 @@ html > body {
     text-align: center;
   }
 
+  &--secondary {
+    color: var(--secondary-color-500);
+
+    .highlight {
+      color: var(--primary-color-500);
+    }
+  }
+
   .highlight {
     color: var(--secondary-color-500);
   }
