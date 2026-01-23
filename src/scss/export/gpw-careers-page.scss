@@ -1,5 +1,108 @@
 @use '../components/gpw-tabs';
 @use '../components/hero-section';
 /* =============================== */
-/* =           Solutions         = */
+/* =           About us          = */
 /* =============================== */
+.about-us {
+  padding-block: 0 var(--spacing-3xl);
+
+  .section__inner {
+    display: grid;
+    grid-template-columns: [left-edge] 1fr [content-start] min(var(--screen-lg), 100%) [content-end] 1fr [right-edge];
+  }
+
+  .tabs {
+    &__nav {
+      grid-column: content-start / content-end;
+
+      &--underline {
+        --_underline-height: 0.1875rem;
+
+        &:has(.tabs__nav-menu[aria-orientation='horizontal']) .tabs__nav-menu {
+          position: relative;
+          gap: 0;
+
+          &:after {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: var(--_underline-height);
+            background-color: var(--gray-color-200);
+          }
+        }
+      }
+
+      &-item {
+        position: relative;
+        z-index: 2;
+        padding-block: 0.875rem;
+        flex: 1 0 0;
+        text-align: center;
+        text-transform: capitalize;
+        font-weight: 700;
+        font-size: clamp(1rem, 2vw, 1.125rem);
+      }
+    }
+
+    &__content {
+      background-color: var(--gray-color-100);
+      grid-column: left-edge / right-edge;
+      display: grid;
+      grid-template-columns: subgrid;
+    }
+
+    &__panel {
+      grid-column: content-start / content-end;
+      padding-block: var(--spacing-3xl);
+    }
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+    gap: var(--spacing-xl) var(--spacing-2xl);
+
+    &-img {
+      grid-row: 1;
+      display: block;
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    .about-us__item {
+      --_cols: 2;
+    }
+
+    .tabs__nav:has(.tabs__nav-menu[aria-orientation='horizontal']) .tabs__nav-menu {
+      width: 100%;
+    }
+
+    .tabs__panel:nth-child(even) .about-us__item {
+      &-img,
+      &-content {
+        grid-row: 1;
+      }
+
+      &-img {
+        grid-column: 2;
+      }
+
+      &-content {
+        grid-column: 1;
+      }
+    }
+  }
+
+  @include container-query(content, lg) {
+    .tabs__panel {
+      padding-inline: var(--spacing-sm);
+    }
+  }
+}

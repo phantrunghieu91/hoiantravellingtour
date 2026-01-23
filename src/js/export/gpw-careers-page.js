@@ -1,3 +1,4 @@
+import GPWTabs from "../components/gpw-tabs";
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('GPW Careers Page script loaded.');
+  new GPWTabs();
 });
