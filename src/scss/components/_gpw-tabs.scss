@@ -40,7 +40,7 @@
       transition: all 200ms;
     }
 
-    &:is(&--underline) {
+    &--underline {
       white-space: nowrap;
 
       .tabs__nav-item {
@@ -74,7 +74,7 @@
       }
     }
 
-    &:is(&--pills) {
+    &--pills {
       .tabs__nav-item {
         padding: 0.3125rem 1rem;
         border: 0.0625rem solid var(--_border-color, var(--gray-color-100));
@@ -94,7 +94,7 @@
       }
     }
 
-    &:is(&--default) {
+    &--default {
       position: relative;
 
       #{$class}__nav-menu {
