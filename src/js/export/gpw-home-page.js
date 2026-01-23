@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }.init();
 
+  // Testimonial Section
   new Testimonial();
 
   new ServicesCarousel();

@@ -115,12 +115,15 @@ const config = defineConfig({
       output: {
         manualChunks: undefined,
         entryFileNames: info => {
-          const name = info.name.replace(/^js[:_]/, '').replace(/^scss[:_]/, '');
+          const name = info.name
+            .replace(/^js[:_]/, '')
+            .replace(/^scss[:_]/, '')
+            .replace(/(\.min\d*)?$/, '');
           return `js/${name}.min.js`;
         },
 
         chunkFileNames: chunkInfo => {
-          const version = '0.0.1';
+          const version = '0.0.2';
           return `js/components/${chunkInfo.name}-chunk-v${version}.min.js`;
         },
 
