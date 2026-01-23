@@ -14,4 +14,6 @@ get_template_part( 'gpw-templates/global/get-free-quote-section' );
 
 get_template_part( 'gpw-templates/global/testimonial-section');
 
+get_template_part( 'gpw-templates/home-page/blogs-section' );
+
 get_template_part( 'gpw-templates/global/footer' );

@@ -3,7 +3,8 @@
  * @author Hieu "JIN" Phan Trung
  * * Template: Home page - Blogs section
  */
-$sectionData = get_field('blogs', get_the_ID());
+$frontPageId = get_option('page_on_front');
+$sectionData = get_field('blogs', $frontPageId);
 $args = [
   'post_type' => 'post',
   'numberposts' => 6,
