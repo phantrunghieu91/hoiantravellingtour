@@ -30,7 +30,7 @@
             left: 0;
             width: 100%;
             height: var(--_underline-height);
-            background-color: var(--gray-color-200);
+            background-color: var(--gray-color-500);
           }
         }
       }
@@ -103,6 +103,56 @@
   @include container-query(content, lg) {
     .tabs__panel {
       padding-inline: var(--spacing-sm);
+    }
+  }
+}
+/* =============================== */
+/* =        Why choose us        = */
+/* =============================== */
+.why-choose-us {
+  padding-block: var(--spacing-3xl);
+
+  .section__description {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  &__reasons {
+    --_items-per-row: 2;
+    --_space-between-items: var(--spacing-lg);
+
+    border-radius: 1rem;
+    padding-block: clamp(2rem, 5cqi, 4rem);
+    padding-inline: clamp(1rem, 2.5cqi, 1.5rem);
+    margin-bottom: 0;
+    background-color: var(--primary-color-500);
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    gap: var(--_space-between-items);
+  }
+
+  &__reason {
+    flex: 0 0 calc((100% - var(--_space-between-items) * (var(--_items-per-row) - 1)) / var(--_items-per-row));
+    margin-bottom: 0;
+    text-align: center;
+    font-size: var(--fs-md);
+    font-weight: 600;
+    color: #fff;
+
+    &-icon {
+      display: block;
+      margin-inline: auto;
+      margin-bottom: var(--spacing-sm);
+      width: clamp(3.5rem, 10cqi, 5.25rem);
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    .why-choose-us__reasons {
+      --_items-per-row: 4;
     }
   }
 }
