@@ -17,6 +17,7 @@ class ThemeInit {
       base\Utilities::class,
       controller\CompanyInfo::class,
       controller\PostController::class,
+      controller\CareerController::class,
     ];
   }
 
