@@ -117,8 +117,15 @@ class Register extends BaseController
     }
 
     if( is_page( [508] ) ) {
+      $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
+
       $this->enqueueScript('gpw-careers-page', time(), true);
       $this->enqueueStyle('gpw-careers-page', time());
+      wp_localize_script('gpw-careers-page', 'ajaxObj', [
+        'url' => admin_url('admin-ajax.php'),
+        'action' => $action,
+        'nonce' => wp_create_nonce($action),
+      ]);
     }
   }
   public function setTypeForModuleScripts() {
