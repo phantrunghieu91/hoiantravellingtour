@@ -62,11 +62,11 @@ class Register extends BaseController
     $this->enqueueScript('aos', null, false, '', [], false);
     $this->enqueueStyle('aos', null);
 
-    $this->enqueueStyle('theme-init', time());
+    $this->enqueueStyle('theme-init', '1.0.0');
     $this->enqueueStyle('google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-    $this->enqueueStyle('gpw-header', time());
-    $this->enqueueStyle('gpw-footer', time());
+    $this->enqueueStyle('gpw-header', '1.0.0');
+    $this->enqueueStyle('gpw-footer', '1.0.0');
 
     // * Enqueue swiper for page that needs it
     if (is_front_page() || is_post_type_archive('logistics-solution') || is_singular('logistics-solution') || is_singular('industry') 
@@ -76,15 +76,15 @@ class Register extends BaseController
     }
 
     if (is_front_page()) {
-      $this->enqueueScript('gpw-home-page', time(), true);
-      $this->enqueueStyle('gpw-home-page', time());
+      $this->enqueueScript('gpw-home-page', '1.0.0', true);
+      $this->enqueueStyle('gpw-home-page', '1.0.0');
     }
 
     if (is_home() || is_category()) {
       $postController = \gpweb\inc\controller\PostController::getInstance();
       $action = $postController->getAction();
-      $this->enqueueScript('gpw-post-category-page', time());
-      $this->enqueueStyle('gpw-post-category-page', time());
+      $this->enqueueScript('gpw-post-category-page', '1.0.0');
+      $this->enqueueStyle('gpw-post-category-page', '1.0.0');
       wp_localize_script('gpw-post-category-page', 'gpwObject', [
         'url' => admin_url('admin-ajax.php'),
         'action' => $action,
@@ -95,33 +95,33 @@ class Register extends BaseController
     }
 
     if (is_singular('post')) {
-      $this->enqueueStyle('gpw-post-single-page', time());
+      $this->enqueueStyle('gpw-post-single-page', '1.0.0');
     }
 
     if ( is_post_type_archive('logistics-solution') || is_singular('logistics-solution') ) {
-      $this->enqueueScript('gpw-services-page', time(), true);
-      $this->enqueueStyle('gpw-services-page', time());
+      $this->enqueueScript('gpw-services-page', '1.0.0', true);
+      $this->enqueueStyle('gpw-services-page', '1.0.0');
     }
 
     if( is_singular('industry') ) {
-      $this->enqueueScript('gpw-industry-single-page', time(), true);
-      $this->enqueueStyle('gpw-industry-single-page', time());
+      $this->enqueueScript('gpw-industry-single-page', '1.0.0', true);
+      $this->enqueueStyle('gpw-industry-single-page', '1.0.0');
     }
 
     if( is_page( [14] ) ) {
-      $this->enqueueStyle('gpw-contact-page', time());
+      $this->enqueueStyle('gpw-contact-page', '1.0.0');
     }
 
     if( is_page( [13] ) ) {
-      $this->enqueueScript('gpw-about-page', time(), true);
-      $this->enqueueStyle('gpw-about-page', time());
+      $this->enqueueScript('gpw-about-page', '1.0.0', true);
+      $this->enqueueStyle('gpw-about-page', '1.0.0');
     }
 
     if( is_page( [508] ) ) {
       $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
 
-      $this->enqueueScript('gpw-careers-page', time(), true);
-      $this->enqueueStyle('gpw-careers-page', time());
+      $this->enqueueScript('gpw-careers-page', '1.0.0', true);
+      $this->enqueueStyle('gpw-careers-page', '1.0.0');
       wp_localize_script('gpw-careers-page', 'ajaxObj', [
         'url' => admin_url('admin-ajax.php'),
         'action' => $action,
