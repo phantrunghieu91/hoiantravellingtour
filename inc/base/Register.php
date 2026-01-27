@@ -69,7 +69,8 @@ class Register extends BaseController
     $this->enqueueStyle('gpw-footer', time());
 
     // * Enqueue swiper for page that needs it
-    if (is_front_page() || is_post_type_archive('logistics-solution') || is_singular('logistics-solution') || is_singular('industry')) {
+    if (is_front_page() || is_post_type_archive('logistics-solution') || is_singular('logistics-solution') || is_singular('industry') 
+      || is_page( [ 508 ])) {
       $this->enqueueScript('swiper');
       $this->enqueueStyle('swiper');
     }
@@ -114,6 +115,18 @@ class Register extends BaseController
     if( is_page( [13] ) ) {
       $this->enqueueScript('gpw-about-page', time(), true);
       $this->enqueueStyle('gpw-about-page', time());
+    }
+
+    if( is_page( [508] ) ) {
+      $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
+
+      $this->enqueueScript('gpw-careers-page', time(), true);
+      $this->enqueueStyle('gpw-careers-page', time());
+      wp_localize_script('gpw-careers-page', 'ajaxObj', [
+        'url' => admin_url('admin-ajax.php'),
+        'action' => $action,
+        'nonce' => wp_create_nonce($action),
+      ]);
     }
   }
   public function setTypeForModuleScripts() {
