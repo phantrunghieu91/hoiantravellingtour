@@ -13,4 +13,6 @@ get_template_part( 'gpw-templates/careers/why-choose-us-section' );
 
 get_template_part( 'gpw-templates/careers/job-list-section' );
 
+// get_template_part( 'gpw-templates/global/team-members-section', 'with-slide' );
+
 get_template_part( 'gpw-templates/global/footer' );

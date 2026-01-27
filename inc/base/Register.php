@@ -69,7 +69,8 @@ class Register extends BaseController
     $this->enqueueStyle('gpw-footer', time());
 
     // * Enqueue swiper for page that needs it
-    if (is_front_page() || is_post_type_archive('logistics-solution') || is_singular('logistics-solution') || is_singular('industry')) {
+    if (is_front_page() || is_post_type_archive('logistics-solution') || is_singular('logistics-solution') || is_singular('industry') 
+      || is_page( [ 508 ])) {
       $this->enqueueScript('swiper');
       $this->enqueueStyle('swiper');
     }
