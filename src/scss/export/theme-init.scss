@@ -92,7 +92,7 @@ html > body {
   font-size: var(--fs-xl);
   line-height: 1.2;
   color: var(--heading-color);
-  text-transform: capitalize;
+  text-transform: none;
   margin-bottom: var(--spacing-2xl);
 
   &--center {
