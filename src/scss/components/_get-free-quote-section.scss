@@ -1,23 +1,36 @@
 @use '../abstracts/' as *;
 .get-free-quote {
   --_overlay-gradient-color: oklch( from var(--primary-color-500) l c h / .65 );
+
+  position: relative;
   padding-block: var(--spacing-3xl);
 
-  // background: linear-gradient( to right, var(--_overlay-gradient-color) 0%, var(--_overlay-gradient-color) 100%), var(--_background-image, none);
-  // background-position: center;
-  // background-repeat: no-repeat;
-  // background-size: cover;
+  &__world-map {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
 
-  // .section__inner {
-  //   --_section-inner-max-width: 50rem;
+    animation: move-right-left 20s linear infinite;
 
-  //   padding: clamp(1.875rem, 4cqi, 2.8125rem);
-  //   background-color: #fff;
-  //   border-radius: 1.5rem;
-  // }
+    &-bg {
+      flex: 1 0 100%;
+      opacity: .1;
+    }
+  }
+
+  .section__inner {
+    position: relative;
+    z-index: 1;
+  }
 
   .wpcf7 {
     &-form {
+      width: min(100%, 50rem);
+      margin-inline: auto;
       display: grid;
       grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
       gap: 0 var(--spacing-lg);

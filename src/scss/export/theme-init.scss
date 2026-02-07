@@ -92,7 +92,7 @@ html > body {
   font-size: var(--fs-xl);
   line-height: 1.2;
   color: var(--heading-color);
-  text-transform: none;
+  text-transform: capitalize;
   margin-bottom: var(--spacing-2xl);
 
   &--center {
@@ -178,5 +178,11 @@ html > body {
     &--full {
       --_section-inner-padding-inline: 0rem;
     }
+  }
+}
+
+@keyframes move-right-left {
+  100% {
+    transform: translateX(-100%);
   }
 }

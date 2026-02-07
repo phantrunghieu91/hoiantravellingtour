@@ -8,11 +8,17 @@ if( empty( $sectionData['title'] ) ) {
   error_log('GET A QUOTE SECTION: Title is required.');
   return;
 }
-// $formSC = '[contact-form-7 id="4e0f5b0" title="GLOBAL: Get a free quote"]';
+$worldMapSVG = get_stylesheet_directory_uri(  ) . '/assets/images/world-map.svg';
 $formSC = '[contact-form-7 id="3149cb5" title="GLOBAL: Get a free quote (NEW)"]';
 $sectionBgUrl = !empty( $sectionData['background_image'] ) ? wp_get_attachment_image_url( $sectionData['background_image'], 'full' ) : false;
 ?>
 <section class="get-free-quote" <?php if( $sectionBgUrl ) echo sprintf('style="--_background-image:url(%s)"', esc_url($sectionBgUrl)); ?> >
+
+  <div class="get-free-quote__world-map">
+    <img src="<?php echo esc_url( $worldMapSVG ); ?>" alt="World Map" class="get-free-quote__world-map-bg" />
+    <img src="<?php echo esc_url( $worldMapSVG ); ?>" alt="World Map" class="get-free-quote__world-map-bg get-free-quote__world-map-bg--clone" aria-hidden="true" />
+  </div>
+
   <div class="section__inner">
 
     <?php if( !empty( $sectionData['sub_title'] )): ?>
