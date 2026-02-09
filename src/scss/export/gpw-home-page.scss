@@ -14,10 +14,55 @@
   --_transition-func: ease-in-out;
   padding-block: 3.125rem;
 
-  &__grid {
+  .section__inner {
     display: grid;
-    grid-template-columns: repeat(var(--_slides-per-view, 2), minmax(0, 1fr));
-    gap: 0.625rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  &__header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    .section__title {
+      flex: 0 0 fit-content;
+    }
+  }
+  
+  &__navigators {
+    display: flex;
+    gap: var(--spacing-sm);
+
+    .gpw-nav-btn {
+      --_icon-color: var(--primary-color-500);
+      position: static;
+      transform: none;
+      border: .0625rem solid currentColor;
+
+      .material-symbols-outlined {
+        transition: color 300ms;
+      }
+
+      &:hover {
+        --_btn-bg-color: var(--primary-color-500);
+        --_icon-color: #fff;
+      }
+    }
+  }
+
+  &__carousel {
+    --_slides-per-view: 1.5;
+    --_space-between: 1.25rem;
+    
+    .swiper-slide {
+      width: calc(100% / var(--_slides-per-view) - (var(--_space-between) * (var(--_slides-per-view) - 1) / var(--_slides-per-view)));
+      margin-right: var(--_space-between);
+    }
+
+    .gpw-pagination {
+      position: static;
+      margin-top: var(--spacing-lg);
+    }
   }
 
   .our-solution {
@@ -105,8 +150,43 @@
     }
   }
 
-  @include container-query(content, md, gt) {
-    --_slides-per-view: 4;
+  @include container-query( content, sm, gt ) {
+    &__carousel {
+      --_slides-per-view: 2.5;
+    }
+  }
+
+  @include container-query( content, md, gt ) {
+    &__navigators {
+      .gpw-nav-btn {
+        --_btn-size: 3.4375rem;
+        --_icon-size: 1.875rem;
+      }
+    }
+    &__carousel {
+      --_slides-per-view: 3.5;
+    }
+  }
+
+  @include container-query(content, lg) {
+    .section__inner {
+      padding-inline: var(--spacing-sm);
+    }
+  }
+
+  @include container-query( content, lg, gt ) {
+    .section__inner {
+      grid-template-columns: 1fr var(--screen-lg) 1fr;
+    }
+
+    &__header {
+      grid-column: 2 / 3;
+    }
+
+    &__carousel {
+      --_slides-per-view: 4.5;
+      grid-column: 2 / 4;
+    }
   }
 }
 /* =============================== */

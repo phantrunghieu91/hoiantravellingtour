@@ -2,6 +2,60 @@ import GPWTabs from "../components/gpw-tabs";
 import Testimonial from "../components/testimonial";
 import ServicesCarousel from "../components/gpw-services-carousel";
 document.addEventListener('DOMContentLoaded', function() {
+  // our solutions carousel
+  const ourSolutions = {
+    init() {
+      try {
+        this.cacheElements();
+        this.initCarousel();
+      } catch( error ) {
+        console.warn( 'OUR SOLUTIONS CAROUSEL:', error.message );
+      }
+    },
+    cacheElements() {
+      this.sectionEl = document.querySelector('.our-solutions');
+      if( !this.sectionEl ) {
+        throw new Error('Section our solutions not found');
+      }
+      this.swiperEl = this.sectionEl.querySelector('.our-solutions__carousel .swiper');
+      if( !this.swiperEl ) {
+        throw new Error('Swiper element for our solutions not found');
+      }
+    },
+    initCarousel() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error('Swiper library is not loaded');
+      }
+      this.swiper = new Swiper(this.swiperEl, {
+        slidesPerView: 1.5,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+        },
+        navigation: {
+          nextEl: this.sectionEl.querySelector('.gpw-nav-btn__next'),
+          prevEl: this.sectionEl.querySelector('.gpw-nav-btn__prev'),
+        },
+        pagination: {
+          el: this.sectionEl.querySelector('.gpw-pagination'),
+          clickable: true,
+        },
+        breakpoints: {
+          550: {
+            slidesPerView: 2.5,
+          },
+          850: {
+            slidesPerView: 3.5,
+          },
+          1250: {
+            slidesPerView: 4.5,
+          }
+        }
+      });
+    }
+  }.init();
+  
   new GPWTabs();
 
   // Statistic Section Animation

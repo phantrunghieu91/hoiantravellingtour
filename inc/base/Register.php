@@ -62,7 +62,7 @@ class Register extends BaseController
     $this->enqueueScript('aos', null, false, '', [], false);
     $this->enqueueStyle('aos', null);
 
-    $this->enqueueStyle('theme-init', '1.0.3');
+    $this->enqueueStyle('theme-init', '1.0.5');
     $this->enqueueStyle('google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
     $this->enqueueStyle('gpw-header', '1.0.0');
@@ -76,8 +76,8 @@ class Register extends BaseController
     }
 
     if (is_front_page()) {
-      $this->enqueueScript('gpw-home-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-home-page', '1.0.3');
+      $this->enqueueScript('gpw-home-page', time(), true); // 1.0.0
+      $this->enqueueStyle('gpw-home-page', time()); // 1.0.3
     }
 
     if (is_home() || is_category()) {
