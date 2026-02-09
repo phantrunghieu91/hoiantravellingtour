@@ -27,6 +27,7 @@ class Utilities
       case 'post':
       case 'page':
       case 'product':
+      case 'industry':
         $url = get_permalink($data);
         break;
       case 'category':
