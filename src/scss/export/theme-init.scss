@@ -122,11 +122,17 @@ html > body {
       content: '';
       position: absolute;
       bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
       width: var(--_separator-width);
       height: var(--_separator-height);
       background-color: var(--_separator-color);
+    }
+
+    &:is(.section__title--center) {
+      &:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 }
