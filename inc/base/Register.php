@@ -62,7 +62,7 @@ class Register extends BaseController
     $this->enqueueScript('aos', null, false, '', [], false);
     $this->enqueueStyle('aos', null);
 
-    $this->enqueueStyle('theme-init', '1.0.5');
+    $this->enqueueStyle('theme-init', '1.0.6');
     $this->enqueueStyle('google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
     $this->enqueueStyle('gpw-header', '1.0.0');
@@ -76,8 +76,8 @@ class Register extends BaseController
     }
 
     if (is_front_page()) {
-      $this->enqueueScript('gpw-home-page', time(), true); // 1.0.0
-      $this->enqueueStyle('gpw-home-page', time()); // 1.0.3
+      $this->enqueueScript('gpw-home-page', time(), true); // 1.0.1
+      $this->enqueueStyle('gpw-home-page', time()); // 1.0.4
     }
 
     if (is_home() || is_category()) {
@@ -100,28 +100,28 @@ class Register extends BaseController
 
     if ( is_post_type_archive('logistics-solution') || is_singular('logistics-solution') ) {
       $this->enqueueScript('gpw-services-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-services-page', '1.0.3');
+      $this->enqueueStyle('gpw-services-page', '1.0.6');
     }
 
     if( is_singular('industry') ) {
       $this->enqueueScript('gpw-industry-single-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-industry-single-page', '1.0.0');
+      $this->enqueueStyle('gpw-industry-single-page', '1.0.3');
     }
 
     if( is_page( [14] ) ) {
-      $this->enqueueStyle('gpw-contact-page', '1.0.3');
+      $this->enqueueStyle('gpw-contact-page', '1.0.6');
     }
 
     if( is_page( [13] ) ) {
-      $this->enqueueScript('gpw-about-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-about-page', '1.0.3');
+      $this->enqueueScript('gpw-about-page', '1.0.1', true); // 1.0.1
+      $this->enqueueStyle('gpw-about-page', '1.0.6'); // 1.0.4
     }
 
     if( is_page( [508] ) ) {
       $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
 
       $this->enqueueScript('gpw-careers-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-careers-page', '1.0.0');
+      $this->enqueueStyle('gpw-careers-page', '1.0.1');
       wp_localize_script('gpw-careers-page', 'ajaxObj', [
         'url' => admin_url('admin-ajax.php'),
         'action' => $action,

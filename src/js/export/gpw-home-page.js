@@ -53,6 +53,18 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         }
       });
+
+      // observe to stop autoplay when not visible
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            this.swiper.autoplay.start();
+          } else {
+            this.swiper.autoplay.stop();
+          }
+        });
+      }, { threshold: 0.5 });
+      observer.observe(this.sectionEl);
     }
   }.init();
   
@@ -70,35 +82,49 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('STATISTIC: Section element not found');
         return;
       }
-      this.videoWrapperEl = this.sectionEl.querySelector('.statistic__video');
-      this.videoEl = this.videoWrapperEl?.querySelector('video');
-      this.videoPlayBtn = this.videoWrapperEl?.querySelector('.statistic__video-btn');
+      this.videoDialogEl = this.sectionEl.querySelector('.statistic__video-dialog');
+      this.videoEl = this.videoDialogEl?.querySelector('video');
+      this.videoPlayBtn = this.sectionEl.querySelector('.statistic__video-btn');
       this.counterEls = this.sectionEl.querySelectorAll('.statistic__number-int');
     },
     bindEvents() {
       this.handleVideoPlay();
       this.handleCounters();
+      this.videoPlayBtn?.addEventListener('click', () => {
+        this.videoDialogEl.showModal();
+        this.toggleOverflowOnHtml();
+        setTimeout(() => {
+          this.videoEl.play();
+        }, 500);
+      });
     },
     handleVideoPlay() {
-      if(!this.videoWrapperEl) {
-        console.log('STATISTIC: Video element not found');
+      if(!this.videoDialogEl) {
+        console.log('STATISTIC: Video dialog not found');
         return;
       }
-      this.videoWrapperEl.addEventListener('click', event => {
+      this.videoDialogEl.addEventListener('click', event => {
         const target = event.target;
-        if( (target === this.videoPlayBtn || target.closest('button') === this.videoPlayBtn) && this.videoEl.paused ) {
-          this.videoEl.play();
-          this.videoPlayBtn.classList.add('hidden');
-        }
-        if( target === this.videoEl && !this.videoEl.paused ) {
+        if(target === this.videoDialogEl) {
           this.videoEl.pause();
-          this.videoPlayBtn.classList.remove('hidden');
+          this.videoDialogEl.close();
+          this.toggleOverflowOnHtml(false);
+        }
+        if( target === this.videoEl ) {
+          if( this.videoEl.paused ) {
+            this.videoEl.play();
+          } else {
+            this.videoEl.pause();
+          }
         }
       });
       // Show play button when video ends
       this.videoEl.addEventListener('ended', () => {
         this.videoPlayBtn.classList.remove('hidden');
       });
+    },
+    toggleOverflowOnHtml(hide = true) {
+      document.documentElement.style.overflow = hide ? 'hidden' : '';
     },
     handleCounters() {
       if(this.counterEls.length === 0) {
