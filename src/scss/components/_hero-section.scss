@@ -54,4 +54,24 @@
     font-size: var(--fs-lg);
     margin-bottom: 1.875rem;
   }
+
+  @include container-query( content, sm ) {
+    &__content {
+      align-self: end;
+    }
+    
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__background-video {
+      aspect-ratio: 2/3;
+      object-fit: cover;
+
+      iframe {
+        aspect-ratio: 2/3;
+        object-fit: cover;
+    }
+    }
+  }
 }
