@@ -41,6 +41,11 @@
   --base-color: var(--gray-color-950);
   --heading-color: var(--primary-color-500);
 }
+
+html {
+  scrollbar-gutter: stable;
+}
+
 html > body {
   color: var(--base-color);
   font-size: var(--fs-normal);
