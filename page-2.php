@@ -10,7 +10,7 @@ get_template_part( 'gpw-templates/global/hero-section', 'with-content' );
 
 get_template_part( 'gpw-templates/home-page/our-solutions-section' );
 
-get_template_part( 'gpw-templates/home-page/core-value-section' );
+get_template_part( 'gpw-templates/home-page/core-value-section', 'style-2' );
 
 get_template_part( 'gpw-templates/home-page/statistic-section' );
 

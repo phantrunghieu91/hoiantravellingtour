@@ -1,4 +1,3 @@
-@use '../components/gpw-tabs';
 @use '../components/gpw-swiper';
 @use '../components/hero-section';
 @use '../components/testimonial-section';
@@ -194,28 +193,142 @@
 /* =          Core Value         = */
 /* =============================== */
 .core-value {
-  .section__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    align-items: center;
-    gap: var(--spacing-xl) var(--spacing-3xl);
-  }
+  $class: &;
+  --_transition-duration: 400ms;
+  padding-block: var(--spacing-3xl);
 
-  &__description {
-    margin-bottom: var(--spacing-xl);
-  }
+  &.style-2 {
+    #{$class}__header {
+      margin-bottom: var(--spacing-xl);
+    }
 
-  .tabs__nav-item {
-    font-weight: 700;
-  }
+    #{$class}__grid {
+      display: grid;
+      grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-3xl);
+    }
 
-  &__tabs {
-    margin-bottom: var(--spacing-xl);
+    #{$class}__item {
+      background-color: var(--_item-bg-color, var(--primary-color-500));
+      border: .0625rem dashed var(--_item-border-color, var(--primary-color-500));
+      padding-block: clamp(2.5rem, 4cqi, 3.125rem) clamp(1.875rem, 3cqi, 2.5rem);
+      padding-inline: clamp(1.5625rem, 3cqi, 2.5rem);
+      color: var(--_item-text-color, #fff);
+      text-align: center;
+
+      &-icon {
+        display: block;
+        width: 5rem;
+        aspect-ratio: 1;
+        margin-inline: auto;
+        margin-bottom: 1.25rem;
+        border-radius: 50%;
+        background-color: var(--_icon-bg-color, transparent);
+        border: 0.0625rem solid var(--_icon-border-color, var(--secondary-color-500));
+        display: grid;
+        place-items: center;
+
+        transition: transform var(--_transition-duration), background-color var(--_transition-duration), border-color var(--_transition-duration);
+
+        img {
+          display: block;
+          width: 2rem;
+          aspect-ratio: 1;
+          filter: var(--_icon-filter, brightness(0) saturate(100%) invert(16%) sepia(99%) saturate(3824%) hue-rotate(346deg) brightness(86%) contrast(99%));
+
+          transition: filter var(--_transition-duration);
+        }
+      }
+
+      &-title {
+        color: inherit;
+        font-size: clamp(1.25rem, 2.5cqi, 1.625rem);
+        margin-bottom: .75rem;
+      }
+
+      &:nth-child(odd) {
+        --_item-bg-color: transparent;
+        --_item-text-color: var(--base-color);
+        --_item-border-color: var(--secondary-color-500);
+        --_icon-bg-color: var(--secondary-color-500);
+        --_icon-filter: invert(1);
+
+        &:hover {
+          --_icon-bg-color: var(--primary-color-500);
+          --_icon-border-color: var(--primary-color-500);
+        }
+      }
+
+      &:hover {
+        --_icon-bg-color: var(--secondary-color-500);
+        --_icon-border-color: var(--secondary-color-500);
+        --_icon-filter: invert(1);
+
+        #{$class}__item-icon {
+          transform: rotateY(360deg);
+        }
+      }
+    }
+
+    #{$class}__footer {
+      position: relative;
+      width: min( 100%, calc( var(--screen-lg) - 6.25rem ) );
+      margin-inline: auto;
+      background: var(--secondary-color-500);
+      mix-blend-mode: multiply;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+
+      &-overlay {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--_footer-bg-img) center bottom / cover no-repeat;
+        mix-blend-mode: multiply;
+      }
+
+      &-content {
+        align-self: center;
+        padding: clamp(1.875rem, 4cqi, 3.125rem);
+        color: #fff;
+      }
+
+      &-sub-title {
+        display: block;
+        margin-bottom: var(--spacing-sm);
+        font-size: clamp(1rem, 1.5cqi, 1.125rem);
+        text-transform: uppercase;
+      }
+
+      &-title {
+        color: inherit;
+        font-size: clamp(1.875rem, 3cqi, 2.25rem);
+        line-height: 1.2;
+      }
+    }
+
+    .gpw-button:is(a) {
+      --_gpw-button-background-color: #fff;
+      --_gpw-button-border-color: #fff;
+      --_gpw-button-text-color: var(--primary-color-500);
+      --_gpw-button-hover-background-color: #fff;
+      --_gpw-button-hover-text-color: var(--secondary-color-500);
+      --_gpw-button-hover-border-color: #fff;
+    }
   }
 
   @include container-query(content, md, gt) {
-    .section__inner {
-      grid-template-columns: 40% minmax(0, 1fr);
+    &.style-2 {
+      #{$class}__grid {
+        --_cols: 3;
+      }
+
+      #{$class}__footer {
+        grid-template-columns: 40% minmax(0, 1fr);
+      }
     }
   }
 }
