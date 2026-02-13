@@ -39,7 +39,7 @@
               left: 0;
               bottom: 0;
               width: 100%;
-              height: .0625rem;
+              height: 0.0625rem;
               background-color: currentColor;
               transform: scaleX(0);
               transform-origin: left;
@@ -60,15 +60,51 @@
     }
   }
 
+  .nav-dropdown.nav-dropdown-simple > li {
+    & > a {
+      --_transition-duration: 250ms;
+      color: var(--primary-color-500);
+      display: inline-flex;
+      align-items: center;
+
+      transition: color var(--_transition-duration);
+
+      &:before {
+        display: inline-block;
+        content: '\eac9';
+        font-family: 'Material Symbols Outlined';
+        font-size: 1rem;
+        color: inherit;
+        width: 0rem;
+        overflow: hidden;
+
+        transition:
+          width var(--_transition-duration),
+          margin-right var(--_transition-duration);
+      }
+    }
+
+    & > a:hover,
+    &.current-menu-item > a {
+      color: var(--secondary-color-500);
+      background-color: #fff;
+
+      &:before {
+        width: 1rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
   .nav > li > &__hotline-btn {
     --_icon-size: 3.125rem;
 
     display: grid;
     grid-template-areas: 'icon text' 'icon phone';
     grid-template-columns: var(--_icon-size, 3.125rem) minmax(0, 1fr);
-    grid-template-rows: repeat(2, calc( var(--_icon-size) / 2 - .25rem ));
-    gap: .25rem .75rem;
-    
+    grid-template-rows: repeat(2, calc(var(--_icon-size) / 2 - 0.25rem));
+    gap: 0.25rem 0.75rem;
+
     font-size: var(--fs-normal);
     line-height: 1;
 
@@ -79,8 +115,8 @@
       width: 100%;
       aspect-ratio: 1;
       border-radius: 50%;
-      border: .0625rem solid var(--tertiary-color-500);
-      
+      border: 0.0625rem solid var(--tertiary-color-500);
+
       animation: pulse-border 1.5s infinite;
     }
 
@@ -89,7 +125,7 @@
       grid-area: icon;
       align-self: center;
       justify-self: center;
-      width: calc(100% - .625rem);
+      width: calc(100% - 0.625rem);
       aspect-ratio: 1;
       border-radius: 50%;
       background-image: linear-gradient(to right, var(--secondary-color-500), var(--primary-color-500));
@@ -116,7 +152,8 @@
 }
 
 @keyframes pulse-border {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(0.5);
   }
   50% {
