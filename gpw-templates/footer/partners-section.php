@@ -3,8 +3,9 @@
  * @author Hieu "JIN" Phan Trung
  * * Template: Footer - Partners Section
  */
-$partners = get_field('partner_section', 'gpw_settings');
+$partners = get_field('partners', 'gpw_settings');
 if (empty($partners['logos'])) {
+  do_action('qm/debug', 'No partner logos found, skipping partners section.');
   return;
 }
 ?>
