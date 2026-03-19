@@ -1,5 +1,6 @@
 import GPWAccordion from "../components/gpw-accordion";
 import GPWTabs from '../components/gpw-tabs';
+import RelatedPosts from "../components/related-posts";
 document.addEventListener('DOMContentLoaded', function() {
   const gpwAccordion = new GPWAccordion();
   if( gpwAccordion.accordions.length > 0 ) {
@@ -136,4 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }.init();
+
+  // Related posts
+  new RelatedPosts();
 });
