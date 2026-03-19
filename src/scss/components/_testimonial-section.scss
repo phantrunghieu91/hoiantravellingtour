@@ -15,6 +15,7 @@
 
     width: calc((100% - (var(--_slides-per-view) - 1) * var(--_space-between)) / var(--_slides-per-view));
     margin-right: var(--_space-between);
+    height: auto;
   }
 }
 
@@ -22,6 +23,7 @@
   --_avatar-size: 4rem;
 
   padding: clamp(1.25rem, 3cqi, 2rem);
+  height: 100%;
   border-radius: 1rem;
   background-color: #fff;
   border: .0625rem solid var(--gray-color-300);
