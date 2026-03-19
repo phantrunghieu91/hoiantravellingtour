@@ -3,10 +3,11 @@
  * @author Hieu "Jin" Phan Trung
  * * Template: POST CATEGORY - Latest posts section
  */
-if( !have_posts() ) {
-  return is_user_logged_in() && current_user_can( 'manage_options' )
-    ? wp_die( esc_html__( 'LATEST POSTS SECTION: No posts found in this category.', GPW_TEXT_DOMAIN ) )
-    : '';
+if ( !have_posts() ) {
+    if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
+        echo '<p style="text-align: center; padding: 20px;">' . esc_html__( 'LATEST POSTS SECTION: No posts found in this category.', GPW_TEXT_DOMAIN ) . '</p>';
+    }
+    return;
 }
 ?>
 <section class="latest-posts">
