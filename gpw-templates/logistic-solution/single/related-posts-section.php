@@ -3,15 +3,14 @@
  * @author Hieu "Jin" Phan Trung
  * * Template: SINGLE LOGISTICS SOLUTION - Related posts section
  */
-$keyword = get_the_title();
-$keyword = '';
-$args = [
+$keyword = isset( $args['keyword'] ) ? sanitize_text_field( $args['keyword'] ) : get_the_title();
+$postQueryArgs = [
   'post_type' => 'post',
   's' => $keyword,
   'numberposts' => 6,
   'post_status' => 'publish',
 ];
-// $related_posts = get_posts($args);
+
 $relatedPosts = [];
 $addedPostIds = [];
 
@@ -22,11 +21,14 @@ $categories = get_categories([
   'order' => 'ASC',
 ]);
 
+$categoriesPostsCount = [];
+
 foreach( $categories as $category ) {
-  $cat_posts = get_posts( array_merge( $args, [
+  $catPosts = get_posts( array_merge( $postQueryArgs, [
     'category' => $category->term_id,
   ] ) );
-  foreach( $cat_posts as $post ) {
+  $categoriesPostsCount[ $category->term_id ] = count( $catPosts );
+  foreach( $catPosts as $post ) {
     if( !in_array( $post->ID, $addedPostIds ) ) {
       $relatedPosts[] = $post;
       $addedPostIds[] = $post->ID;
@@ -49,7 +51,11 @@ if (empty($relatedPosts)) {
           <?php _e('All', GPW_TEXT_DOMAIN) ?>
         </li>
 
-        <?php foreach ($categories as $category): ?>
+        <?php foreach ($categories as $category):
+          if( $categoriesPostsCount[ $category->term_id ] === 0 ) {
+            continue;
+          }
+        ?>
 
           <li class="related-posts__nav-item" data-cat="<?= esc_attr($category->term_id) ?>">
 
@@ -75,3 +81,6 @@ if (empty($relatedPosts)) {
     </a>
   </div>
 </section>
+<?php 
+// ! Cleanup variables
+unset( $postQueryArgs, $relatedPosts, $addedPostIds, $categories, $categoriesPostsCount );
