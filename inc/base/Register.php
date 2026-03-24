@@ -104,8 +104,8 @@ class Register extends BaseController
     }
 
     if( is_singular('industry') ) {
-      $this->enqueueScript('gpw-industry-single-page', '1.0.1', true);
-      $this->enqueueStyle('gpw-industry-single-page', '1.0.5');
+      $this->enqueueScript('gpw-industry-single-page', time(), true);  // 1.0.1
+      $this->enqueueStyle('gpw-industry-single-page', time()); // 1.0.5
     }
 
     if( is_page( [14] ) ) {

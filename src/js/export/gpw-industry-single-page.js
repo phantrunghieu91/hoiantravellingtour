@@ -1,5 +1,5 @@
 import GPWAccordion from "../components/gpw-accordion";
-import GPWTabs from '../components/gpw-tabs';
+// import GPWTabs from '../components/gpw-tabs';
 import RelatedPosts from "../components/related-posts";
 document.addEventListener('DOMContentLoaded', function() {
   const gpwAccordion = new GPWAccordion();
@@ -96,8 +96,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }.init();
 
-  // Logistics Solutions Tabs
-  new GPWTabs();
+  // Logistics Solutions 
+  // new GPWTabs(); // Tabs are removed in favor of new styles
+  const logisticsSolutionsSection = {
+    init() {
+      try {
+        this.cacheElements();
+        this.initSwiper();
+      } catch (error) {
+        console.warn('LOGISTICS SOLUTIONS SECTION: ', error.message);
+      }
+    },
+    cacheElements() {
+      this.sectionEl = document.querySelector('.logistics-solutions');
+      if( !this.sectionEl ) {
+        throw new Error('Logistics solutions section not found');
+      }
+      this.swiperEl = this.sectionEl.querySelector('.swiper');
+      if( !this.swiperEl ) {
+        throw new Error('Logistics solutions swiper not found');
+      }
+    },
+    initSwiper() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error('Swiper is not defined');
+      }
+      new Swiper(this.swiperEl, {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        navigation: {
+          nextEl:  this.sectionEl.querySelector('.gpw-nav-btn__next'),
+          prevEl: this.sectionEl.querySelector('.gpw-nav-btn__prev'),
+        },
+        breakpoints: {
+          850: {
+            slidesPerView: 3.5,
+          }
+        }
+      });
+    }
+  }.init();
 
   // Related Industries Carousel
   const relatedIndustries = {
