@@ -1,0 +1,39 @@
+@use '../abstracts/' as *;
+/* =============================== */
+/* =           Header            = */
+/* =============================== */
+.single-career-header {
+  padding-block: var(--spacing-3xl) var(--spacing-xl);
+  border-bottom: .0625rem solid var(--gray-color-200);
+
+  &__title {
+    color: var(--primary-color-500);
+    font-size: var(--fs-2xl);
+  }
+
+  &__meta {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    margin-bottom: 0;
+
+    &-item {
+      margin-bottom: 0;
+    }
+  }
+}
+/* =============================== */
+/* =            Main             = */
+/* =============================== */
+.single-career-main {
+  padding-block: var(--spacing-3xl);
+
+  h2, h3, h4, h5, h6 {
+    color: var(--primary-color-500);
+  }
+
+  ul {
+    margin-left: 1.25rem;
+  }
+}
