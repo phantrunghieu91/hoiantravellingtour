@@ -7,9 +7,15 @@ $companyInfo = gpweb\inc\controller\CompanyInfo::getInstance();
 $email = $companyInfo->getEmail();
 $phoneNumber = $companyInfo->getPhoneNumber();
 $offices = $companyInfo->getOffice();
-$address = $offices[0]['address'] ?? '';
+$address = array_filter( $offices, function( $office, $index ) {
+  return $index === 0 || $index === 2;
+}, ARRAY_FILTER_USE_BOTH);
+$addressHTML = '';
+foreach( $address as $office ) {
+  $addressHTML .= sprintf('<p><strong>%s:</strong> %s</p>', esc_html($office['name']), esc_html($office['address']));
+}
 $items = [
-  ['icon' => 'location_on', 'content' => esc_html($address)],
+  ['icon' => 'location_on', 'content' => $addressHTML ],
   ['icon' => 'email', 'content' => sprintf('<a href="mailto:%s">%s</a>', $email, $email)],
   ['icon' => 'call', 'content' => sprintf('<a href="tel:%s">%s</a>', $phoneNumber, $phoneNumber)],
 ]
