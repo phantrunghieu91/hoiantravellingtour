@@ -13,7 +13,7 @@ if( empty( $sectionData['benefits'] ) ) {
   <div class="section__inner">
     <h2 class="section__title section__title--has-separator"><?= esc_html( $sectionData['title'] ) ?></h2>
     <?php if( ! empty( $sectionData['description'] ) ) : ?>
-      <div class="benefits__description"><?= wp_kses_post( $sectionData['description'] ) ?></div>
+      <div class="section__description"><?= wp_kses_post( $sectionData['description'] ) ?></div>
     <?php endif; ?>
     <ul class="benefits__list">
       <?php foreach( $sectionData['benefits'] as $benefit ) : ?>

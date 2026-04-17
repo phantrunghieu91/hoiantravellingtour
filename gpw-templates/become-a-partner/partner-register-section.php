@@ -15,7 +15,7 @@ if( empty( $sectionData['contact_form_7_shortcode'] ) ) {
       <div class="partner-register__form-wrapper">
         <h2 class="section__title section__title--has-separator"><?= esc_html( $sectionData['title'] ) ?></h2>
         <?php if( !empty( $sectionData['description'] ) ) : ?>
-          <div class="partner-register__description"><?= wp_kses_post( $sectionData['description'] ) ?></div>
+          <div class="section__description"><?= wp_kses_post( $sectionData['description'] ) ?></div>
         <?php endif; ?>
         <div class="partner-register__form">
           <?= do_shortcode( $sectionData['contact_form_7_shortcode'] ) ?>
