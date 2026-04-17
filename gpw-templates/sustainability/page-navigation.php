@@ -11,7 +11,9 @@ if( empty( $navItems ) ) {
 <nav class="page-nav">
   <ul class="page-nav__list">
     <?php foreach( $navItems as $navItem ) : ?>
-      <li class="page-nav__item" data-target="<?= esc_attr( $navItem['id'] ) ?>"><?= esc_html( $navItem['label'] ) ?></li>
+      <li class="page-nav__item">
+        <a href="#<?= esc_attr( $navItem['id'] ) ?>" class="page-nav__link"><?= esc_html( $navItem['label'] ) ?></a>
+      </li>
     <?php endforeach ?>
   </ul>
 </nav>
