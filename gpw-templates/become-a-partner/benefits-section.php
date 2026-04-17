@@ -1,7 +1,7 @@
 <?php 
 /**
  * @author Hieu "Jin" Phan Trung
- * * Template: Become a partner page - Benefits section
+ * * Template: Be our agent page - Benefits section
  */
 $sectionData = get_field('benefit', get_the_ID() );
 if( empty( $sectionData['benefits'] ) ) {

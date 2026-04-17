@@ -1,7 +1,7 @@
 <?php 
 /**
  * @author Hieu "Jin" Phan Trung
- * * Template: Become a partner page - Introduction section
+ * * Template: Be our agent page - Introduction section
  */
 $sectionData = get_field('introduction', get_the_ID());
 if( empty( $sectionData['title'] ) && empty( $sectionData['content' ] ) ) {

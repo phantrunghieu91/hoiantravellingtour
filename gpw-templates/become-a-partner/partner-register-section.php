@@ -1,7 +1,7 @@
 <?php 
 /**
  * @author Hieu "Jin" Phan Trung
- * * Template: Become a partner page - Partner register form
+ * * Template: Be our agent page - Partner register form
  */
 $sectionData = get_field('partner_register', get_the_ID());
 if( empty( $sectionData['contact_form_7_shortcode'] ) ) {
