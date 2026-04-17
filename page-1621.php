@@ -5,7 +5,7 @@
  */
 get_template_part( 'gpw-templates/global/header' );
 
-get_template_part( 'gpw-templates/global/hero-section', 'with-content' );
+get_template_part( 'gpw-templates/global/hero-section', 'with-content', [ 'split_title' => true ] );
 
 get_template_part( 'gpw-templates/become-a-partner/introduction-section' );
 
