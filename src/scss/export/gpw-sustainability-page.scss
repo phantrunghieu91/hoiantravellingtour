@@ -1,0 +1,100 @@
+@use '../abstracts/' as *;
+@use '../components/hero-section';
+@use '../components/get-free-quote-section';
+/* =============================== */
+/* =            Hero             = */
+/* =============================== */
+.hero {
+  &__title {
+    width: min(50rem, calc(100% - 1.25rem));
+    margin-inline: auto;
+  }
+}
+/* =============================== */
+/* =       Page navigation       = */
+/* =============================== */
+.page-nav {
+  background-color: hsl( from var(--primary-color-50) h s l / .5 );
+  padding-block: .9375rem;
+  border-bottom: .125rem solid var(--primary-color-500);
+
+  &__list, &__item {
+    margin-bottom: 0;
+  }
+
+  &__list {
+    width: min(var(--screen-lg), calc( 100% - 2 * var(--spacing-sm)) );
+    margin-inline: auto;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    gap: var(--spacing-md);
+  }
+
+  &__item {
+    font-size: var(--fs-md);
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+}
+/* =============================== */
+/* =    Sustainability Section   = */
+/* =============================== */
+.sustainability-section {
+  $class: &;
+  padding-block: var(--spacing-3xl);
+
+  .section__title {
+    text-transform: capitalize;
+  }
+
+  &:has( &__slogan ) {
+    padding-block-start: 0;
+  }
+
+  &:nth-child(2n) {
+    background-color: hsl( from var(--primary-color-50) h s l / .5 );
+  }
+
+  &__slogan {
+    margin-bottom: var(--spacing-3xl);
+    padding-block: var(--spacing-3xl);
+    padding-inline: 10%;
+    text-align: center;
+    font-size: var(--fs-xl);
+    background-color: var(--gray-color-200);
+    border-bottom: .1875rem solid var(--secondary-color-500);
+  }
+  
+  &__block {
+    display: grid;
+    grid-template-columns: repeat( var(--_cols, 1), minmax(0, 1fr) );
+    gap: var(--spacing-xl) var(--spacing-3xl);
+
+    &:has( + & ) {
+      margin-bottom: var(--spacing-3xl);
+    }
+  }
+  
+  @include container-query(content, sm, gt ) {
+    &__block {
+      --_cols: 2;
+    }
+
+    &__block {
+      &:nth-child(2n) {
+        #{$class}__block-image, #{$class}__block-content {
+          grid-row: 1 / 2;
+        }
+
+        #{$class}__block-image {
+          grid-column: 2 / 3;
+        }
+
+        #{$class}__block-content {
+          grid-column: 1 / 2;
+        }
+      }
+    }
+  }
+}

@@ -134,7 +134,11 @@ class Register extends BaseController
     }
 
     if( is_page( [1621])) {
-      $this->enqueueStyle('gpw-be-our-agent-page', time());
+      $this->enqueueStyle('gpw-be-our-agent-page', '1.0.0');
+    }
+
+    if( is_page( [1671])) {
+      $this->enqueueStyle('gpw-sustainability-page', '1.0.0');
     }
   }
   public function setTypeForModuleScripts() {
