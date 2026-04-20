@@ -125,7 +125,7 @@ class Register extends BaseController
       $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
 
       $this->enqueueScript('gpw-careers-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-careers-page', '1.0.2');
+      $this->enqueueStyle('gpw-careers-page', '1.0.3'); // 1.0.3
       wp_localize_script('gpw-careers-page', 'ajaxObj', [
         'url' => admin_url('admin-ajax.php'),
         'action' => $action,
