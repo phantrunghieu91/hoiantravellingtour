@@ -20,6 +20,6 @@ get_template_part( 'gpw-templates/logistic-solution/single/service-details-secti
 
 get_template_part( 'gpw-templates/logistic-solution/single/other-services-section' );
 
-get_template_part( 'gpw-templates/logistic-solution/single/related-posts-section' );
+get_template_part( 'gpw-templates/global/related-posts-section' );
 
 get_template_part( 'gpw-templates/global/footer' );
