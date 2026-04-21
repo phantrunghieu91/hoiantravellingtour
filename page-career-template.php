@@ -1,7 +1,7 @@
 <?php 
 /**
  * @author Hieu "Jin" Phan Trung
- * * Template: Careers page
+ * * Template name: PAGE - Careers page
  */
 get_template_part( 'gpw-templates/global/header' );
 
@@ -10,6 +10,8 @@ get_template_part( 'gpw-templates/global/hero-section', 'with-content' );
 get_template_part( 'gpw-templates/careers/about-us-section' );
 
 get_template_part( 'gpw-templates/careers/why-choose-us-section' );
+
+get_template_part( 'gpw-templates/global/related-posts-section' );
 
 get_template_part( 'gpw-templates/careers/job-list-section' );
 
