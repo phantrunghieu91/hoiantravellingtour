@@ -109,7 +109,7 @@ class Register extends BaseController
     }
 
     if( is_singular( 'career' ) ) {
-      $this->enqueueStyle('gpw-career-single-page', '1.0.1');
+      $this->enqueueStyle('gpw-career-single-page', '1.0.2');
     }
 
     if( is_page( [14] ) ) {
@@ -125,7 +125,7 @@ class Register extends BaseController
       $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
 
       $this->enqueueScript('gpw-careers-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-careers-page', '1.0.5');
+      $this->enqueueStyle('gpw-careers-page', '1.0.6');
       wp_localize_script('gpw-careers-page', 'ajaxObj', [
         'url' => admin_url('admin-ajax.php'),
         'action' => $action,

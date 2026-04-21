@@ -38,6 +38,10 @@
       &:hover, &:focus-visible {
         border-color: var(--primary-color-500);
       }
+
+      &[readonly] {
+        background-color: var(--gray-color-200);
+      }
     }
 
     &-form-control-wrap:where([data-name=your-email], [data-name=phone-number], [data-name=position-applied-for], [data-name=cv-file], [data-name=cover-letter]),
