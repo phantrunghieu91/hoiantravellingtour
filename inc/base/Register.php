@@ -65,7 +65,7 @@ class Register extends BaseController
     $this->enqueueStyle('theme-init', '1.0.7');
     $this->enqueueStyle('google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-    $this->enqueueStyle('gpw-header', '1.0.1');
+    $this->enqueueStyle('gpw-header', '1.0.2');
     $this->enqueueStyle('gpw-footer', '1.0.1');
 
     // * Enqueue swiper for page that needs it
@@ -109,7 +109,7 @@ class Register extends BaseController
     }
 
     if( is_singular( 'career' ) ) {
-      $this->enqueueStyle('gpw-career-single-page', '1.0.0');
+      $this->enqueueStyle('gpw-career-single-page', '1.0.1');
     }
 
     if( is_page( [14] ) ) {
@@ -125,7 +125,7 @@ class Register extends BaseController
       $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
 
       $this->enqueueScript('gpw-careers-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-careers-page', '1.0.3'); // 1.0.3
+      $this->enqueueStyle('gpw-careers-page', '1.0.5');
       wp_localize_script('gpw-careers-page', 'ajaxObj', [
         'url' => admin_url('admin-ajax.php'),
         'action' => $action,
