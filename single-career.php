@@ -9,4 +9,6 @@ get_template_part( 'gpw-templates/careers/single/header' );
 
 get_template_part( 'gpw-templates/careers/single/main' );
 
+get_template_part( 'gpw-templates/careers/position-applied-form' );
+
 get_template_part( 'gpw-templates/global/footer' );

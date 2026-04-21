@@ -18,7 +18,7 @@ if( empty( $relatedPosts ) ) {
 ?>
 <section class="related-posts">
   <div class="section__inner">
-    <h2 class="section__title section__title--center"><?= __('Related Posts', GPW_TEXT_DOMAIN) ?></h2>
+    <h2 class="section__title section__title--center"><?= __('Related Posts', 'gpw') ?></h2>
     <div class="related-posts__grid">
       <?php foreach( $relatedPosts as $post ) {
         setup_postdata( $post );

@@ -48,7 +48,7 @@
             }
           }
 
-          &:is(.current-menu-item, :hover) > a {
+          &:is(.current-menu-item, .current-menu-ancestor, :hover) > a {
             color: var(--secondary-color-500);
           }
 

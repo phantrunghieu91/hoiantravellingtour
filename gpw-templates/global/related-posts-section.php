@@ -1,49 +1,37 @@
-<?php
+<?php 
 /**
  * @author Hieu "Jin" Phan Trung
- * * Template: SINGLE LOGISTICS SOLUTION - Related posts section
+ * * Template: Global - Related posts section
  */
-$keyword = isset( $args['keyword'] ) ? sanitize_text_field( $args['keyword'] ) : get_the_title();
-$postQueryArgs = [
+$sectionData = get_field( 'related_posts', get_the_ID() );
+if( empty( $sectionData['categories' ] ) ) {
+  do_action('qm/debug', 'Please select categories for related posts!');
+  return;
+}
+$defaultQuery = [
   'post_type' => 'post',
-  's' => $keyword,
   'numberposts' => 6,
   'post_status' => 'publish',
 ];
-
 $relatedPosts = [];
 $addedPostIds = [];
-
-$categories = get_categories([
-  'taxonomy' => 'category',
-  'hide_empty' => true,
-  'orderby' => 'term_id',
-  'order' => 'ASC',
-]);
-
-$categoriesPostsCount = [];
-
-foreach( $categories as $category ) {
-  $catPosts = get_posts( array_merge( $postQueryArgs, [
-    'category' => $category->term_id,
-  ] ) );
-  $categoriesPostsCount[ $category->term_id ] = count( $catPosts );
-  foreach( $catPosts as $post ) {
+foreach( $sectionData['categories'] as $catId ) {
+  $query = array_merge( $defaultQuery, [ 'category' => $catId ] );
+  $posts = get_posts( $query );
+  if( empty( $posts ) ) {
+    continue;
+  }
+  foreach( $posts as $post ) {
     if( !in_array( $post->ID, $addedPostIds ) ) {
       $relatedPosts[] = $post;
       $addedPostIds[] = $post->ID;
     }
   }
 }
-
-if (empty($relatedPosts)) {
-  do_action('qm/debug', 'Related posts not found');
-  return;
-}
 ?>
 <section class="related-posts">
   <div class="section__inner">
-    <h2 class="section__title section__title--center"><?php esc_html_e('Related Posts', 'gpw'); ?></h2>
+    <h2 class="section__title section__title--center"><?= esc_html( $sectionData['title'] ) ?></h2>
     <nav class="related-posts__nav">
       <ul class="related-posts__nav-list">
 
@@ -51,13 +39,14 @@ if (empty($relatedPosts)) {
           <?php _e('All', 'gpw') ?>
         </li>
 
-        <?php foreach ($categories as $category):
-          if( $categoriesPostsCount[ $category->term_id ] === 0 ) {
+        <?php foreach ($sectionData['categories'] as $catID):
+          $category = get_category( $catID );
+          if( $category->count === 0 ) {
             continue;
           }
         ?>
 
-          <li class="related-posts__nav-item" data-cat="<?= esc_attr($category->term_id) ?>">
+          <li class="related-posts__nav-item" data-cat="<?= esc_attr($catID) ?>">
 
             <?= esc_html($category->name) ?>
 
@@ -81,6 +70,3 @@ if (empty($relatedPosts)) {
     </a>
   </div>
 </section>
-<?php 
-// ! Cleanup variables
-unset( $postQueryArgs, $relatedPosts, $addedPostIds, $categories, $categoriesPostsCount );

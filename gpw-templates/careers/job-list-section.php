@@ -27,11 +27,11 @@ $jobsQuery = new WP_Query($jobArgs);
       <form method="POST" class="job-list__search-form job-search">
         <div class="job-search__message" aria-hidden="true"></div>
         <div class="job-search__group">
-          <input type="text" name="keyword" placeholder="<?php esc_attr_e('Job', GPW_TEXT_DOMAIN) ?>" class="job-search__form-control" />
+          <input type="text" name="keyword" placeholder="<?php esc_attr_e('Job', 'gpw') ?>" class="job-search__form-control" />
         </div>
         <div class="job-search__group">
           <select name="job-position" class="job-search__form-control">
-            <option value=""><?php esc_html_e('Choose job position', GPW_TEXT_DOMAIN) ?></option>
+            <option value=""><?php esc_html_e('Choose job position', 'gpw') ?></option>
             <?php foreach( $jobPositions as $position ) {
               echo sprintf('<option value="%s">%s</option>',
                 esc_attr( $position->term_id ),
@@ -42,7 +42,7 @@ $jobsQuery = new WP_Query($jobArgs);
         </div>
         <div class="job-search__group">
           <select name="work-location" class="job-search__form-control">
-            <option value=""><?php esc_html_e('Choose work location', GPW_TEXT_DOMAIN) ?></option>
+            <option value=""><?php esc_html_e('Choose work location', 'gpw') ?></option>
             <?php foreach( $workLocations as $location ) {
               echo sprintf('<option value="%s">%s</option>',
                 esc_attr( $location->term_id ),
@@ -67,10 +67,10 @@ $jobsQuery = new WP_Query($jobArgs);
       
       <?php if( !$jobsQuery->have_posts() ): ?>
 
-        <p class="job-list__no-results-message"><?php esc_html_e('No job openings found.', GPW_TEXT_DOMAIN) ?></p>
+        <p class="job-list__no-results-message"><?php esc_html_e('No job openings found.', 'gpw') ?></p>
 
       <?php else: ?>
-        <h2 class="section__title"><?php esc_html_e('Jobs', GPW_TEXT_DOMAIN) ?></h2>
+        <h2 class="section__title"><?php esc_html_e('Jobs', 'gpw') ?></h2>
 
         <ul class="job-list__items">
 
@@ -90,25 +90,25 @@ $jobsQuery = new WP_Query($jobArgs);
               <ul class="job-list__item-meta-list">
                 <?php if( !empty( $quantity )): ?>
                   <li class="job-list__item-meta quantity">
-                    <span class="job-list__item-meta-label"><?php esc_html_e('Quantity', GPW_TEXT_DOMAIN) ?></span>
+                    <span class="job-list__item-meta-label"><?php esc_html_e('Quantity', 'gpw') ?></span>
                     <span class="job-list__item-meta-value"><?= esc_html( $quantity ) ?></span>
                   </li>
                 <?php endif; ?>
                 <?php if( $locationName ): ?>
                   <li class="job-list__item-meta location">
-                    <span class="job-list__item-meta-label"><?php esc_html_e('Location', GPW_TEXT_DOMAIN) ?></span>
+                    <span class="job-list__item-meta-label"><?php esc_html_e('Location', 'gpw') ?></span>
                     <span class="job-list__item-meta-value"><?= esc_html( $locationName ) ?></span>
                   </li>
                 <?php endif; ?>
                 <?php if( !empty( $deadline )): ?>
                   <li class="job-list__item-meta deadline">
-                    <span class="job-list__item-meta-label"><?php esc_html_e('Application Deadline', GPW_TEXT_DOMAIN) ?></span>
+                    <span class="job-list__item-meta-label"><?php esc_html_e('Application Deadline', 'gpw') ?></span>
                     <span class="job-list__item-meta-value"><?= esc_html( $deadline ) ?></span>
                   </li>
                 <?php endif; ?>
               </ul>
               <a href="<?= $permalink ?>" class="job-list__item-view-detail">
-                <span><?php esc_html_e('View detail', GPW_TEXT_DOMAIN) ?></span>
+                <span><?php esc_html_e('View detail', 'gpw') ?></span>
                 <span class="material-symbols-outlined">arrow_forward</span>
               </a>
             </li>
@@ -151,20 +151,20 @@ $jobsQuery = new WP_Query($jobArgs);
         <h3 class="job-list__item-title"><a href=""></a></h3>
         <ul class="job-list__item-meta-list">
           <li class="job-list__item-meta quantity">
-            <span class="job-list__item-meta-label"><?php esc_html_e('Quantity', GPW_TEXT_DOMAIN) ?></span>
+            <span class="job-list__item-meta-label"><?php esc_html_e('Quantity', 'gpw') ?></span>
             <span class="job-list__item-meta-value"></span>
           </li>
           <li class="job-list__item-meta location">
-            <span class="job-list__item-meta-label"><?php esc_html_e('Location', GPW_TEXT_DOMAIN) ?></span>
+            <span class="job-list__item-meta-label"><?php esc_html_e('Location', 'gpw') ?></span>
             <span class="job-list__item-meta-value"></span>
           </li>
           <li class="job-list__item-meta deadline">
-            <span class="job-list__item-meta-label"><?php esc_html_e('Application Deadline', GPW_TEXT_DOMAIN) ?></span>
+            <span class="job-list__item-meta-label"><?php esc_html_e('Application Deadline', 'gpw') ?></span>
             <span class="job-list__item-meta-value"></span>
           </li>
         </ul>
         <a href="" class="job-list__item-view-detail">
-          <span><?php esc_html_e('View detail', GPW_TEXT_DOMAIN) ?></span>
+          <span><?php esc_html_e('View detail', 'gpw') ?></span>
           <span class="material-symbols-outlined">arrow_forward</span>
         </a>
       </li>

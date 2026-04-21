@@ -18,6 +18,7 @@ class ThemeInit {
       controller\CompanyInfo::class,
       controller\PostController::class,
       controller\CareerController::class,
+      controller\JobAppliedFormModified::class,
     ];
   }
 

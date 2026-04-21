@@ -29,7 +29,7 @@ foreach( $sectionData['logistics_solution'] as $logisticsSolution ) {
       <?php 
         if( $permalink ) {
           get_template_part( 'gpw-templates/global/gpw-button', null, [
-            'label' => __('Tìm hiểu thêm', GPW_TEXT_DOMAIN),
+            'label' => __('Tìm hiểu thêm', 'gpw'),
             'url' => $permalink,
             'style' => 'primary',
           ]); 
