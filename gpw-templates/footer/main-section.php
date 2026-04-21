@@ -78,7 +78,7 @@ $mapEmbed = $companyInfo->getMainOfficeMap();
 
     <?php if( !empty($facebookEmbed) ) : ?>
       <div class="footer__facebook">
-        <h2 class="footer__title"><?= __('Fanpage', GPW_TEXT_DOMAIN) ?></h2>
+        <h2 class="footer__title"><?= __('Fanpage', 'gpw') ?></h2>
         
         <?= sprintf('<div class="footer__facebook-embed">%s</div>', $facebookEmbed ); ?>
 

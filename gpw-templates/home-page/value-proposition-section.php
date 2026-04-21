@@ -35,7 +35,7 @@ $valuePropositionCard = function($post) {
       <div class="value-proposition__card-description"><?= wp_kses_post($shortDescription) ?></div>
       <a href="<?= $permalink ?>" class="value-proposition__card-read-more-btn">
         <span class="material-symbols-outlined">chevron_right</span>
-        <span><?php esc_html_e('Read more', GPW_TEXT_DOMAIN) ?></span>
+        <span><?php esc_html_e('Read more', 'gpw') ?></span>
       </a>
     </div>
   </article>
@@ -46,7 +46,7 @@ $valuePropositionCard = function($post) {
 ?>
 <section class="value-proposition">
   <div class="section__inner">
-    <h2 class="section__title section__title--center section__title--has-separator"><?php esc_html_e('Our value', GPW_TEXT_DOMAIN) ?> <span class="highlight"><?php esc_html_e('proposition', GPW_TEXT_DOMAIN) ?></span></h2>
+    <h2 class="section__title section__title--center section__title--has-separator"><?php esc_html_e('Our value', 'gpw') ?> <span class="highlight"><?php esc_html_e('proposition', 'gpw') ?></span></h2>
     
     <div class="value-proposition__grid">
       <?php foreach( $logisticSolutions as $card ) {

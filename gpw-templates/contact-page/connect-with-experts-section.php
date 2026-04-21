@@ -13,7 +13,7 @@ $url = isset( $sectionData['link_to'] ) ? Utils::getUrl( $sectionData['link_to']
     <div class="connect-with-expert__wrapper">
       <?= wp_get_attachment_image( $imgID, 'medium_large', false, [ 'class' => 'connect-with-expert__image' ] ) ?>
       <div class="connect-with-expert__content">
-        <h2 class="section__title"><?= esc_html( $sectionData['title'] ?? __('Connect with experts', GPW_TEXT_DOMAIN) ) ?></h2>
+        <h2 class="section__title"><?= esc_html( $sectionData['title'] ?? __('Connect with experts', 'gpw') ) ?></h2>
         
         <?php if( !empty( $sectionData['description'] )): ?>
           <div class="section__description"><?= wp_kses_post( $sectionData['description'] ) ?></div>

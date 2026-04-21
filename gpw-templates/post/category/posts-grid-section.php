@@ -22,7 +22,7 @@ $maxPages = $wp_query->max_num_pages;
         <nav class="posts-grid__nav">
           <ul class="posts-grid__nav-list">
 
-            <li class="posts-grid__nav-item posts-grid__nav-item--active" data-cat="0"><?php _e( 'All', GPW_TEXT_DOMAIN ) ?></li>
+            <li class="posts-grid__nav-item posts-grid__nav-item--active" data-cat="0"><?php _e( 'All', 'gpw' ) ?></li>
 
             <?php foreach( $categories as $category ): ?>
 
@@ -54,13 +54,13 @@ $maxPages = $wp_query->max_num_pages;
   <button type="button" class="posts-grid__load-more-btn gpw-button gpw-button__primary gpw-button--center" 
     data-max="<?php esc_attr_e( $maxPages ) ?>" data-cat="<?= is_category() ? get_queried_object_id() : 0 ?>"
   >
-    <span class="gpw-button__text"><?php _e( 'Load more', GPW_TEXT_DOMAIN ) ?></span>
+    <span class="gpw-button__text"><?php _e( 'Load more', 'gpw' ) ?></span>
   </button>
   <?php endif; ?>
   
   <?php else: ?>
     
-    <p class="posts-grid__no-posts-message"><?php esc_html_e( 'No posts found in this category.', GPW_TEXT_DOMAIN ) ?></p>
+    <p class="posts-grid__no-posts-message"><?php esc_html_e( 'No posts found in this category.', 'gpw' ) ?></p>
     
   <?php endif; ?>
     

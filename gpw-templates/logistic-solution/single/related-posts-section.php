@@ -43,12 +43,12 @@ if (empty($relatedPosts)) {
 ?>
 <section class="related-posts">
   <div class="section__inner">
-    <h2 class="section__title section__title--center"><?php esc_html_e('Related Posts', GPW_TEXT_DOMAIN); ?></h2>
+    <h2 class="section__title section__title--center"><?php esc_html_e('Related Posts', 'gpw'); ?></h2>
     <nav class="related-posts__nav">
       <ul class="related-posts__nav-list">
 
         <li class="related-posts__nav-item related-posts__nav-item--active" data-cat="0">
-          <?php _e('All', GPW_TEXT_DOMAIN) ?>
+          <?php _e('All', 'gpw') ?>
         </li>
 
         <?php foreach ($categories as $category):
@@ -77,7 +77,7 @@ if (empty($relatedPosts)) {
         
     </main>
     <a href="<?= get_permalink( get_option( 'page_for_posts' ) ) ?>" class="gpw-button gpw-button__primary gpw-button--center related-posts__view-all-btn" role="button">
-      <span class="gpw-button__text"><?php esc_html_e( 'View all', GPW_TEXT_DOMAIN ) ?></span>
+      <span class="gpw-button__text"><?php esc_html_e( 'View all', 'gpw' ) ?></span>
     </a>
   </div>
 </section>

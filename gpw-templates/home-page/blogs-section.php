@@ -65,7 +65,7 @@ if (empty($posts)) {
       <ul class="<?= esc_attr($class) ?>__nav-list">
 
         <li class="<?= esc_attr($class) ?>__nav-item <?= esc_attr($class) ?>__nav-item--active" data-cat="0">
-          <?php _e('All', GPW_TEXT_DOMAIN) ?>
+          <?php _e('All', 'gpw') ?>
         </li>
 
         <?php foreach ($categories as $category): ?>

@@ -9,7 +9,7 @@ $logisticSolutions = get_posts([
   'orderby' => 'menu_order',
   'order' => 'ASC',
 ]);
-$sectionTitle = isset($args['title']) ? $args['title'] : sprintf( '%s <span class="highlight">%s</span>', __('Our value', GPW_TEXT_DOMAIN), __('proposition', GPW_TEXT_DOMAIN) );
+$sectionTitle = isset($args['title']) ? $args['title'] : sprintf( '%s <span class="highlight">%s</span>', __('Our value', 'gpw'), __('proposition', 'gpw') );
 $hasViewAllButton = $args['has_view_all_button'] ?? false;
 if( empty($logisticSolutions) ) {
   error_log('SERVICES SECTION: No logistic solution found.');
@@ -31,7 +31,7 @@ foreach( $logisticSolutions as $card ) {
       <div class="services__card-description line-clamp"><?= wp_kses_post($shortDescription) ?></div>
       <a href="<?= $permalink ?>" class="services__card-read-more-btn gpw-button gpw-button__outlined gpw-button--center" role="button">
         <span class="material-symbols-outlined">chevron_right</span>
-        <span><?php esc_html_e('Read more', GPW_TEXT_DOMAIN) ?></span>
+        <span><?php esc_html_e('Read more', 'gpw') ?></span>
       </a>
     </div>
   </article>
@@ -51,7 +51,7 @@ foreach( $logisticSolutions as $card ) {
     <?php if( $hasViewAllButton ): ?>
 
       <a href="<?= get_post_type_archive_link( 'logistics-solution' ) ?>" class="gpw-button gpw-button--center gpw-button__primary" role="button">
-        <span class="gpw-button__text"><?php esc_html_e('View all services', GPW_TEXT_DOMAIN) ?></span>
+        <span class="gpw-button__text"><?php esc_html_e('View all services', 'gpw') ?></span>
       </a>
 
     <?php endif; ?>

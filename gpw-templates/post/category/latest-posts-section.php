@@ -5,7 +5,7 @@
  */
 if ( !have_posts() ) {
     if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
-        echo '<p style="text-align: center; padding: 20px;">' . esc_html__( 'LATEST POSTS SECTION: No posts found in this category.', GPW_TEXT_DOMAIN ) . '</p>';
+        echo '<p style="text-align: center; padding: 20px;">' . esc_html__( 'LATEST POSTS SECTION: No posts found in this category.', 'gpw' ) . '</p>';
     }
     return;
 }

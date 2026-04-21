@@ -16,9 +16,9 @@ $imgID = 306;
     </div>
     <div class="consultant__content">
       <h2 class="consultant__title">
-        <?php esc_html_e('Get free consultation from 3A Logistics', GPW_TEXT_DOMAIN) ?></h2>
+        <?php esc_html_e('Get free consultation from 3A Logistics', 'gpw') ?></h2>
       <a href="<?= get_permalink($contactPageID) ?>" class="gpw-button gpw-button__secondary">
-        <span class="gpw-button__text"><?php esc_html_e('Contact now', GPW_TEXT_DOMAIN) ?></span>
+        <span class="gpw-button__text"><?php esc_html_e('Contact now', 'gpw') ?></span>
       </a>
     </div>
 
