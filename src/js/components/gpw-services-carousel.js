@@ -18,8 +18,8 @@ export default class ServicesCarousel {
       throw new Error('Swiper is not defined');
     }
 
-    new Swiper(this.swiperEl, {
-      slidesPerView: 1,
+    this.swiper = new Swiper(this.swiperEl, {
+      slidesPerView: 2,
       spaceBetween: 20,
       navigation: {
         nextEl: '.services__carousel .gpw-nav-btn__next',
@@ -27,7 +27,7 @@ export default class ServicesCarousel {
       },
       breakpoints: {
         550: {
-          slidesPerView: 2,
+          slidesPerView: 3,
         },
         850: {
           slidesPerView: 4,

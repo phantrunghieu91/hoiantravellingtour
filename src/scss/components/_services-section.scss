@@ -3,7 +3,7 @@
 .services {
   --_transition-duration: 500ms;
   --_transition-func: ease-in-out;
-  --_slides-per-view: 1;
+  --_slides-per-view: 2;
   --_space-between: 1.25rem;
 
   padding-block: var(--spacing-3xl);
@@ -72,7 +72,7 @@
   }
 
   @container content ( width > 550px ) {
-    --_slides-per-view: 2;
+    --_slides-per-view: 3;
   }
 
   @container content ( width > 850px ) {
