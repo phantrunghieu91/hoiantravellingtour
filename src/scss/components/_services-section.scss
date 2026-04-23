@@ -71,6 +71,13 @@
     }
   }
 
+  @container content ( width < 400px ) {
+    &__card a:is(.gpw-button) {
+      --_gpw-button-padding-block: var(--spacing-sm);
+      --_gpw-button-padding-inline: var(--spacing-md);
+    }
+  }
+
   @container content ( width > 550px ) {
     --_slides-per-view: 3;
   }
