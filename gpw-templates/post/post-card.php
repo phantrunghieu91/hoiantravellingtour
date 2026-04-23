@@ -3,13 +3,15 @@
  * @author Hieu "Jin" Phan Trung
  * * Template: Post - Post card
  * ! Args:
- *  - orientation: 'vertical' | 'horizontal' (default: 'vertical')
- *  - show_category: bool (default: false)
- *  - show_excerpt: bool (default: true)
- *  - is_featured: bool (default: false)
- *  - is_template: bool (default: false)
- *  - is_hidden: bool (default: false)
- *  - footer_display: 'none' | 'meta' | 'read-more' (default: 'none')
+ *  - orientation: 'vertical' | 'horizontal' (default: 'vertical') : controls the layout of the card. Vertical will stack the thumbnail on top of the content, 
+ *    while horizontal will place them side by side.
+ *  - show_category: bool (default: false) : whether to show the category or not
+ *  - show_excerpt: bool (default: true) : whether to show the excerpt or not
+ *  - is_featured: bool (default: false) : if true, the card will have a different style to highlight it as a featured post
+ *  - is_template: bool (default: false) : if true, the card will use placeholder data and wrap in a <template> tag for JS cloning
+ *  - is_hidden: bool (default: false) : if true, the card will have aria-hidden="true" attribute for accessibility, used for template or hidden cards
+ *  - footer_display: 'none' | 'meta' | 'read-more' (default: 'none') : controls what to display in the footer area of the card. 
+ *    'meta' will show author and date, 'read-more' will show a read more link.
  */
 $orientation = $args['orientation'] ?? 'vertical';
 $showExcerpt = $args['show_excerpt'] ?? true;
@@ -25,7 +27,7 @@ $excerpt = $isTemplate ? 'Excerpt template' : get_the_excerpt();
 $permalink = $isTemplate ? '#' : get_permalink();
 $authorName = $isTemplate ? 'Author' : get_the_author_meta( 'display_name', get_post_field( 'post_author', $postID ) );
 $publishDate = $isTemplate ? '01/01/2025' : get_the_date( 'F j, Y', $postID );
-$featuredImageID = $isTemplate ? PLACEHOLDER_IMAGE_ID : get_post_thumbnail_id( $postID );
+$featuredImageID = $isTemplate ? PLACEHOLDER_IMAGE_ID : (get_post_thumbnail_id( $postID ) ?: PLACEHOLDER_IMAGE_ID);
 $categories = get_the_category( $postID );
 $primaryCategory = get_post_meta( $postID, 'rank_math_primary_category', true );
 $primaryCategory = $primaryCategory 
