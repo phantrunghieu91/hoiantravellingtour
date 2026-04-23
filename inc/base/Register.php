@@ -66,7 +66,7 @@ class Register extends BaseController
     $this->enqueueStyle('google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
     $this->enqueueStyle('gpw-header', '1.0.2');
-    $this->enqueueStyle('gpw-footer', '1.0.1');
+    $this->enqueueStyle('gpw-footer', '1.0.2');
 
     // * Enqueue swiper for page that needs it
     if (is_front_page() || is_post_type_archive('logistics-solution') || is_singular('logistics-solution') || is_singular('industry') 
