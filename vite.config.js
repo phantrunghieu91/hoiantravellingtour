@@ -123,7 +123,7 @@ const config = defineConfig({
         },
 
         chunkFileNames: chunkInfo => {
-          const version = '0.0.2';
+          const version = '0.0.3';
           return `js/components/${chunkInfo.name}-chunk-v${version}.min.js`;
         },
 
