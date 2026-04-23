@@ -66,6 +66,7 @@
   @include container-query( content, sm ) {
     &__content {
       align-self: end;
+      margin-bottom: 1.875rem;
     }
     
     &__title {

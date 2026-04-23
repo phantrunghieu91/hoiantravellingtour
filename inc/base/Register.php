@@ -77,7 +77,7 @@ class Register extends BaseController
 
     if (is_front_page()) {
       $this->enqueueScript('gpw-home-page', '1.0.2', true);
-      $this->enqueueStyle('gpw-home-page', '1.0.6');
+      $this->enqueueStyle('gpw-home-page', time()); // '1.0.6'
     }
 
     if (is_home() || is_category()) {
@@ -100,12 +100,12 @@ class Register extends BaseController
 
     if ( is_post_type_archive('logistics-solution') || is_singular('logistics-solution') ) {
       $this->enqueueScript('gpw-services-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-services-page', '1.0.8');
+      $this->enqueueStyle('gpw-services-page', '1.0.9');
     }
 
     if( is_singular('industry') ) {
       $this->enqueueScript('gpw-industry-single-page', '1.0.2', true);
-      $this->enqueueStyle('gpw-industry-single-page', '1.0.7');
+      $this->enqueueStyle('gpw-industry-single-page', '1.0.8');
     }
 
     if( is_singular( 'career' ) ) {
@@ -113,7 +113,7 @@ class Register extends BaseController
     }
 
     if( is_page( [14] ) ) {
-      $this->enqueueStyle('gpw-contact-page', '1.0.7');
+      $this->enqueueStyle('gpw-contact-page', '1.0.8');
     }
 
     if( is_page( [13] ) ) {
@@ -125,7 +125,7 @@ class Register extends BaseController
       $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
 
       $this->enqueueScript('gpw-careers-page', '1.0.0', true);
-      $this->enqueueStyle('gpw-careers-page', '1.0.6');
+      $this->enqueueStyle('gpw-careers-page', '1.0.7');
       wp_localize_script('gpw-careers-page', 'ajaxObj', [
         'url' => admin_url('admin-ajax.php'),
         'action' => $action,
@@ -134,11 +134,11 @@ class Register extends BaseController
     }
 
     if( is_page( [1621])) {
-      $this->enqueueStyle('gpw-be-our-agent-page', '1.0.0');
+      $this->enqueueStyle('gpw-be-our-agent-page', '1.0.1');
     }
 
     if( is_page( [1671])) {
-      $this->enqueueStyle('gpw-sustainability-page', '1.0.0');
+      $this->enqueueStyle('gpw-sustainability-page', '1.0.1');
     }
   }
   public function setTypeForModuleScripts() {
