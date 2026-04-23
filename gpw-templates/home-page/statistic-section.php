@@ -6,7 +6,7 @@
 use gpweb\inc\base\Utilities as Utils;
 $sectionData = get_field('statistic', get_the_ID());
 if( empty( $sectionData['numbers'] ) ) {
-  error_log('Statistic Section: No numbers found.');
+  do_action('qm/debug', 'Statistic Section: No numbers found.');
   return;
 }
 $hasVideo = ($sectionData['video_type'] == 'upload_video' && !empty( $sectionData['upload_video'] )) || ($sectionData['video_type'] == 'youtube' && !empty( $sectionData['youtube'] ));
@@ -90,6 +90,16 @@ $verticalDotLineImgID = 638;
       </ul>
 
     </div>
+
+    <?php if( $hasVideo ) {
+      echo '<div class="statistic__video-on-mobile">';
+      if( $sectionData['video_type'] == 'upload_video' && !empty( $sectionData['upload_video'] ) ) {
+        Utils::renderVideoBlock( $sectionData['upload_video'], '', true );
+      } elseif( $sectionData['video_type'] == 'youtube' && !empty( $sectionData['youtube'] ) ) {
+        Utils::renderYoutubeEmbed( $sectionData['youtube_link'], true, '' );
+      }
+      echo '</div>';
+    } ?>
 
     <?= wp_get_attachment_image( $horizontalArrowImgID, 'full', false, [ 'class' => 'statistic__horizontal-arrow', 'alt' => 'Floating image' ] ) ?>
     <?= wp_get_attachment_image( $verticalArrowImgID, 'full', false, [ 'class' => 'statistic__vertical-arrow', 'alt' => 'Floating image' ] ) ?>
