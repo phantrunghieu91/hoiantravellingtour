@@ -21,7 +21,7 @@ foreach( $sectionData['logistics_solution'] as $logisticsSolution ) {
         <div class="logistics-solution__description"><?= wp_kses_post( $logisticsSolution['description'] ) ?></div>
       <?php endif; ?>
       <?php get_template_part( 'gpw-templates/global/gpw-button', null, [
-        'label' => __('Khám phá ngay', 'gpw'),
+        'label' => __('Discover now', 'gpw'),
         'url' => $link,
         'style' => 'outline',
       ]) ?>
