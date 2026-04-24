@@ -51,6 +51,7 @@ class Register extends BaseController
       new \gpweb\shortcodes\ImgById('img_by_id'),
       new \gpweb\shortcodes\LinkTo('link_to'),
       new \gpweb\shortcodes\CertificateList('certificate_list_sc'),
+      new \gpweb\shortcodes\LanguageSwitcher('gpw_language_switcher'),
     ];
   }
 
@@ -65,7 +66,7 @@ class Register extends BaseController
     $this->enqueueStyle('theme-init', '1.0.7');
     $this->enqueueStyle('google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-    $this->enqueueStyle('gpw-header', '1.0.2');
+    $this->enqueueStyle('gpw-header', '1.0.3');
     $this->enqueueStyle('gpw-footer', '1.0.2');
 
     // * Enqueue swiper for page that needs it
@@ -77,7 +78,7 @@ class Register extends BaseController
 
     if (is_front_page()) {
       $this->enqueueScript('gpw-home-page', '1.0.4', true);
-      $this->enqueueStyle('gpw-home-page', '1.0.7');
+      $this->enqueueStyle('gpw-home-page', time()); // '1.0.7'
     }
 
     if (is_home() || is_category()) {
@@ -100,7 +101,7 @@ class Register extends BaseController
 
     if ( is_post_type_archive('logistics-solution') || is_singular('logistics-solution') ) {
       $this->enqueueScript('gpw-services-page', '1.0.1', true);
-      $this->enqueueStyle('gpw-services-page', '1.0.11');
+      $this->enqueueStyle('gpw-services-page', time()); // '1.0.11'
     }
 
     if( is_singular('industry') ) {
