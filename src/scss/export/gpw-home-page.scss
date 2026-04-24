@@ -353,6 +353,10 @@
     color: #fff;
   }
 
+  .section__title {
+    margin-bottom: .5em;
+  }
+
   .section__sub-title {
     text-transform: uppercase;
   }
@@ -684,15 +688,22 @@
     }
 
     &__content {
+      margin-left: 2.5rem;
+    }
+
+    &__trust-score {
+      width: fit-content;
+    }
+  }
+
+  @include container-query(content, #{to-rem(1800)}, gt) {
+    &__content {
+      margin-left: unset;
       grid-column: 3 / 7;
 
       .section__title {
         font-size: 3rem;
       }
-    }
-
-    &__trust-score {
-      width: fit-content;
     }
   }
 
