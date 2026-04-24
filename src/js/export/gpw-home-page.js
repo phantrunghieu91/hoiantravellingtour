@@ -134,12 +134,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if(entry.isIntersecting) {
+            if(entry.target.isRunning) return;
+            entry.target.isRunning = true;
             this.counterAnimation(entry.target);
-            observer.unobserve(entry.target); // Stop observing after animation
           }
         });
       }, { threshold: 0.8 })
       this.counterEls.forEach(counterEl => {
+        counterEl.isRunning = false;
         observer.observe(counterEl);
       });
     },
@@ -151,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentNumber += step;
         if(currentNumber >= targetNumber) {
           currentNumber = targetNumber;
+          counterEl.isRunning = false;
           clearInterval(interval);
         }
         counterEl.textContent = currentNumber.toLocaleString();

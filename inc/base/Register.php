@@ -77,7 +77,7 @@ class Register extends BaseController
     }
 
     if (is_front_page()) {
-      $this->enqueueScript('gpw-home-page', '1.0.4', true);
+      $this->enqueueScript('gpw-home-page', '1.0.5', true);
       $this->enqueueStyle('gpw-home-page', '1.0.8');
     }
 
