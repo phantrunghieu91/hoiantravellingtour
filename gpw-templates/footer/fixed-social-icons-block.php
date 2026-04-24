@@ -12,7 +12,7 @@ if( empty($socials) ) {
   <ul class="fixed-social-icons__list">
     <?php foreach($socials as $social) : ?>
       <li class="fixed-social-icons__item">
-        <a href="<?= esc_url($social['url']); ?>" target="_blank" rel="noopener noreferrer">
+        <a href="<?= esc_url($social['link']); ?>" target="_blank" rel="noopener noreferrer">
           <?= wp_get_attachment_image( $social['icon'], 'medium', false, [ 'class' => 'fixed-social-icons__icon', 'alt' => $social['name'] ] ) ?>
         </a>
       </li>
