@@ -78,7 +78,7 @@ class Register extends BaseController
 
     if (is_front_page()) {
       $this->enqueueScript('gpw-home-page', '1.0.4', true);
-      $this->enqueueStyle('gpw-home-page', time()); // '1.0.7'
+      $this->enqueueStyle('gpw-home-page', '1.0.8');
     }
 
     if (is_home() || is_category()) {
@@ -101,7 +101,7 @@ class Register extends BaseController
 
     if ( is_post_type_archive('logistics-solution') || is_singular('logistics-solution') ) {
       $this->enqueueScript('gpw-services-page', '1.0.1', true);
-      $this->enqueueStyle('gpw-services-page', time()); // '1.0.11'
+      $this->enqueueStyle('gpw-services-page', '1.0.12');
     }
 
     if( is_singular('industry') ) {
@@ -119,7 +119,7 @@ class Register extends BaseController
 
     if( is_page( [13] ) ) {
       $this->enqueueScript('gpw-about-page', '1.0.1', true);
-      $this->enqueueStyle('gpw-about-page', '1.0.6');
+      $this->enqueueStyle('gpw-about-page', '1.0.7');
     }
 
     if( is_page( [508] ) ) {
