@@ -74,7 +74,6 @@ export default class CareerController {
     const jobData = await this.fetchJobList(formData);
     this.displayMessage(`Found ${jobData.found_jobs} job(s).`, '', 'success');
     this.state.isFetching = false;
-    console.log('HandleSearch: ', jobData);
     this.renderJobList(jobData.jobs);
     this.renderPagination(jobData.max_pages);
   }
@@ -166,11 +165,9 @@ export default class CareerController {
     const jobData = await this.fetchJobList(formData);
     this.state.isFetching = false;
     this.changeActivePaginationItem();
-    console.log('FetchJobsByPage: ', jobData);
     this.renderJobList(jobData.jobs);
   }
   changeActivePaginationItem() {
-    console.log(this.state);
     this.paginationItems.forEach(item => {
       const isActive = item.dataset.page == this.state.currentPage;
       item.classList.toggle('job-list__pagination-item--active', isActive);
