@@ -1,7 +1,7 @@
 <?php 
 /**
  * @author Hieu "Jin" Phan Trung
- * * Template: Page become a partner
+ * * Template name: PAGE - Be our agent
  */
 get_template_part( 'gpw-templates/global/header' );
 
