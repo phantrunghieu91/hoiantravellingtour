@@ -1,7 +1,7 @@
 <?php 
 /**
  * @author Hieu "Jin" Phan Trung
- * * Template: About us page
+ * * Template name: PAGE - About us page
  */
 get_template_part( 'gpw-templates/global/header' );
 
