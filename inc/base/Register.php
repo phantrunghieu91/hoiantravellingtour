@@ -52,6 +52,7 @@ class Register extends BaseController
       new \gpweb\shortcodes\LinkTo('link_to'),
       new \gpweb\shortcodes\CertificateList('certificate_list_sc'),
       new \gpweb\shortcodes\LanguageSwitcher('gpw_language_switcher'),
+      new \gpweb\shortcodes\HeaderHotline('gpw_header_hotline'),
     ];
   }
 
