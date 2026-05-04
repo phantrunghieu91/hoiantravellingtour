@@ -43,6 +43,7 @@
     }
 
     &-icon {
+      width: calc( var(--_icon-size) * .6 );
       object-fit: contain;
       transition: transform 300ms;
     }
