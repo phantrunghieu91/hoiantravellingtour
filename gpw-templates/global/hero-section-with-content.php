@@ -4,14 +4,15 @@
  * * Template: Global - Hero section with content
  */
 use gpweb\inc\base\Utilities as Utils;
-$heroData = get_field( 'hero', is_archive() ? 'gpw_settings' : get_the_ID() );
+$isArchive = is_archive();
+$heroData = get_field( 'hero', $isArchive ? 'gpw_settings' : get_the_ID() );
 if( !$heroData || ( $heroData['video_type'] == 'upload' && empty($heroData['background_video']) ) && ( $heroData['video_type'] == 'youtube' && empty($heroData['background_video']['youtube_link']) ) ) {
   do_action('qm/error', 'Hero section: Missing background video' );
   return;
 }
 $splitTitle = isset( $args['split_title'] ) ? $args['split_title'] : false;
 $url = isset($heroData['link_to']) ? Utils::getUrl($heroData['link_to']) : '';
-$title = isset( $heroData['title'] ) && !empty( $heroData['title'] ) ? esc_html($heroData['title']) : ( is_archive() ? get_the_archive_title() : get_the_title() );
+$title = isset( $heroData['title'] ) && !empty( $heroData['title'] ) ? ($isArchive ? esc_html($heroData['title'][GPW_CURRENT_LANGUAGE]) : esc_html($heroData['title'])) : ( $isArchive ? get_the_archive_title() : get_the_title() );
 if( $splitTitle ) {
   $words = explode( ' ', $title );
   $half  = (int) floor( count( $words ) / 2 );
@@ -21,6 +22,8 @@ if( $splitTitle ) {
     esc_html( implode( ' ', array_slice( $words, $half ) ) )
   );
 }
+$subTitle = isset( $heroData['sub_title'] ) && !empty( $heroData['sub_title'] ) ? ($isArchive ? esc_html($heroData['sub_title'][GPW_CURRENT_LANGUAGE]) : esc_html($heroData['sub_title'])) : '';
+$description = isset( $heroData['description'] ) && !empty( $heroData['description'] ) ? ($isArchive ? wp_kses_post($heroData['description'][GPW_CURRENT_LANGUAGE]) : wp_kses_post($heroData['description'])) : '';
 ?>
 <section class="hero hero--with-content">
   <div class="section__inner section__inner--full">
@@ -30,15 +33,15 @@ if( $splitTitle ) {
       : Utils::renderYoutubeEmbed( $heroData['youtube_link'], true, 'hero__background-video' ) ?>
 
     <div class="hero__content">
-      <?php if( !empty($heroData['sub_title']) ): ?>
-        <span class="hero__sub-title"><?= esc_html($heroData['sub_title']) ?></span>
+      <?php if( !empty($subTitle) ): ?>
+        <span class="hero__sub-title"><?= $subTitle ?></span>
       <?php endif; ?>
       
       <h1 class="hero__title"><?= $title ?></h1>
 
-      <?php if( !empty($heroData['description']) ): ?>
+      <?php if( !empty($description) ): ?>
 
-        <div class="hero__description"><?= esc_html($heroData['description']) ?></div>
+        <div class="hero__description"><?= $description ?></div>
 
       <?php endif; ?>
 
