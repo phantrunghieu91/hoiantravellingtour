@@ -4,6 +4,7 @@ defined('ABSPATH') || exit;
 // Placeholder image id constant
 define('PLACEHOLDER_IMAGE_ID', 41);
 define('GPW_TEXT_DOMAIN', 'gpw');
+define('GPW_DATE_FORMAT', pll_current_language() === 'en' ? 'F j, Y' : 'j F, Y');
 
 // Turn off auto gen <p> of contact form 7
 add_filter('wpcf7_autop_or_not', function() {
