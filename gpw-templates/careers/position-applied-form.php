@@ -3,7 +3,7 @@
  * @author Hieu "Jin" Phan Trung
  * * Template: Career page - Position applied form
  */
-$careerPageID = 508;
+$careerPageID = GPW_CURRENT_LANGUAGE == 'en' ? 508 : 2310;
 $sectionData = get_field('position_applied_for', $careerPageID);
 if( empty($sectionData['contact_form_sc']) ) {
   do_action('qm/debug', 'Please enter contact form SC!');
