@@ -24,12 +24,17 @@ class CompanyInfo {
       return;
     }
     $companyInfo = get_field('company_information', 'gpw_settings');
-    $this->office = $companyInfo['office'] ?? [];
     $this->email = $companyInfo['email'] ?? '';
     $this->phone = $companyInfo['phone_number'] ?? '';
     $this->socials = $companyInfo['social'] ?? [];
     $this->facebookEmbed = $companyInfo['facebook_embed'] ?? '';
     $this->mainOfficeMap = $companyInfo['main_office_map_embed'] ?? '';
+    foreach( $companyInfo['office'] as $office ) {
+      $this->office[] = [
+        'name' => $office['name'][GPW_CURRENT_LANGUAGE] ?: ( $office['name']['en'] ?? '' ),
+        'address' => $office['address'][GPW_CURRENT_LANGUAGE] ?: ( $office['address']['en'] ?? '' ), 
+      ];
+    }
   }
   public function getOffice(): array {
     return $this->office;
