@@ -3,7 +3,7 @@
  * @author Hieu "Jin" Phan Trung
  * * Template: About page - Team members section
  */
-$sectionData = get_field('team_members', get_the_ID() );
+$sectionData = get_field('team_members', 'gpw_settings' );
 if( empty($sectionData['member']) ) {
   do_action('qm/debug', 'TEAM MEMBERS: No members data found');
   return;
@@ -11,22 +11,22 @@ if( empty($sectionData['member']) ) {
 ?>
 <section class="team-members">
   <div class="section__inner">
-    <?php if( !empty( $sectionData['sub_title'] )): ?>
-      <span class="section__sub-title section__sub-title--center"><?php esc_html_e( $sectionData['sub_title'] ); ?></span>
+    <?php if( !empty( $sectionData['sub_title'][GPW_CURRENT_LANGUAGE] )): ?>
+      <span class="section__sub-title section__sub-title--center"><?php esc_html_e( $sectionData['sub_title'][GPW_CURRENT_LANGUAGE] ); ?></span>
     <?php endif ?>
-    <?php if( !empty( $sectionData['title'] )): ?>
-      <h2 class="section__title section__title--center section__title--has-separator"><?= wp_kses_post( $sectionData['title'] ); ?></h2>
+    <?php if( !empty( $sectionData['title'][GPW_CURRENT_LANGUAGE] )): ?>
+      <h2 class="section__title section__title--center section__title--has-separator"><?= wp_kses_post( $sectionData['title'][GPW_CURRENT_LANGUAGE] ); ?></h2>
     <?php endif ?>
-    <?php if( !empty( $sectionData['description'] )): ?>
-      <div class="section__description section__description--center"><?= wp_kses_post( $sectionData['description'] ); ?></div>
+    <?php if( !empty( $sectionData['description'][GPW_CURRENT_LANGUAGE] )): ?>
+      <div class="section__description section__description--center"><?= wp_kses_post( $sectionData['description'][GPW_CURRENT_LANGUAGE] ); ?></div>
     <?php endif ?>
     <div class="team-members__grid">
       
       <?php foreach( $sectionData['member'] as $member ) :
         $avatarID = $member['avatar'] ?: PLACEHOLDER_IMAGE_ID;
-        $name = $member['name'] ?: false;
-        $position = $member['position'] ?: false;
-        $quote = $member['quote'] ?: false;
+        $name = $member['name'][GPW_CURRENT_LANGUAGE] ?: ( $member['name']['en'] ?: false );
+        $position = $member['position'][GPW_CURRENT_LANGUAGE] ?: ( $member['position']['en'] ?: false );
+        $quote = $member['quote'][GPW_CURRENT_LANGUAGE] ?: ( $member['quote']['en'] ?: false );
       ?>
 
         <article class="team-member">

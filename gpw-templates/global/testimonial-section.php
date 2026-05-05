@@ -10,9 +10,10 @@ if (empty($sectionData['feedback'])) {
 }
 foreach ($sectionData['feedback'] as $feedback):
   $avatarID = $feedback['avatar'] ?: PLACEHOLDER_IMAGE_ID;
-  $name = $feedback['name'] ?: '';
-  $position = $feedback['position'] ?: '';
-  $company = $feedback['company'] ?: '';
+  $name = $feedback['name'][GPW_CURRENT_LANGUAGE] ?: ($feedback['name']['en'] ?: '');
+  $position = $feedback['position'][GPW_CURRENT_LANGUAGE] ?: ($feedback['position']['en'] ?: '');
+  $company = $feedback['company'][GPW_CURRENT_LANGUAGE] ?: ($feedback['company']['en'] ?: '');
+  $content = $feedback['content'][GPW_CURRENT_LANGUAGE] ?: ($feedback['content']['en'] ?: '');
   if (empty($name)) {
     continue;
   }
@@ -38,7 +39,7 @@ foreach ($sectionData['feedback'] as $feedback):
 
       <?php endif ?>
     </div>
-    <div class="testimonial__content"><?= wp_kses_post($feedback['content']) ?></div>
+    <div class="testimonial__content"><?= wp_kses_post($content) ?></div>
   </article>
   <?php
   $slideItems[] = ob_get_clean();
@@ -46,15 +47,15 @@ endforeach;
 ?>
 <section class="testimonials">
   <div class="section__inner">
-    <?php if (!empty($sectionData['sub_title'])): ?>
+    <?php if (!empty($sectionData['sub_title'][GPW_CURRENT_LANGUAGE])): ?>
 
-      <span class="section__sub-title section__sub-title--center"><?php esc_html_e($sectionData['sub_title']) ?></span>
+      <span class="section__sub-title section__sub-title--center"><?php esc_html_e($sectionData['sub_title'][GPW_CURRENT_LANGUAGE]) ?></span>
 
     <?php endif;
-    if (!empty($sectionData['title'])): ?>
+    if (!empty($sectionData['title'][GPW_CURRENT_LANGUAGE])): ?>
 
       <h2 class="section__title section__title--center section__title--has-separator">
-        <?= wp_kses_post($sectionData['title']) ?>
+        <?= wp_kses_post($sectionData['title'][GPW_CURRENT_LANGUAGE]) ?>
       </h2>
 
     <?php endif ?>
