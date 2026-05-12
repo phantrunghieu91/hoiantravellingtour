@@ -34,7 +34,7 @@ foreach ($sectionData['solution'] as $solution):
 endforeach;
 ?>
 <section class="our-solutions">
-  <div class="section__inner section__inner--full">
+  <div class="section__inner">
     <div class="our-solutions__header">
       <h2 class="section__title section__title--has-separator">
         <?= wp_kses_post($sectionData['title']) ?>

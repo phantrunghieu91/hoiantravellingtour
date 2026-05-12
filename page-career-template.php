@@ -11,11 +11,11 @@ get_template_part( 'gpw-templates/careers/about-us-section' );
 
 get_template_part( 'gpw-templates/careers/why-choose-us-section' );
 
-get_template_part( 'gpw-templates/global/related-posts-section' );
-
 get_template_part( 'gpw-templates/careers/job-list-section' );
 
 get_template_part( 'gpw-templates/careers/position-applied-form' );
+
+get_template_part( 'gpw-templates/global/related-posts-section' );
 
 // get_template_part( 'gpw-templates/global/team-members-section', 'with-slide' );
 
