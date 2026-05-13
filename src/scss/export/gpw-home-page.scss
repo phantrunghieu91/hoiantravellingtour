@@ -51,6 +51,8 @@
   &__carousel {
     --_slides-per-view: 1.5;
     --_space-between: 1.25rem;
+    --_carousel-blur-width: 7.5rem;
+    position: relative;
 
     .swiper-slide {
       width: calc(100% / var(--_slides-per-view) - (var(--_space-between) * (var(--_slides-per-view) - 1) / var(--_slides-per-view)));
@@ -60,6 +62,19 @@
     .gpw-pagination {
       position: static;
       margin-top: var(--spacing-lg);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      right: 0;
+      display: block;
+      height: calc(100% - 1rem - var(--spacing-lg));
+      width: var(--_carousel-blur-width);
+      backdrop-filter: blur(2px);
+      background: linear-gradient(to right, hsl( from #fff h s l / .4 ) 0%, white 80%);
     }
   }
 
@@ -153,6 +168,7 @@
   @include container-query(content, sm, gt) {
     &__carousel {
       --_slides-per-view: 2.5;
+      --_carousel-blur-width: 8.75rem;
     }
   }
 
