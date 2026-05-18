@@ -71,8 +71,7 @@ class Register extends BaseController
     $this->enqueueStyle('gpw-footer', '1.0.2');
 
     // * Enqueue swiper for page that needs it
-    if (is_front_page() || is_post_type_archive('logistics-solution') || is_singular('logistics-solution') || is_singular('industry') 
-      || is_page( [ 508 ])) {
+    if (is_front_page() || is_post_type_archive(['logistics-solution', 'industry']) || is_singular('logistics-solution') || is_singular('industry') || is_page( [ 508 ])) {
       $this->enqueueScript('swiper');
       $this->enqueueStyle('swiper');
     }
@@ -100,7 +99,7 @@ class Register extends BaseController
       $this->enqueueStyle('gpw-post-single-page', '1.0.0');
     }
 
-    if ( is_post_type_archive('logistics-solution') || is_singular('logistics-solution') ) {
+    if ( is_post_type_archive(['logistics-solution', 'industry']) || is_singular('logistics-solution') ) {
       $this->enqueueScript('gpw-services-page', '1.0.2', true);
       $this->enqueueStyle('gpw-services-page', '1.0.13');
     }
