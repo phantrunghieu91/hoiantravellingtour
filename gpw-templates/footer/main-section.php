@@ -20,11 +20,10 @@ $mapEmbed = $companyInfo->getMainOfficeMap();
   <div class="section__inner">
 
     <div class="footer__about">
-      <?php if( isset( $mainSectionData['logo'] ) && !empty($mainSectionData['logo'])) {
-        echo wp_get_attachment_image( $mainSectionData['logo'], 'medium', false, ['class' => 'footer__main-logo'] );
-      } else {
-        echo $logo;
-      }?>
+      <?php echo sprintf( '<a class="footer__logo-wrapper" href="%s">%s</a>',
+        is_front_page() ? 'javascript:void(0);' : home_url(),
+        isset( $mainSectionData['logo'] ) && !empty($mainSectionData['logo']) ? wp_get_attachment_image( $mainSectionData['logo'], 'medium', false, ['class' => 'footer__logo'] ) : $logo,
+      ); ?>
       <a class="footer__hotline" href="tel:<?= esc_attr($phoneNumber) ?>">
         <span class="material-symbols-outlined">call</span>
         <span><?= esc_html($phoneNumber) ?></span>
