@@ -4,17 +4,16 @@
  * * Template: Services Section
  */
 $currentObj = get_queried_object(  );
-if( !is_a( $currentObj, 'WP_Post_Type' )) {
-  do_action( 'qm/debug', 'Please use this section inside post type archive only!');
-  return;
-}
 $services = get_posts([
-  'post_type' => $currentObj->name,
+  'post_type' => is_a( $currentObj, 'WP_Post_Type' ) ? $currentObj->name : 'logistics-solution',
   'numberposts' => -1,
   'orderby' => 'menu_order',
   'order' => 'ASC',
 ]);
 $sectionTitle = isset($args['title']) ? $args['title'] : sprintf( '%s <span class="highlight">%s</span>', __('Our value', 'gpw'), __('proposition', 'gpw') );
+if( is_front_page() && get_field( 'logistic_solution_title', get_option( 'page_on_front' ) ) ) {
+  $sectionTitle = get_field('logistic_solution_title');
+}
 $hasViewAllButton = $args['has_view_all_button'] ?? false;
 if( empty($services) ) {
   do_action( 'qm/debug', 'SERVICES SECTION: No logistic solution found.');
