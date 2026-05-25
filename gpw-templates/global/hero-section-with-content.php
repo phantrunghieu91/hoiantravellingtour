@@ -6,7 +6,8 @@
 use gpweb\inc\base\Utilities as Utils;
 $isArchive = is_archive();
 $heroData = get_field( 'hero', $isArchive ? 'gpw_settings' : get_the_ID() );
-if( !$heroData || ( $heroData['video_type'] == 'upload' && empty($heroData['background_video']) ) && ( $heroData['video_type'] == 'youtube' && empty($heroData['background_video']['youtube_link']) ) ) {
+if( !$heroData || ( empty( $heroData['banner']) ) &&
+  ( $heroData['video_type'] == 'upload' && empty($heroData['background_video']) ) && ( $heroData['video_type'] == 'youtube' && empty($heroData['youtube_link']) ) ) {
   do_action('qm/error', 'Hero section: Missing background video' );
   return;
 }
@@ -28,9 +29,13 @@ $description = isset( $heroData['description'] ) && !empty( $heroData['descripti
 <section class="hero hero--with-content">
   <div class="section__inner section__inner--full">
 
-    <?php $heroData['video_type'] == 'upload' 
+    <?php if( !empty( $heroData['banner'] ) ) {
+      echo wp_get_attachment_image( $heroData['banner'], 'full', false, [ 'class' => 'hero__background-image' ] );
+    } else {
+      echo $heroData['video_type'] == 'upload' 
       ? Utils::renderVideoBlock($heroData['background_video'], 'hero__background-video') 
-      : Utils::renderYoutubeEmbed( $heroData['youtube_link'], true, 'hero__background-video' ) ?>
+      : Utils::renderYoutubeEmbed( $heroData['youtube_link'], true, 'hero__background-video' );
+    } ?>
 
     <div class="hero__content">
       <?php if( !empty($subTitle) ): ?>

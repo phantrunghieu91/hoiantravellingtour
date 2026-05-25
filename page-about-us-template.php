@@ -7,14 +7,8 @@ get_template_part( 'gpw-templates/global/header' );
 
 get_template_part( 'gpw-templates/global/hero-section', 'with-content' );
 
-get_template_part( 'gpw-templates/about-page/vision-mission-section' );
-
-get_template_part( 'gpw-templates/about-page/our-value-section' );
-
-get_template_part( 'gpw-templates/about-page/statistic-section' );
+get_template_part( 'gpw-templates/home-page/statistic-section' );
 
 get_template_part( 'gpw-templates/about-page/team-members-section' );
-
-get_template_part( 'gpw-templates/global/get-free-quote-section' );
 
 get_template_part( 'gpw-templates/global/footer' );
