@@ -9,6 +9,10 @@ get_template_part( 'gpw-templates/global/hero-section', 'with-content' );
 
 get_template_part( 'gpw-templates/home-page/statistic-section' );
 
+get_template_part( 'gpw-templates/home-page/core-value-section', 'style-2' );
+
+get_template_part( 'gpw-templates/about-page/customer-centric-section' );
+
 get_template_part( 'gpw-templates/about-page/team-members-section' );
 
 get_template_part( 'gpw-templates/global/footer' );
