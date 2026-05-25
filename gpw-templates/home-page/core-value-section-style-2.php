@@ -37,28 +37,30 @@ $footerImgId = isset( $sectionData['banner'] ) && !empty( $sectionData['banner']
       </article>
       <?php endforeach; ?>
     </main>
-    <footer class="core-value__footer" <?php if( $footerBgImgID ) echo sprintf('style="--_footer-bg-img:url(%s)"', wp_get_attachment_image_url( $footerBgImgID, 'full' )) ?>>
-      <div class="core-value__footer-overlay"></div>
-      <?php if( $footerImgId ) {
-        echo wp_get_attachment_image( $footerImgId, 'large', false, [ 'class' => 'core-value__footer-image' ] );
-      } ?>
-      <div class="core-value__footer-content">
-      <?php if( !empty( $sectionData['banner']['sub_title'] ) ): ?>
-        <span class="core-value__footer-sub-title"><?= esc_html( $sectionData['banner']['sub_title'] ) ?></span>
-      <?php endif ?>
-      <?php if( !empty( $sectionData['banner']['title'] ) ): ?>
-        <h4 class="core-value__footer-title"><?= esc_html( $sectionData['banner']['title'] ) ?></h4>
-      <?php endif ?>
-      <?php if( $btnUrl && !empty( $sectionData['link_to']['label'] ) ) {
-        get_template_part( 'gpw-templates/global/gpw-button', null, [
-          'label' => $sectionData['link_to']['label'],
-          'url' => $btnUrl,
-          'style' => 'primary',
-          'icon_code' => 'chevron_right',
-        ]);
-      } ?>
-      </div>
-    </footer>
+    <?php if( !empty( $sectionData['banner']) ) : ?>
+      <footer class="core-value__footer" <?php if( $footerBgImgID ) echo sprintf('style="--_footer-bg-img:url(%s)"', wp_get_attachment_image_url( $footerBgImgID, 'full' )) ?>>
+        <div class="core-value__footer-overlay"></div>
+        <?php if( $footerImgId ) {
+          echo wp_get_attachment_image( $footerImgId, 'large', false, [ 'class' => 'core-value__footer-image' ] );
+        } ?>
+        <div class="core-value__footer-content">
+        <?php if( !empty( $sectionData['banner']['sub_title'] ) ): ?>
+          <span class="core-value__footer-sub-title"><?= esc_html( $sectionData['banner']['sub_title'] ) ?></span>
+        <?php endif ?>
+        <?php if( !empty( $sectionData['banner']['title'] ) ): ?>
+          <h4 class="core-value__footer-title"><?= esc_html( $sectionData['banner']['title'] ) ?></h4>
+        <?php endif ?>
+        <?php if( $btnUrl && !empty( $sectionData['link_to']['label'] ) ) {
+          get_template_part( 'gpw-templates/global/gpw-button', null, [
+            'label' => $sectionData['link_to']['label'],
+            'url' => $btnUrl,
+            'style' => 'primary',
+            'icon_code' => 'chevron_right',
+          ]);
+        } ?>
+        </div>
+      </footer>
+    <?php endif ?>
   </div>
 </section>
 <?php 
