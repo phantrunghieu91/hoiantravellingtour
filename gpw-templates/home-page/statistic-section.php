@@ -4,7 +4,8 @@
  * * Template: Home Page - Statistic Section
  */
 use gpweb\inc\base\Utilities as Utils;
-$sectionData = get_field('statistic', get_the_ID());
+$frontPageID = get_option('page_on_front');
+$sectionData = get_field('statistic', $frontPageID);
 if( empty( $sectionData['numbers'] ) ) {
   do_action('qm/debug', 'Statistic Section: No numbers found.');
   return;
