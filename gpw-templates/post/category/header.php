@@ -12,7 +12,7 @@ if( !is_home() && !is_category() ) {
 <header class="category-header">
   <div class="section__inner">
     <h1 class="category-header__title">
-      <?= is_home() ? __( "Blog ", 'gpw' ) . get_bloginfo( 'name' ) : single_cat_title(); ?>
+      <?= is_home() ? __( "Blog", 'gpw' ) . ' ' . get_bloginfo( 'name' ) : single_cat_title(); ?>
     </h1>
   </div>
 </header>

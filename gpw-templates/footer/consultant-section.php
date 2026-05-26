@@ -3,7 +3,7 @@
  * @author Hieu "Jin" Phan Trung
  * * Template: FOOTER - Consultant block
  */
-$contactPageID = 14;
+$contactPageID = GPW_CURRENT_LANGUAGE == 'en' ? 14 : 2313;
 $imgID = 306;
 ?>
 <section class="consultant">
