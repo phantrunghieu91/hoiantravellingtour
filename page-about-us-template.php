@@ -21,6 +21,8 @@ get_template_part( 'gpw-templates/about-page/why-choose-us-section' );
 
 get_template_part( 'gpw-templates/about-page/our-customers-section' );
 
+get_template_part( 'gpw-templates/home-page/our-solutions-section' );
+
 get_template_part( 'gpw-templates/about-page/team-members-section' );
 
 get_template_part( 'gpw-templates/global/footer' );

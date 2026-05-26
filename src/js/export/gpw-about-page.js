@@ -95,4 +95,69 @@ document.addEventListener( 'DOMContentLoaded', function () {
       });
     }
   }.init();
+  // our solutions carousel
+  const ourSolutions = {
+    init() {
+      try {
+        this.cacheElements();
+        this.initCarousel();
+      } catch( error ) {
+        console.warn( 'OUR SOLUTIONS CAROUSEL:', error.message );
+      }
+    },
+    cacheElements() {
+      this.sectionEl = document.querySelector('.our-solutions');
+      if( !this.sectionEl ) {
+        throw new Error('Section our solutions not found');
+      }
+      this.swiperEl = this.sectionEl.querySelector('.our-solutions__carousel .swiper');
+      if( !this.swiperEl ) {
+        throw new Error('Swiper element for our solutions not found');
+      }
+    },
+    initCarousel() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error('Swiper library is not loaded');
+      }
+      this.swiper = new Swiper(this.swiperEl, {
+        slidesPerView: 1.5,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+        },
+        navigation: {
+          nextEl: this.sectionEl.querySelector('.gpw-nav-btn__next'),
+          prevEl: this.sectionEl.querySelector('.gpw-nav-btn__prev'),
+        },
+        pagination: {
+          el: this.sectionEl.querySelector('.gpw-pagination'),
+          clickable: true,
+        },
+        breakpoints: {
+          550: {
+            slidesPerView: 2.5,
+          },
+          850: {
+            slidesPerView: 3.5,
+          },
+          1250: {
+            slidesPerView: 4.5,
+          }
+        }
+      });
+
+      // observe to stop autoplay when not visible
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            this.swiper.autoplay.start();
+          } else {
+            this.swiper.autoplay.stop();
+          }
+        });
+      }, { threshold: 0.5 });
+      observer.observe(this.sectionEl);
+    }
+  }.init();
 } );
