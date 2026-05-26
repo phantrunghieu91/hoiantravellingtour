@@ -17,6 +17,8 @@ get_template_part( 'gpw-templates/about-page/customer-centric-section' );
 
 get_template_part( 'gpw-templates/about-page/tagline-section' );
 
+get_template_part( 'gpw-templates/about-page/why-choose-us-section' );
+
 get_template_part( 'gpw-templates/about-page/team-members-section' );
 
 get_template_part( 'gpw-templates/global/footer' );

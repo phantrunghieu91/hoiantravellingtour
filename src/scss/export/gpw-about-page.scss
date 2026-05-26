@@ -2,6 +2,7 @@
 @use '../components/statistics-section';
 @use '../components/core-value-section';
 @use '../components/get-free-quote-section';
+@use '../components/gpw-swiper';
 /* =============================== */
 /* =            Hero             = */
 /* =============================== */
@@ -103,7 +104,7 @@
 /* =      Customer centric       = */
 /* =============================== */
 .customer-centric {
-  --_gap: .5rem;
+  --_space-between: .5rem;
   --_icon-size: 2.5rem;
   --_logo-size: 6rem;
   --_logo-before-size-gap: .9375rem;
@@ -125,7 +126,7 @@
     grid-template-columns: repeat( 2, minmax( 0, 20rem ) );
     grid-template-rows: repeat( 2, minmax( 0, var(--_item-height) ) );
     justify-content: center;
-    gap: var(--_gap);
+    gap: var(--_space-between);
   }
 
   &__item {
@@ -209,8 +210,8 @@
 
     &:nth-child(1) {
       &:before, &:after {
-        bottom: calc( -1 * var(--_gap));
-        right: calc( -1 * var(--_gap) );
+        bottom: calc( -1 * var(--_space-between));
+        right: calc( -1 * var(--_space-between) );
 
         border-top-left-radius: 100rem;
       }
@@ -222,8 +223,8 @@
     
     &:nth-child(2) {
       &:before, &:after {
-        bottom: calc( -1 * var(--_gap) );
-        left: calc( -1 * var(--_gap) );
+        bottom: calc( -1 * var(--_space-between) );
+        left: calc( -1 * var(--_space-between) );
   
         border-top-right-radius: 100rem;
       }
@@ -236,8 +237,8 @@
     &:nth-child(3) {
       &:before, &:after {
         --_item-circle-bg-clr: var(--primary-color-500);
-        top: calc( -1 * var(--_gap) );
-        right: calc( -1 * var(--_gap) );
+        top: calc( -1 * var(--_space-between) );
+        right: calc( -1 * var(--_space-between) );
   
         border-bottom-left-radius: 100rem;
       }
@@ -250,8 +251,8 @@
     &:nth-child(4) {
       &:before, &:after {
         --_item-circle-bg-clr: var(--primary-color-500);
-        top: calc( -1 * var(--_gap) );
-        left: calc( -1 * var(--_gap) );
+        top: calc( -1 * var(--_space-between) );
+        left: calc( -1 * var(--_space-between) );
   
         border-bottom-right-radius: 100rem;
       }
@@ -297,7 +298,7 @@
   }
 
   @include container-query( content, #{to-rem(768)}, gt ) {
-    --_gap: 1.25rem;
+    --_space-between: 1.25rem;
     --_icon-size: 4rem;
     --_logo-size: 12.5rem;
     --_item-height: 20rem;
@@ -346,5 +347,79 @@
       width: 75%;
       margin-inline: auto;
     }
+  }
+}
+/* =============================== */
+/* =        Why choose us        = */
+/* =============================== */
+.why-choose-us {
+  --_slides-per-view: 1.2;
+  --_space-between: .625rem;
+  --_slide-width: calc( (100% - ( var(--_slides-per-view) - 1 ) * var(--_space-between)) / var(--_slides-per-view) );
+  --_reason-icon-size: 1.25rem;
+  --_reason-padding: 1.5rem;
+  
+  padding-block: var(--spacing-3xl);
+
+  .swiper {
+    padding-block: .625rem 0;
+  }
+
+  .swiper-slide {
+    width: var(--_slide-width);
+    height: auto;
+    margin-right: var(--_space-between);
+  }
+
+  &__reason {
+    --_fixed-height: true;
+    padding: var(--_reason-padding);
+    height: 100%;
+    border-radius: .5rem;
+    background-color: var(--gray-color-100);
+    cursor: default;
+
+    transition: box-shadow 250ms, transform 250ms;
+
+    &-icon {
+      width: calc(var(--_reason-icon-size) * 2);
+      aspect-ratio: 1/1;
+      border-radius: .25rem;
+      background-color: var(--secondary-color-100);
+      margin-bottom: 1rem;
+      display: grid;
+      place-items: center;
+
+      img {
+        width: var(--_reason-icon-size);
+        height: var(--_reason-icon-size);
+      }
+    }
+
+    &-title {
+      --_font-size: clamp( 1rem, 2cqi, 1.125rem );
+      --_line-height: 1.4;
+      --_line-clamp: 3;
+      color: var(--primary-color-500);
+    }
+
+    &:hover {
+      transform: translateY(-.125rem);
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
+  }
+
+  .gpw-pagination {
+    position: static;
+    margin-top: var(--spacing-md);
+  }
+
+  @include container-query( content, sm, gt ) {
+    --_slides-per-view: 3;
+    --_space-between: 1.25rem;
+  }
+
+  @include container-query( content, md, gt ) {
+    --_slides-per-view: 4;
   }
 }

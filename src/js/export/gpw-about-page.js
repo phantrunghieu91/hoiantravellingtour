@@ -50,4 +50,49 @@ document.addEventListener( 'DOMContentLoaded', function () {
       }, 50);      
     }
   }.init();
+  // Why choose us
+  const whyChooseUs = {
+    init() {
+      try {
+        this.cacheElements();
+        this.initSwiper();
+      } catch( error ) {
+        console.warn( 'ABOUT PAGE: Why choose us carousel error: ', error );
+      }
+    },
+    cacheElements() {
+      this.swiperEl = document.querySelector( '.why-choose-us .swiper' );
+      if( !this.swiperEl ) {
+        throw new Error( 'Can NOT find swiper element!' );
+      }
+    },
+    initSwiper() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error( 'Swiper library have NOT registered!' );
+      }
+      new Swiper( this.swiperEl, {
+        slidesPerView: 1.2,
+        spaceBetween: 10,
+        loop: true,
+        navigation: {
+          prevEl: '.why-choose-us .gpw-nav-btn__prev',
+          nextEl: '.why-choose-us .gpw-nav-btn__next',
+        },
+        pagination: {
+          el: '.why-choose-us .gpw-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          550: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          850: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+        }
+      });
+    }
+  }.init();
 } );
