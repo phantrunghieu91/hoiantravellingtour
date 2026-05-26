@@ -423,3 +423,70 @@
     --_slides-per-view: 4;
   }
 }
+/* =============================== */
+/* =        Our customers        = */
+/* =============================== */
+.our-customers {
+  --_image-height: 12.5rem;
+  padding-block: var(--spacing-3xl);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--_cols, 1), minmax(0, 1fr) ); 
+    gap: var(--_grid-gap, .625rem);
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: var(--_image-height) auto auto;
+    gap: 0;
+
+    &-image {
+      border-radius: .3125rem;
+      overflow: hidden;
+      
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        transition: transform 250ms;
+      }
+    }
+    
+    &-title {
+      margin-block: .625rem;
+      font-size: clamp(1rem, 2cqi, 1.125rem);
+      line-height: 1.3;
+      color: var(--primary-color-500);
+    }
+
+    &:hover {
+      .our-customers__item-image img {
+        transform: scale(1.1);
+
+        transition: transform 500ms;
+      }
+    }
+  }
+  
+  @include container-query( content, sm, gt ) {
+    --_cols: 2;
+    --_grid-gap: 1.25rem;    
+  }
+  
+  @include container-query( content, md, gt ) {
+    --_cols: 4;
+
+    &__grid {
+      grid-template-rows: var(--_image-height) auto auto;
+    }
+
+    &__item {
+      grid-template-rows: subgrid;
+      grid-row: 1 / 4;
+    }
+  }
+}
