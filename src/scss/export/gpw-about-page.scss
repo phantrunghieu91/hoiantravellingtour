@@ -107,7 +107,7 @@
   --_icon-size: 2.5rem;
   --_logo-size: 6rem;
   --_logo-before-size-gap: .9375rem;
-  --_item-height: 15.625rem;
+  --_item-height: 18rem;
   --_item-padding-block: .75rem;
   --_item-padding-inline: .75rem;
   --_item-title-fs: var(--fs-md);
@@ -118,7 +118,7 @@
   --_item-sm-circle-border-width: .125rem;
   
   padding-block: 5rem;
-  background-color: var(--primary-color-400);
+  background-color: var(--primary-color-500);
 
   &__main {
     display: grid;
@@ -308,5 +308,43 @@
     --_item-sm-circle-size: 10rem;
     --_item-lg-circle-size: 10.625rem;
     --_item-sm-circle-border-width: .3125rem;
+  }
+}
+/* =============================== */
+/* =           Tagline           = */
+/* =============================== */
+.tagline {
+  padding-block: var(--spacing-3xl);
+
+  .section__inner {
+    padding-block: 3.5rem;
+    border-radius: 1.125rem;
+    background-color: var(--primary-color-500);
+  }
+
+  &__content {
+    color: #fff;
+    font-size: clamp( 2rem, 1rem + 2.5cqi, 3rem );
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  &__icon {
+    filter: invert(1);
+    display: block;
+    margin-inline: auto;
+    margin-bottom: .625rem;
+    width: var(--_icon-size, 3rem);
+    aspect-ratio: 1 / 1;
+  }
+
+  @include container-query( content, md, gt ) {
+    --_icon-size: 4rem;
+
+    &__content {
+      width: 75%;
+      margin-inline: auto;
+    }
   }
 }
