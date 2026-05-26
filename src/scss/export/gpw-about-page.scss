@@ -19,6 +19,28 @@
   }
 }
 /* =============================== */
+/* =        Introduction         = */
+/* =============================== */
+.introduction {
+  padding-block: var(--spacing-3xl);
+
+  .section__inner {
+    display: grid;
+    grid-template-columns: minmax( 0, 1fr );
+    gap: var(--spacing-xl) var(--spacing-3xl);
+  }
+
+  .section__title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  @include container-query( content, md, gt ) {
+    .section__inner {
+      grid-template-columns: 40% minmax( 0, 1fr );
+    }
+  }
+}
+/* =============================== */
 /* =        Team members         = */
 /* =============================== */
 .team-members {

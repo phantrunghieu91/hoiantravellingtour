@@ -7,6 +7,8 @@ get_template_part( 'gpw-templates/global/header' );
 
 get_template_part( 'gpw-templates/global/hero-section', 'with-content' );
 
+get_template_part( 'gpw-templates/about-page/introduction-section' );
+
 get_template_part( 'gpw-templates/home-page/statistic-section' );
 
 get_template_part( 'gpw-templates/home-page/core-value-section', 'style-2' );
