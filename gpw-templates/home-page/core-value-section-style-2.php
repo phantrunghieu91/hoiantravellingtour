@@ -9,7 +9,7 @@ if (empty($sectionData['tabs'])) {
   do_action('qm/error', 'Core value section: Missing data');
   return;
 }
-$btnUrl = Utils::getUrl($sectionData['link_to']);
+$btnUrl = isset( $sectionData['link_to']) ? Utils::getUrl($sectionData['link_to']) : '';
 $footerBgImgID = isset( $sectionData['banner'] ) && !empty( $sectionData['banner']['overlay_image'] ) ? $sectionData['banner']['overlay_image'] : false;
 $footerImgId = isset( $sectionData['banner'] ) && !empty( $sectionData['banner']['image'] ) ? $sectionData['banner']['image'] : false;
 ?>
