@@ -198,7 +198,8 @@
 
   &__content {
     z-index: 2;
-    padding: 4.375rem;
+    padding-block: 4.375rem;
+    padding-inline: 4.375rem 32.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

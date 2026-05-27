@@ -6,8 +6,6 @@
 $footerBgID = get_field('footer_background_image', 'gpw_settings');
 ?>
 
-<?php get_template_part( 'gpw-templates/footer/partners-section' ) ?>
-
 <?php get_template_part( 'gpw-templates/footer/consultant-section' ) ?>
 
 </main>
