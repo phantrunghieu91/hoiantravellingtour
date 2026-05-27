@@ -116,4 +116,13 @@ class Utilities
       esc_attr( $videoType )
     );
   }
+  public static function splitTextInHalf( $textStr ) {
+    $words = explode( ' ', $textStr );
+    $half  = (int) floor( count( $words ) / 2 );
+    return sprintf(
+      '<span>%s</span> <span>%s</span>',
+      esc_html( implode( ' ', array_slice( $words, 0, $half ) ) ),
+      esc_html( implode( ' ', array_slice( $words, $half ) ) )
+    );
+  }
 }

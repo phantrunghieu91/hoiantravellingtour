@@ -1,0 +1,202 @@
+@use '../abstracts/' as *;
+.our-solutions {
+  --_transition-duration: 250ms;
+  --_transition-func: ease-in-out;
+  padding-block: 3.125rem;
+
+  .section__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  &__header {
+    display: flex;
+    flex-flow: row wrap;
+    row-gap: 1.25rem;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-2xl);
+
+    .section__title {
+      flex: 0 0 fit-content;
+      margin-bottom: 0;
+    }
+  }
+
+  &__navigators {
+    display: flex;
+    gap: var(--spacing-sm);
+
+    .gpw-nav-btn {
+      --_icon-color: var(--primary-color-500);
+      position: static;
+      transform: none;
+      border: 0.0625rem solid currentColor;
+
+      .material-symbols-outlined {
+        transition: color 300ms;
+      }
+
+      &:hover {
+        --_btn-bg-color: var(--primary-color-500);
+        --_icon-color: #fff;
+      }
+    }
+  }
+
+  &__carousel {
+    --_slides-per-view: 1.5;
+    --_space-between: 1.25rem;
+    --_carousel-blur-width: 7.5rem;
+    position: relative;
+
+    .swiper-slide {
+      width: calc(100% / var(--_slides-per-view) - (var(--_space-between) * (var(--_slides-per-view) - 1) / var(--_slides-per-view)));
+      margin-right: var(--_space-between);
+    }
+
+    .gpw-pagination {
+      position: static;
+      margin-top: var(--spacing-lg);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      right: 0;
+      display: block;
+      height: calc(100% - 1rem - var(--spacing-lg));
+      width: var(--_carousel-blur-width);
+      backdrop-filter: blur(2px);
+      background: linear-gradient(to right, hsl(from #fff h s l / 0.4) 0%, white 80%);
+    }
+  }
+
+  .our-solution {
+    --_padding: 1.25rem;
+    display: grid;
+    grid-template-areas: 'solution-stack';
+    overflow: hidden;
+
+    &__image,
+    &__content,
+    &:after {
+      grid-area: solution-stack;
+    }
+
+    &__image {
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    &:after {
+      content: '';
+      opacity: 0;
+      z-index: 2;
+
+      transition: opacity var(--_transition-duration) var(--_transition-func);
+    }
+
+    &:after {
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgb(0 0 0 / 0.25);
+    }
+
+    &__content {
+      position: relative;
+      z-index: 3;
+      padding: var(--_padding);
+      display: grid;
+      align-items: end;
+      transition: align-items var(--_transition-duration) var(--_transition-func);
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: var(--_padding);
+        left: var(--_padding);
+        width: calc(100% - (var(--_padding) * 2));
+        height: calc(100% - (var(--_padding) * 2));
+        border: 0.0625rem solid #fff;
+        opacity: 0;
+        pointer-events: none;
+
+        transition: opacity var(--_transition-duration) var(--_transition-func);
+      }
+    }
+
+    &__title {
+      position: relative;
+      top: 0;
+      text-align: center;
+      margin: 0;
+      color: #fff;
+
+      transition:
+        top var(--_transition-duration) var(--_transition-func),
+        transform 0s 0s;
+    }
+
+    &:hover {
+      &:after {
+        opacity: 1;
+      }
+
+      .our-solution__title {
+        top: -50%;
+        transform: translateY(50%);
+      }
+
+      .our-solution__content {
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @include container-query(content, sm, gt) {
+    &__carousel {
+      --_slides-per-view: 2.5;
+      --_carousel-blur-width: 8.75rem;
+    }
+  }
+
+  @include container-query(content, md, gt) {
+    &__navigators {
+      .gpw-nav-btn {
+        --_btn-size: 3.4375rem;
+        --_icon-size: 1.875rem;
+      }
+    }
+    &__carousel {
+      --_slides-per-view: 3.5;
+    }
+  }
+
+  @include container-query(content, lg) {
+    .section__inner {
+      padding-inline: var(--spacing-sm);
+    }
+  }
+
+  @include container-query(content, lg, gt) {
+    .section__inner {
+      grid-template-columns: 1fr var(--screen-lg) 1fr;
+    }
+
+    &__header {
+      grid-column: 2 / 3;
+    }
+
+    &__carousel {
+      --_slides-per-view: 4.5;
+      grid-column: 2 / 4;
+    }
+  }
+}

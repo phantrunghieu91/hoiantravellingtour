@@ -64,21 +64,21 @@ class Register extends BaseController
     $this->enqueueScript('aos', null, false, '', [], false);
     $this->enqueueStyle('aos', null);
 
-    $this->enqueueStyle('theme-init', '1.0.7');
+    $this->enqueueStyle('theme-init', '1.0.8');
     $this->enqueueStyle('google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
     $this->enqueueStyle('gpw-header', '1.0.3');
-    $this->enqueueStyle('gpw-footer', '1.0.2');
+    $this->enqueueStyle('gpw-footer', '1.0.3');
 
     // * Enqueue swiper for page that needs it
-    if (is_front_page() || is_post_type_archive(['logistics-solution', 'industry']) || is_singular('logistics-solution') || is_singular('industry') || is_page( [ 508 ])) {
+    if (is_front_page() || is_post_type_archive(['logistics-solution', 'industry']) || is_singular('logistics-solution') || is_singular('industry') || is_page( [ 508, 13, 2695 ])) {
       $this->enqueueScript('swiper');
       $this->enqueueStyle('swiper');
     }
 
     if (is_front_page()) {
       $this->enqueueScript('gpw-home-page', '1.0.5', true);
-      $this->enqueueStyle('gpw-home-page', '1.0.11');
+      $this->enqueueStyle('gpw-home-page', '1.0.14');
     }
 
     if (is_home() || is_category()) {
@@ -101,32 +101,32 @@ class Register extends BaseController
 
     if ( is_post_type_archive(['logistics-solution', 'industry']) || is_singular('logistics-solution') ) {
       $this->enqueueScript('gpw-services-page', '1.0.2', true);
-      $this->enqueueStyle('gpw-services-page', '1.0.13');
+      $this->enqueueStyle('gpw-services-page', '1.0.14');
     }
 
     if( is_singular('industry') ) {
       $this->enqueueScript('gpw-industry-single-page', '1.0.4', true);
-      $this->enqueueStyle('gpw-industry-single-page', '1.0.9');
+      $this->enqueueStyle('gpw-industry-single-page', '1.0.10');
     }
 
     if( is_singular( 'career' ) ) {
-      $this->enqueueStyle('gpw-career-single-page', '1.0.2');
+      $this->enqueueStyle('gpw-career-single-page', '1.0.3');
     }
 
     if( is_page( [14, 2313] ) ) {
-      $this->enqueueStyle('gpw-contact-page', '1.0.8');
+      $this->enqueueStyle('gpw-contact-page', '1.0.9');
     }
 
-    if( is_page( [13, 2303] ) ) {
-      $this->enqueueScript('gpw-about-page', '1.0.2', true);
-      $this->enqueueStyle('gpw-about-page', '1.0.7');
+    if( is_page( [13, 2695] ) ) {
+      $this->enqueueScript('gpw-about-page', time(), true); // '1.0.3'
+      $this->enqueueStyle('gpw-about-page', time()); // 1.0.7
     }
 
     if( is_page( [508,2310] ) ) {
       $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
 
       $this->enqueueScript('gpw-careers-page', '1.0.3', true);
-      $this->enqueueStyle('gpw-careers-page', '1.0.7');
+      $this->enqueueStyle('gpw-careers-page', '1.0.8');
       wp_localize_script('gpw-careers-page', 'ajaxObj', [
         'url' => admin_url('admin-ajax.php'),
         'action' => $action,
@@ -135,11 +135,11 @@ class Register extends BaseController
     }
 
     if( is_page( [1621, 2305])) {
-      $this->enqueueStyle('gpw-be-our-agent-page', '1.0.1');
+      $this->enqueueStyle('gpw-be-our-agent-page', '1.0.2');
     }
 
     if( is_page( [1671, 2308])) {
-      $this->enqueueStyle('gpw-sustainability-page', '1.0.1');
+      $this->enqueueStyle('gpw-sustainability-page', '1.0.2');
     }
   }
   public function setTypeForModuleScripts() {

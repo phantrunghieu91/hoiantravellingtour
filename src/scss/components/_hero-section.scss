@@ -14,15 +14,17 @@
   }
 
   &__content,
-  &__background-video,
+  &__background-video, &__background-image,
   .section__inner:before {
     grid-area: hero-stack;
   }
 
-  &__background-video {
+  &__background-video, &__background-image {
     z-index: 1;
     width: 100%;
+  }
 
+  &__background-video {
     iframe {
       width: 100%;
       aspect-ratio: 16/9;

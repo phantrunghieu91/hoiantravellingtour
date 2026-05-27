@@ -7,14 +7,30 @@ get_template_part( 'gpw-templates/global/header' );
 
 get_template_part( 'gpw-templates/global/hero-section', 'with-content' );
 
-get_template_part( 'gpw-templates/about-page/vision-mission-section' );
+get_template_part( 'gpw-templates/about-page/introduction-section' );
 
-get_template_part( 'gpw-templates/about-page/our-value-section' );
+get_template_part( 'gpw-templates/home-page/statistic-section' );
 
-get_template_part( 'gpw-templates/about-page/statistic-section' );
+get_template_part( 'gpw-templates/home-page/core-value-section', 'style-2' );
 
-get_template_part( 'gpw-templates/about-page/team-members-section' );
+get_template_part( 'gpw-templates/about-page/customer-centric-section' );
 
-get_template_part( 'gpw-templates/global/get-free-quote-section' );
+get_template_part( 'gpw-templates/about-page/tagline-section' );
+
+get_template_part( 'gpw-templates/about-page/why-choose-us-section' );
+
+get_template_part( 'gpw-templates/about-page/our-customers-section' );
+
+get_template_part( 'gpw-templates/home-page/our-solutions-section' );
+
+get_template_part( 'gpw-templates/global/case-studies-section' );
+
+get_template_part( 'gpw-templates/footer/partners-section' );
+
+get_template_part( 'gpw-templates/global/related-posts-section' );
+
+get_template_part( 'gpw-templates/about-page/offices-map-section' );
+
+// get_template_part( 'gpw-templates/about-page/team-members-section' );
 
 get_template_part( 'gpw-templates/global/footer' );

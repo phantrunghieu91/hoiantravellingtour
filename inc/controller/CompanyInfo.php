@@ -38,6 +38,7 @@ class CompanyInfo
     $this->mainOfficeMap = $companyInfo['main_office_map_embed'] ?? '';
     foreach ($companyInfo['office'] as $office) {
       $this->office[] = [
+        'image' => $office['image'] ?: PLACEHOLDER_IMAGE_ID,
         'name' => $office['name'][GPW_CURRENT_LANGUAGE] ?: ($office['name']['en'] ?? ''),
         'address' => $office['address'][GPW_CURRENT_LANGUAGE] ?: ($office['address']['en'] ?? ''),
       ];
