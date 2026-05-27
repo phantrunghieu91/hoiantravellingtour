@@ -121,6 +121,7 @@
   --_item-sm-circle-size: 5rem;
   --_item-lg-circle-size: 5.3125rem;
   --_item-sm-circle-border-width: .125rem;
+  --_transition-duration: 250ms;
   
   padding-block: 5rem;
   background-color: var(--primary-color-500);
@@ -158,11 +159,18 @@
       font-size: var(--fs-sm);
       line-height: 1.4;
     }
+
+    &-title, &-content {
+      transition: color var(--_transition-duration);
+    }
     
     &-icon {
       z-index: 2;
       justify-self: center;
       width: var(--_icon-size);
+      filter: invert(0);
+
+      transition: filter var(--_transition-duration);
     }
 
     &:before, &:after {
@@ -175,6 +183,9 @@
     &:before {
       width: var(--_item-lg-circle-size);
       height: var(--_item-lg-circle-size);
+
+      transition-duration: var(--_transition-duration);
+      transition-property: width, height;
     }
     
     &:after {
@@ -182,6 +193,21 @@
       height: var(--_item-sm-circle-size);
       border-style: solid;
       border-color: #fff;
+    }
+
+    &:hover {
+      #{$itemClass}-icon {
+        filter: invert(1);
+      }
+
+      #{$itemClass}-title, #{$itemClass}-content {
+        color: #fff;
+      }
+
+      &:before {
+        width: 150%;
+        height: 150%;
+      }
     }
 
     &:nth-child(-n + 2) {
@@ -296,7 +322,7 @@
     position: relative;
     z-index: 2;
     display: block;
-    width: 80%;
+    width: 60%;
     height: auto;
     object-fit: cover;
   }
