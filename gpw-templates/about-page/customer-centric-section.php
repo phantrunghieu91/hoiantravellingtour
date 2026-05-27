@@ -8,7 +8,7 @@ if( empty( $sectionData[ 'items' ])) {
   do_action( 'qm/debug', 'ABOUT PAGE: Customer centric do NOT have data.' );
   return;
 }
-$logoID = $sectionData['logo_icon'] ?: get_theme_mob( 'site_logo' );
+$logoID = $sectionData['logo_icon'] ?: get_theme_mod( 'site_logo' );
 ?>
 <section class="customer-centric">
   <div class="section__inner">
