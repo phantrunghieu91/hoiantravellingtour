@@ -4,26 +4,25 @@
  * * Template: Global - Case study section
  */
 $sectionData = get_field( 'case_studies' );
-$caseStudies = get_posts([
-  'post_type' => 'case-study',
-  'post_status' => 'publish',
-  'numberposts' => 4,
-]);
+$caseStudies = $sectionData['items'];
 if( empty( $caseStudies )) {
-  do_action( 'qm/debug', 'GLOBAL: Case studies section - Please add case study post!');
+  do_action( 'qm/debug', 'GLOBAL: Case studies section - Please add case study!');
   return;
 }
 $slideItems = [];
 foreach( $caseStudies as $case ) {
-  $caseID = $case->ID;
-  $imgID = get_post_thumbnail_id( $caseID );
-  $info = get_field( 'information', $caseID );
+  $caseID = $case['related_post'];
+  $caseTitle = esc_html($case['title']) ?: get_the_title( $caseID );
+  $imgID = $case['image'] ?: (get_post_thumbnail_id( $caseID ) ?: PLACEHOLDER_IMAGE_ID);
+  $imgAlt = get_post_meta( $imgID, '_', true ) ?: __('International logistics and freight forwarding projects by 3A Logistics', 'gpw');
+  $info = $case['information'];
+  $link = get_permalink( $caseID ) ?: 'javascript:void(0);';
   ob_start();
   ?>
   <article class="case-study">
-    <?= wp_get_attachment_image( $imgID ?: PLACEHOLDER_IMAGE_ID, 'large', false, ['class' => 'case-study__image', 'alt' => __('International logistics and freight forwarding projects by 3A Logistics', 'gpw') ] ) ?>
+    <?= wp_get_attachment_image( $imgID, 'large', false, ['class' => 'case-study__image', 'alt' => $imgAlt ] ) ?>
     <div class="case-study__content">
-      <h3 class="case-study__title"><?= $case->post_title ?></h3>
+      <h3 class="case-study__title"><?= $caseTitle ?></h3>
       <ul class="case-study__info-list">
         <li class="case-study__info volume">
           <strong class="case-study__info-label"><?= __('Volume', 'gpw') ?>:</strong>
