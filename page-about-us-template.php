@@ -27,6 +27,8 @@ get_template_part( 'gpw-templates/global/case-studies-section' );
 
 get_template_part( 'gpw-templates/footer/partners-section' );
 
+get_template_part( 'gpw-templates/global/related-posts-section' );
+
 // get_template_part( 'gpw-templates/about-page/team-members-section' );
 
 get_template_part( 'gpw-templates/global/footer' );

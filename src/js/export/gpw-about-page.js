@@ -1,3 +1,4 @@
+import RelatedPosts from "../components/related-posts";
 document.addEventListener( 'DOMContentLoaded', function () {
   // Statistic Section Animation
   const statistic = {
@@ -199,4 +200,6 @@ document.addEventListener( 'DOMContentLoaded', function () {
       });
     }
   }.init();
+
+  new RelatedPosts();
 } );
