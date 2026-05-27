@@ -12,10 +12,49 @@ document.addEventListener( 'DOMContentLoaded', function () {
         console.error('STATISTIC: Section element not found');
         return;
       }
+      this.videoDialogEl = this.sectionEl.querySelector('.statistic__video-dialog');
+      this.videoEl = this.videoDialogEl?.querySelector('video');
+      this.videoPlayBtn = this.sectionEl.querySelector('.statistic__video-btn');
       this.counterEls = this.sectionEl.querySelectorAll('.statistic__number-int');
     },
     bindEvents() {
+      this.handleVideoPlay();
       this.handleCounters();
+      this.videoPlayBtn?.addEventListener('click', () => {
+        this.videoDialogEl.showModal();
+        this.toggleOverflowOnHtml();
+        setTimeout(() => {
+          this.videoEl.play();
+        }, 500);
+      });
+    },
+    handleVideoPlay() {
+      if(!this.videoDialogEl) {
+        console.log('STATISTIC: Video dialog not found');
+        return;
+      }
+      this.videoDialogEl.addEventListener('click', event => {
+        const target = event.target;
+        if(target === this.videoDialogEl) {
+          this.videoEl.pause();
+          this.videoDialogEl.close();
+          this.toggleOverflowOnHtml(false);
+        }
+        if( target === this.videoEl ) {
+          if( this.videoEl.paused ) {
+            this.videoEl.play();
+          } else {
+            this.videoEl.pause();
+          }
+        }
+      });
+      // Show play button when video ends
+      this.videoEl.addEventListener('ended', () => {
+        this.videoPlayBtn.classList.remove('hidden');
+      });
+    },
+    toggleOverflowOnHtml(hide = true) {
+      document.documentElement.style.overflow = hide ? 'hidden' : '';
     },
     handleCounters() {
       if(this.counterEls.length === 0) {
