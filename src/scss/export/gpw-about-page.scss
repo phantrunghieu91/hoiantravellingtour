@@ -494,3 +494,68 @@
     }
   }
 }
+/* =============================== */
+/* =         Offices map         = */
+/* =============================== */
+.offices-map {
+  --_office-width: 20rem;
+  --_slides-per-view: 1;
+  --_space-between: .625rem;
+  
+  background: var(--_background-image-url) center / cover no-repeat;
+  padding-block: var(--spacing-3xl);
+  margin-block: 0 var(--spacing-3xl);
+
+  &__carousel {
+    width: min(100%, calc( var(--_office-width) * var(--_slides-per-view) + var(--_space-between) * ( var(--_slides-per-view) - 1) ));
+    margin-inline: auto;
+  }
+
+  .swiper-slide {
+    height: auto;
+    width: calc( (100% - ( var(--_space-between) * ( var(--_slides-per-view) - 1 ) )) / var(--_slides-per-view) );
+    margin-right: var(--_space-between);
+
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+
+  .office {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__image {
+      display: block;
+      width: 100%;
+      height: 12.5rem;
+      object-fit: cover;
+    }
+
+    &__content {
+      flex: 1 0 auto;
+      padding: .9375rem;
+      background-color: #fff;
+    }
+
+    &__name {
+      font-size: clamp(1rem, 2cqi, 1.125rem);
+      color: var(--primary-color-500);
+    }
+
+    &__address {
+      margin-bottom: 0;
+    }
+  }
+
+  @include container-query( content, #{to-rem( 640 )}, gt ) {
+    --_slides-per-view: 2;
+    --_space-between: 1.25rem;
+  }
+
+  @include container-query( content, #{to-rem( 960 )}, gt ) {
+    --_slides-per-view: 3;
+    aspect-ratio: 9 / 4;
+  }
+}

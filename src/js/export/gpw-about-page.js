@@ -241,4 +241,44 @@ document.addEventListener( 'DOMContentLoaded', function () {
   }.init();
 
   new RelatedPosts();
+
+  const officesMapSection = {
+    init() {
+      try {
+        this.cacheElements();
+        this.initSwiper();
+      } catch (error) {
+        console.warn( 'ABOUT PAGE: Offices map section error: ', error );
+      }
+    },
+    cacheElements() {
+      this.sectionEl = document.querySelector( '.offices-map' );
+      if( !this.sectionEl ) {
+        throw new Error( 'No offices map section found!' );
+      }
+    },
+    initSwiper() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error( 'No Swiper library found!' );
+      }
+      new Swiper( this.sectionEl.querySelector('.swiper'), {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        navigation: {
+          nextEl: this.sectionEl.querySelector('.gpw-nav-btn__next'),
+          prevEl: this.sectionEl.querySelector('.gpw-nav-btn__prev'),
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          960: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+        }
+      });
+    }
+  }.init();
 } );
