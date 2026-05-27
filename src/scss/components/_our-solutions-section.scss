@@ -12,10 +12,13 @@
   &__header {
     display: flex;
     flex-flow: row wrap;
+    row-gap: 1.25rem;
     justify-content: space-between;
+    margin-bottom: var(--spacing-2xl);
 
     .section__title {
       flex: 0 0 fit-content;
+      margin-bottom: 0;
     }
   }
 
