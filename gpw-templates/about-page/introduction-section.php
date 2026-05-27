@@ -21,7 +21,7 @@ $sectionData = get_field( 'introduction' );
     </div>
     <?php if( !empty( $sectionData[ 'team_image' ] )) : ?>
     <div class="introduction__image-wrapper">
-      <?= wp_get_attachment_image( $sectionData['team_image'], 'large', false, [ 'class' => 'introduction__image', 'alt' => $sectionData['image_alt']]) ?>
+      <?= wp_get_attachment_image( $sectionData['team_image'], 'large', false, [ 'class' => 'introduction__image', 'alt' => get_post_meta($sectionData['team_image'], '_wp_attachment_image_alt', true)]) ?>
     </div>
     <?php endif ?>
   </div>
