@@ -73,6 +73,53 @@ document.addEventListener('DOMContentLoaded', function() {
   
   new GPWTabs();
 
+  // What make different
+  const whatMakeDifferentSection = {
+    init() {
+      try {
+        this.cacheElements();
+        this.initSwiper();
+      } catch( error ) {
+        console.warn( 'ABOUT PAGE: Why choose us carousel error: ', error );
+      }
+    },
+    cacheElements() {
+      this.swiperEl = document.querySelector( '.what-make-different .swiper' );
+      if( !this.swiperEl ) {
+        throw new Error( 'Can NOT find swiper element!' );
+      }
+    },
+    initSwiper() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error( 'Swiper library have NOT registered!' );
+      }
+      new Swiper( this.swiperEl, {
+        slidesPerView: 1.2,
+        spaceBetween: 10,
+        loop: true,
+        navigation: {
+          prevEl: '.what-make-different .gpw-nav-btn__prev',
+          nextEl: '.what-make-different .gpw-nav-btn__next',
+        },
+        pagination: {
+          el: '.what-make-different .gpw-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          550: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          850: {
+            loop: false,
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+        }
+      });
+    }
+  }.init();
+
   // Statistic Section Animation
   const statistic = {
     init() {

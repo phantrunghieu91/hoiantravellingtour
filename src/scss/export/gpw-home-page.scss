@@ -9,6 +9,80 @@
 @use '../components/our-solutions-section';
 @use '../components/case-studies-section';
 /* =============================== */
+/* =    What make us different   = */
+/* =============================== */
+.what-make-different {
+  --_slides-per-view: 1.2;
+  --_space-between: .625rem;
+  --_slide-width: calc( (100% - ( var(--_slides-per-view) - 1 ) * var(--_space-between)) / var(--_slides-per-view) );
+  --_reason-icon-size: 1.25rem;
+  --_reason-padding: 1.5rem;
+  
+  padding-block: var(--spacing-3xl);
+
+  .swiper {
+    padding-block: .625rem 0;
+  }
+
+  .swiper-slide {
+    width: var(--_slide-width);
+    height: auto;
+    margin-right: var(--_space-between);
+  }
+
+  &__reason {
+    --_fixed-height: true;
+    padding: var(--_reason-padding);
+    height: 100%;
+    border-radius: .5rem;
+    background-color: var(--gray-color-100);
+    cursor: default;
+
+    transition: box-shadow 250ms, transform 250ms;
+
+    &-icon {
+      width: calc(var(--_reason-icon-size) * 2);
+      aspect-ratio: 1/1;
+      border-radius: .25rem;
+      background-color: var(--secondary-color-100);
+      margin-bottom: 1rem;
+      display: grid;
+      place-items: center;
+
+      img {
+        width: var(--_reason-icon-size);
+        height: var(--_reason-icon-size);
+      }
+    }
+
+    &-title {
+      --_font-size: clamp( 1rem, 2cqi, 1.125rem );
+      --_line-height: 1.4;
+      --_line-clamp: 3;
+      color: var(--primary-color-500);
+    }
+
+    &:hover {
+      transform: translateY(-.125rem);
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
+  }
+
+  .gpw-pagination {
+    position: static;
+    margin-top: var(--spacing-md);
+  }
+
+  @include container-query( content, sm, gt ) {
+    --_slides-per-view: 3;
+    --_space-between: 1.25rem;
+  }
+
+  @include container-query( content, md, gt ) {
+    --_slides-per-view: 4;
+  }
+}
+/* =============================== */
 /* =            Blogs            = */
 /* =============================== */
 .blogs {
