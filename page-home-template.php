@@ -18,6 +18,8 @@ get_template_part( 'gpw-templates/home-page/statistic-section' );
 
 get_template_part( 'gpw-templates/home-page/what-make-different-section' );
 
+get_template_part( 'gpw-templates/home-page/member-of-group-section' );
+
 get_template_part( 'gpw-templates/home-page/core-value-section', 'style-2' );
 
 get_template_part( 'gpw-templates/global/get-free-quote-section' );
