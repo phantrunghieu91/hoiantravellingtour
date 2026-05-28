@@ -20,11 +20,10 @@ foreach( $sectionData['reason'] as $reason ): ob_start(); ?>
 <?php $slideItems[] = ob_get_clean(); ;endforeach ?>
 <section class="what-make-different">
   <div class="section__inner">
-    <?php if( !empty($sectionData[ 'title' ]) && !empty($sectionData[ 'description' ]) ) : ?>
+    <?php if( !empty($sectionData[ 'title' ]) ) : ?>
       <header class="what-make-different__header">
-        <?php if( !empty( $sectionData['title'] )) {
-          echo sprintf( '<h2 class="section__title section__title--center section__title--has-separator">%s</h2>', wp_kses_post( $sectionData['title'] ) );
-        } ?>
+        <?= sprintf( '<h2 class="section__title section__title--center section__title--has-separator">%s</h2>', wp_kses_post( $sectionData['title'] ) ); ?>
+        
         <?php if( !empty( $sectionData['description'] )) {
           echo sprintf( '<div class="section__description section__description--center">%s</div>', wp_kses_post( $sectionData['description'] ) );
         } ?>
