@@ -9,6 +9,16 @@
 @use '../components/our-solutions-section';
 @use '../components/case-studies-section';
 /* =============================== */
+/* =            Hero             = */
+/* =============================== */
+.hero {
+  @include container-query( content, md ) {
+    &__description {
+      display: none;
+    }
+  }
+}
+/* =============================== */
 /* =    What make us different   = */
 /* =============================== */
 .what-make-different {
