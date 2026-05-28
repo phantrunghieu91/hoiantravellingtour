@@ -51,7 +51,7 @@ $verticalDotLineImgID = 638;
         <?php foreach( $sectionData['numbers'] as $number ) :
           $numberValue = !empty( $number['number'] ) ? $number['number'] : '';
           $numberLabel = !empty( $number['label'] ) ? $number['label'] : '';
-          $numberInt = intval( $numberValue );
+          $numberInt = floatval( $numberValue );
           // replace number with empty string to get only the string part
           $numberText = str_replace( $numberInt, '', $numberValue );
           
@@ -61,7 +61,9 @@ $verticalDotLineImgID = 638;
   
           <div class="statistic__number">
             <div class="statistic__number-value">
-              <span class="statistic__number-int" data-step="<?php esc_attr_e($steps) ?>" data-start="<?php esc_attr_e($startingValue) ?>"><?= esc_html( $numberInt ); ?></span><span class="statistic__number-suffix"><?= esc_html( $numberText ); ?></span>
+              <span class="statistic__number-int" data-step="<?php esc_attr_e($steps) ?>" data-start="<?php esc_attr_e($startingValue) ?>">
+                <?= esc_html( $numberInt ); ?></span><span class="statistic__number-suffix"><?= esc_html( $numberText ); ?>
+              </span>
             </div>
             <span class="statistic__number-label"><?= esc_html( $numberLabel ); ?></span>
           </div>

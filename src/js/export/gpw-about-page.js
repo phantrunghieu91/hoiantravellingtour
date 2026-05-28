@@ -77,9 +77,9 @@ document.addEventListener( 'DOMContentLoaded', function () {
       });
     },
     counterAnimation(counterEl) {
-      const targetNumber = parseInt(counterEl.textContent, 10);
-      let currentNumber = parseInt(counterEl.dataset.start || '0', 10);
-      const step = parseInt(counterEl.dataset.step || '1', 10);
+      const targetNumber = parseFloat(counterEl.textContent, 10);
+      let currentNumber = parseFloat(counterEl.dataset.start || '0', 10);
+      const step = parseFloat(counterEl.dataset.step || '1', 10);
       let interval = setInterval(() => {
         currentNumber += step;
         if(currentNumber >= targetNumber) {
