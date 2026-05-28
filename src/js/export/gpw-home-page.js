@@ -1,6 +1,7 @@
 import GPWTabs from "../components/gpw-tabs";
 import Testimonial from "../components/testimonial";
 import ServicesCarousel from "../components/gpw-services-carousel";
+import caseStudiesSection from "../components/case-studies-section";
 document.addEventListener('DOMContentLoaded', function() {
   // our solutions carousel
   const ourSolutions = {
@@ -67,6 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
       observer.observe(this.sectionEl);
     }
   }.init();
+
+  caseStudiesSection.init();
   
   new GPWTabs();
 

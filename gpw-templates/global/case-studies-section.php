@@ -3,7 +3,8 @@
  * @author Hieu "Jin" Phan Trung
  * * Template: Global - Case study section
  */
-$sectionData = get_field( 'case_studies' );
+$aboutPageID = GPW_CURRENT_LANGUAGE == 'en' ? 13 : 2695;
+$sectionData = get_field( 'case_studies', $aboutPageID );
 $caseStudies = $sectionData['items'];
 if( empty( $caseStudies )) {
   do_action( 'qm/debug', 'GLOBAL: Case studies section - Please add case study!');
