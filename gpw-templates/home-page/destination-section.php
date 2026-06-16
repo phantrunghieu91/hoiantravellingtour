@@ -1,22 +1,23 @@
-<?php 
+<?php
 /**
  * @author Hieu "Jin" Phan Trung
  * * Template: Home page - Destination section
  */
-$sectionData = get_field( 'destination' );
-if( empty( $sectionData['title'] ) ) {
-  do_action( 'qm/debug', 'HOME PAGE - Destination section: Missing data!' );
-  return;
+$homePageID = get_option('page_on_front');
+$sectionData = get_field('destination', $homePageID);
+if (empty($sectionData['title'])) {
+    do_action('qm/debug', 'HOME PAGE - Destination section: Missing data!');
+    return;
 }
 $mapImageId = 2778;
 ?>
 <section class="destination">
   <div class="section__inner">
-    <?php if( !empty($sectionData[ 'title' ]) ) : ?>
+    <?php if (!empty($sectionData[ 'title' ])) : ?>
       <header class="destination__header">
-        <?= sprintf( '<h2 class="section__title section__title--center section__title--has-separator">%s</h2>', wp_kses_post( $sectionData['title'] ) ); ?>
-        <?php if( !empty( $sectionData['description'] )) {
-          echo sprintf( '<div class="section__description section__description--center">%s</div>', wp_kses_post( $sectionData['description'] ) );
+        <?= sprintf('<h2 class="section__title section__title--center section__title--has-separator">%s</h2>', wp_kses_post($sectionData['title'])); ?>
+        <?php if (!empty($sectionData['description'])) {
+            echo sprintf('<div class="section__description section__description--center">%s</div>', wp_kses_post($sectionData['description']));
         } ?>
       </header>
     <?php endif ?>

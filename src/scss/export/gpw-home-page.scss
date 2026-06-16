@@ -8,6 +8,7 @@
 @use '../components/core-value-section';
 @use '../components/our-solutions-section';
 @use '../components/case-studies-section';
+@use '../components/destination-section';
 /* =============================== */
 /* =            Hero             = */
 /* =============================== */
@@ -97,27 +98,6 @@
 /* =============================== */
 .member-of-group {
   padding-block: var(--spacing-3xl);
-}
-/* =============================== */
-/* =         Destination         = */
-/* =============================== */
-.destination {
-  padding-block: 0 var(--spacing-3xl);
-
-  &__header {
-    margin-bottom: var(--spacing-2xl);
-  }
-
-  &__map {
-    .line {
-      animation: moving-dash 25s linear 0s infinite normal running;
-    }
-  }
-
-  @keyframes moving-dash {
-    0% { stroke-dashoffset: 0; }
-    100% { stroke-dashoffset: 822; }
-  }
 }
 /* =============================== */
 /* =            Blogs            = */
