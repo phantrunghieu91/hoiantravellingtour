@@ -1,6 +1,7 @@
 import GPWTabs from "../components/gpw-tabs";
 import Testimonial from "../components/testimonial";
 import ServicesCarousel from "../components/gpw-services-carousel";
+import caseStudiesSection from "../components/case-studies-section";
 document.addEventListener('DOMContentLoaded', function() {
   // our solutions carousel
   const ourSolutions = {
@@ -67,8 +68,57 @@ document.addEventListener('DOMContentLoaded', function() {
       observer.observe(this.sectionEl);
     }
   }.init();
+
+  caseStudiesSection.init();
   
   new GPWTabs();
+
+  // What make different
+  const whatMakeDifferentSection = {
+    init() {
+      try {
+        this.cacheElements();
+        this.initSwiper();
+      } catch( error ) {
+        console.warn( 'ABOUT PAGE: Why choose us carousel error: ', error );
+      }
+    },
+    cacheElements() {
+      this.swiperEl = document.querySelector( '.what-make-different .swiper' );
+      if( !this.swiperEl ) {
+        throw new Error( 'Can NOT find swiper element!' );
+      }
+    },
+    initSwiper() {
+      if( typeof Swiper === 'undefined' ) {
+        throw new Error( 'Swiper library have NOT registered!' );
+      }
+      new Swiper( this.swiperEl, {
+        slidesPerView: 1.2,
+        spaceBetween: 10,
+        loop: true,
+        navigation: {
+          prevEl: '.what-make-different .gpw-nav-btn__prev',
+          nextEl: '.what-make-different .gpw-nav-btn__next',
+        },
+        pagination: {
+          el: '.what-make-different .gpw-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          550: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          850: {
+            loop: false,
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+        }
+      });
+    }
+  }.init();
 
   // Statistic Section Animation
   const statistic = {
@@ -146,9 +196,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     },
     counterAnimation(counterEl) {
-      const targetNumber = parseInt(counterEl.textContent, 10);
-      let currentNumber = parseInt(counterEl.dataset.start || '0', 10);
-      const step = parseInt(counterEl.dataset.step || '1', 10);
+      const targetNumber = parseFloat(counterEl.textContent, 10);
+      let currentNumber = parseFloat(counterEl.dataset.start || '0', 10);
+      const step = parseFloat(counterEl.dataset.step || '1', 10);
       let interval = setInterval(() => {
         currentNumber += step;
         if(currentNumber >= targetNumber) {

@@ -6,6 +6,7 @@
 @use '../components/our-solutions-section';
 @use '../components/case-studies-section';
 @use '../components/related-posts-section';
+@use '../components/destination-section';
 @use '../components/post-card';
 /* =============================== */
 /* =            Hero             = */
@@ -584,4 +585,10 @@
     --_slides-per-view: 3;
     aspect-ratio: 9 / 4;
   }
+}
+/* =============================== */
+/* =         Destination         = */
+/* =============================== */
+.destination {
+  padding-block: var(--spacing-3xl);
 }
