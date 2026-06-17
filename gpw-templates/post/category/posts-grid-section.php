@@ -43,9 +43,8 @@ if( is_home() ) {
       $preloadedPostIds[] = $p->ID;
     }
   }
-  $postCountAfterExcludePreloaded = count(get_posts( ['exclude' => $preloadedPostIds ] ));
 
-  $remainingCount = $postCountAfterExcludePreloaded - count( $preloadedPostIds );
+  $remainingCount = $wp_query->found_posts - count( $preloadedPostIds );
   $maxPages       = max( 1 , ceil( $remainingCount / $postsPerPage ) );
 }
 ?>
