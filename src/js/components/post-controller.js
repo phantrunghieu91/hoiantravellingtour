@@ -10,6 +10,7 @@ export default class PostController {
       page: 1,
       maxPage: this.loadMoreBtn ? parseInt(this.loadMoreBtn.dataset.max) : 1,
       isLoading: false,
+      exclude: this.loadMoreBtn ? this.loadMoreBtn.dataset.exclude : [],
       currentCategory: '0',
     });
     this.indexing();
@@ -112,6 +113,7 @@ export default class PostController {
       requestData.append('action', this.ajaxObj.action);
       requestData.append('nonce', this.ajaxObj.nonce);
       requestData.append('page', this.state.page);
+      requestData.append('exclude', this.state.exclude);
       requestData.append('category_id', this.loadMoreBtn.dataset.cat || 0);
 
       const response = await fetch(this.ajaxObj.url, {

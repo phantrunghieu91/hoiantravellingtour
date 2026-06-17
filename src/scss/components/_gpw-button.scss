@@ -46,6 +46,10 @@
     gap: var(--spacing-xs);
   }
 
+  &__text {
+    pointer-events: none;
+  }
+
   &__outlined {
     --_gpw-button-border-color: var(--_gpw-button-text-color);
     --_gpw-button-hover-border-color: var(--primary-color-500);

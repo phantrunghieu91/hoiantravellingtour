@@ -4,8 +4,7 @@
  * * Controller: Company Information
  */
 namespace gpweb\inc\controller;
-class CompanyInfo
-{
+class CompanyInfo {
   private static CompanyInfo $instance;
   private array $office;
   private string $email;
@@ -13,64 +12,54 @@ class CompanyInfo
   private array $socials;
   private string $facebookEmbed;
   private string $mainOfficeMap;
-  public static function getInstance(): CompanyInfo
-  {
-    if (!isset(self::$instance)) {
+  public static function getInstance(): CompanyInfo {
+    if ( !isset( self::$instance ) ) {
       self::$instance = new CompanyInfo();
     }
     return self::$instance;
   }
-  public function register()
-  {
-    add_action( 'init', [$this, 'getCompanyInformationData']);
+  public function register() {
+    add_action( 'init', [$this, 'getCompanyInformationData'] );
   }
-  public function getCompanyInformationData()
-  {
-    if (!function_exists('get_field')) {
-      error_log('ACF function get_field does not exist. CompanyInfo controller cannot be initialized.');
+  public function getCompanyInformationData() {
+    if ( !function_exists( 'get_field' ) ) {
+      error_log( 'ACF function get_field does not exist. CompanyInfo controller cannot be initialized.' );
       return;
     }
-    $companyInfo = get_field('company_information', 'gpw_settings');
-    $this->email = $companyInfo['email'] ?? '';
-    $this->phone = $companyInfo['phone_number'] ?? '';
-    $this->socials = $companyInfo['social'] ?? [];
-    $this->facebookEmbed = $companyInfo['facebook_embed'] ?? '';
+    $companyInfo         = get_field( 'company_information', 'gpw_settings' );
+    $this->email         = $companyInfo['email']                 ?? '';
+    $this->phone         = $companyInfo['phone_number']          ?? '';
+    $this->socials       = $companyInfo['social']                ?? [];
+    $this->facebookEmbed = $companyInfo['facebook_embed']        ?? '';
     $this->mainOfficeMap = $companyInfo['main_office_map_embed'] ?? '';
-    foreach ($companyInfo['office'] as $office) {
+    foreach ( $companyInfo['office'] as $office ) {
       $this->office[] = [
-        'image' => $office['image'] ?: PLACEHOLDER_IMAGE_ID,
-        'name' => $office['name'][GPW_CURRENT_LANGUAGE] ?: ($office['name']['en'] ?? ''),
-        'address' => $office['address'][GPW_CURRENT_LANGUAGE] ?: ($office['address']['en'] ?? ''),
+        'image'   => $office['image']                         ?? PLACEHOLDER_IMAGE_ID,
+        'name'    => $office['name'][GPW_CURRENT_LANGUAGE]    ?? ( $office['name']['en'] ?? '' ),
+        'address' => $office['address'][GPW_CURRENT_LANGUAGE] ?? ( $office['address']['en'] ?? '' ),
       ];
     }
   }
-  public function getOffice(): array
-  {
+  public function getOffice(): array {
     return $this->office;
   }
-  public function getPhoneNumber(): string
-  {
+  public function getPhoneNumber(): string {
     return $this->phone;
   }
-  public function getEmail(): string
-  {
+  public function getEmail(): string {
     return $this->email;
   }
-  public function getSocials(): array
-  {
+  public function getSocials(): array {
     return $this->socials;
   }
-  public function getFacebookEmbed(): string
-  {
+  public function getFacebookEmbed(): string {
     return $this->facebookEmbed;
   }
-  public function getMainOfficeMap(): string
-  {
+  public function getMainOfficeMap(): string {
     return $this->mainOfficeMap;
   }
-  public function getDefaultLogo()
-  {
-    $logoID = get_theme_mod('site_logo', get_template_directory_uri() . '/assets/img/logo.png');
+  public function getDefaultLogo() {
+    $logoID = get_theme_mod( 'site_logo', get_template_directory_uri() . '/assets/img/logo.png' );
     return $logoID;
   }
 }

@@ -3,6 +3,7 @@
  * @author Hieu "Jin" Phan Trung
  * * Template: Single Post - Header
  */
+$postID = get_the_ID();
 $title = get_the_title();
 $featuredImageID = get_post_thumbnail_id() ?: PLACEHOLDER_IMAGE_ID;
 $categories = get_the_category( $postID );
@@ -26,5 +27,3 @@ $authorName = get_the_author_meta( 'display_name', get_post_field( 'post_author'
   </div>
 </header>
 <?php 
-// ! Cleanup variables
-unset( $title, $featuredImageID, $categories, $primaryCategory );

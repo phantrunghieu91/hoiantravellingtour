@@ -59,7 +59,7 @@ class Register extends BaseController {
     $this->enqueueScript( 'aos', null, false, '', [], false );
     $this->enqueueStyle( 'aos', null );
 
-    $this->enqueueStyle( 'theme-init', '1.0.8' );
+    $this->enqueueStyle( 'theme-init', '1.0.9' );
     $this->enqueueStyle( 'google-symbols', null, 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200' );
 
     $this->enqueueStyle( 'gpw-header', '1.0.3' );
@@ -79,7 +79,7 @@ class Register extends BaseController {
     if ( is_home() || is_category() ) {
       $postController = \gpweb\inc\controller\PostController::getInstance();
       $action         = $postController->getAction();
-      $this->enqueueScript( 'gpw-post-category-page', '1.0.0' );
+      $this->enqueueScript( 'gpw-post-category-page', '1.0.1' );
       $this->enqueueStyle( 'gpw-post-category-page', '1.0.0' );
       wp_localize_script( 'gpw-post-category-page', 'gpwObject', [
         'url'    => admin_url( 'admin-ajax.php' ),
