@@ -76,6 +76,10 @@ html > body {
   @container style(--_fixed-height: true) {
     height: calc(var(--_font-size) * var(--_line-height) * var(--_line-clamp));
   }
+
+  p:not(:first-child) {
+    display: none;
+  }
 }
 
 .section__sub-title {
