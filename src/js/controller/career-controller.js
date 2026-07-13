@@ -17,7 +17,7 @@ export default class CareerController {
       {
         isFetching: false,
         currentPage: 1,
-        maxPages: this.jobListFooter ? parseInt(this.jobListFooter.querySelector('.job-list__pagination').dataset.maxPages, 10) : 1,
+        maxPages: this.jobListPaginationEl ? parseInt(this.jobListPaginationEl.dataset.maxPages, 10) : 1,
       },
       {
         set: (obj, prop, value) => {
@@ -51,11 +51,12 @@ export default class CareerController {
     }
     this.jobListContainer = document.querySelector('.job-list__items');
     this.jobListFooter = document.querySelector('.job-list__footer');
+    this.jobListPaginationEl = this.jobListFooter.querySelector('.job-list__pagination');
     this.paginationItems = this.jobListFooter ? [...this.jobListFooter.querySelectorAll('.job-list__pagination-item')] : [];
   }
   bindEvents() {
     this.searchForm.addEventListener('submit', this.handleSearchSubmit.bind(this));
-    this.bindEventForPagination();
+    this.jobListPaginationEl.addEventListener('click', this.handlePaginationClick.bind(this));
   }
   getFormData() {
     const formData = new FormData(this.searchForm);
@@ -134,25 +135,18 @@ export default class CareerController {
     //   this.messageContainer.setAttribute('aria-hidden', 'true');
     // }, 5000);
   }
-  bindEventForPagination() {
-    if (!this.jobListFooter) {
-      throw new Error('Job list footer not found!');
+  handlePaginationClick(event) {
+    const target = event.target;
+    const pageItem = target.closest('.job-list__pagination-item');
+    if( ! pageItem ) {
+      return;
     }
-
-    if (this.paginationItems.length === 0) {
-      throw new Error('No pagination items found!');
-    }
-    this.paginationItems.forEach(item => {
-      item.addEventListener('click', this.handlePaginationClick.bind(this, item));
-    });
-  }
-  handlePaginationClick(pageItem, event) {
     const pageNumber = pageItem.dataset.page;
     if (pageNumber === 'prev') {
       if (this.state.currentPage > 1) {
         this.state.currentPage -= 1;
       }
-    } else if (pageNumber === 'next') {
+    } else if ( pageNumber === 'next' && this.state.currentPage < this.state.maxPages ) {
       this.state.currentPage += 1;
     } else {
       this.state.currentPage = parseInt(pageNumber, 10);

@@ -165,7 +165,7 @@
 /* =============================== */
 .job-list {
   --_center-block-border-radius: 1.25rem;
-  --_pagination-button-size: 3.125rem;
+  --_pagination-button-size: 2.5rem;
   --_pagination-border-color: var(--gray-color-200);
   --_pagination-active-bg-color: var(--primary-color-500);
 
@@ -269,8 +269,8 @@
     &-meta-list {
       grid-area: meta;
       margin: 0;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto repeat(2, minmax(0, 1fr));
       gap: var(--spacing-lg);
       list-style: none;
     }
@@ -321,6 +321,7 @@
     list-style: none;
     margin-bottom: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 0.625rem;
 
@@ -359,12 +360,15 @@
   }
 
   @include container-query(content, sm, gt) {
+    --_pagination-button-size: 3.125rem;
+
     &__item {
       grid-template-columns: minmax(0, 1fr) auto;
       grid-template-areas: 'title link' 'meta link';
 
       &-meta-list {
         margin-right: 5rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
   }

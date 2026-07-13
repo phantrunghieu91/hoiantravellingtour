@@ -1,25 +1,26 @@
-<?php 
+<?php
 /**
  * @author Hieu "Jin" Phan Trung
  * * Template: Career page - Job list section
  */
-define('JOBS_PER_PAGE', gpweb\inc\controller\CareerController::JOBS_PER_PAGE);
-const PAGED = 1;
-$jobPositions = get_terms([
-  'taxonomy' => 'job-position',
+define( 'JOBS_PER_PAGE', gpweb\inc\controller\CareerController::JOBS_PER_PAGE );
+const PAGED   = 1;
+$jobPositions = get_terms( [
+  'taxonomy'   => 'job-position',
   'hide_empty' => false,
-]);
-$workLocations = get_terms([
-  'taxonomy' => 'work-location',
+] );
+$workLocations = get_terms( [
+  'taxonomy'   => 'work-location',
   'hide_empty' => false,
-]);
+] );
 $jobArgs = [
-  'post_type' => 'career',
-  'post_status' => 'publish',
+  'post_type'      => 'career',
+  'post_status'    => 'publish',
   'posts_per_page' => JOBS_PER_PAGE,
-  'paged' => PAGED,
+  'paged'          => PAGED,
 ];
-$jobsQuery = new WP_Query($jobArgs);
+$jobsQuery = new WP_Query( $jobArgs );
+$maxPages  = $jobsQuery->max_num_pages;
 ?>
 <section class="job-list">
   <div class="section__inner">
@@ -27,13 +28,13 @@ $jobsQuery = new WP_Query($jobArgs);
       <form method="POST" class="job-list__search-form job-search">
         <div class="job-search__message" aria-hidden="true"></div>
         <div class="job-search__group">
-          <input type="text" name="keyword" placeholder="<?php esc_attr_e('Job', 'gpw') ?>" class="job-search__form-control" />
+          <input type="text" name="keyword" placeholder="<?php esc_attr_e( 'Job', 'gpw' ) ?>" class="job-search__form-control" />
         </div>
         <div class="job-search__group">
           <select name="job-position" class="job-search__form-control">
-            <option value=""><?php esc_html_e('Choose job position', 'gpw') ?></option>
+            <option value=""><?php esc_html_e( 'Choose job position', 'gpw' ) ?></option>
             <?php foreach( $jobPositions as $position ) {
-              echo sprintf('<option value="%s">%s</option>',
+              echo sprintf( '<option value="%s">%s</option>',
                 esc_attr( $position->term_id ),
                 esc_html( $position->name )
               );
@@ -42,9 +43,9 @@ $jobsQuery = new WP_Query($jobArgs);
         </div>
         <div class="job-search__group">
           <select name="work-location" class="job-search__form-control">
-            <option value=""><?php esc_html_e('Choose work location', 'gpw') ?></option>
+            <option value=""><?php esc_html_e( 'Choose work location', 'gpw' ) ?></option>
             <?php foreach( $workLocations as $location ) {
-              echo sprintf('<option value="%s">%s</option>',
+              echo sprintf( '<option value="%s">%s</option>',
                 esc_attr( $location->term_id ),
                 esc_html( $location->name )
               );
@@ -52,14 +53,14 @@ $jobsQuery = new WP_Query($jobArgs);
           </select>
         </div>
         <?php get_template_part( 'gpw-templates/global/gpw-button', null, [
-          'tag' => 'button',
-          'type' => 'submit',
-          'label' => 'Search',
-          'has_icon' => true,
-          'style' => 'secondary',
-          'icon_code' => 'search',
+          'tag'           => 'button',
+          'type'          => 'submit',
+          'label'         => 'Search',
+          'has_icon'      => true,
+          'style'         => 'secondary',
+          'icon_code'     => 'search',
           'icon_position' => 'left',
-          'class' => 'job-search__submit-btn',
+          'class'         => 'job-search__submit-btn',
         ] ) ?>
       </form>
     </header>
@@ -67,48 +68,48 @@ $jobsQuery = new WP_Query($jobArgs);
       
       <?php if( !$jobsQuery->have_posts() ): ?>
 
-        <p class="job-list__no-results-message"><?php esc_html_e('No job openings found.', 'gpw') ?></p>
+        <p class="job-list__no-results-message"><?php esc_html_e( 'No job openings found.', 'gpw' ) ?></p>
 
       <?php else: ?>
-        <h2 class="section__title"><?php esc_html_e('Jobs', 'gpw') ?></h2>
+        <h2 class="section__title"><?php esc_html_e( 'Jobs', 'gpw' ) ?></h2>
 
         <ul class="job-list__items">
 
           <?php while( $jobsQuery->have_posts() ): $jobsQuery->the_post();
-            $jobID = get_the_ID();
-            $title = get_the_title();
-            $permalink = get_permalink();
+            $jobID         = get_the_ID();
+            $title         = get_the_title();
+            $permalink     = get_permalink();
             $locationTerms = get_the_terms( get_the_ID(), 'work-location' );
-            $locationName = !empty( $locationTerms ) && !is_wp_error( $locationTerms ) ? $locationTerms[0]->name : false;
-            $quantity = get_field( 'quantity', $jobID );
-            $deadline = get_field( 'application_deadline', $jobID );
-            $deadline = DateTime::createFromFormat('d/m/Y', $deadline )->format('F j, Y');
-          ?>
+            $locationNames = !empty( $locationTerms ) && !is_wp_error( $locationTerms ) ? wp_list_pluck( $locationTerms, 'name' ) : false;
+            $quantity      = get_field( 'quantity', $jobID );
+            $deadline      = get_field( 'application_deadline', $jobID );
+            $deadline      = DateTime::createFromFormat( 'd/m/Y', $deadline )->format( 'F j, Y' );
+            ?>
 
             <li class="job-list__item">
               <h3 class="job-list__item-title"><a href="<?= $permalink ?>"></a><?= esc_html( $title ) ?></h3>
               <ul class="job-list__item-meta-list">
-                <?php if( !empty( $quantity )): ?>
+                <?php if( !empty( $quantity ) ): ?>
                   <li class="job-list__item-meta quantity">
-                    <span class="job-list__item-meta-label"><?php esc_html_e('Quantity', 'gpw') ?></span>
+                    <span class="job-list__item-meta-label"><?php esc_html_e( 'Quantity', 'gpw' ) ?></span>
                     <span class="job-list__item-meta-value"><?= esc_html( $quantity ) ?></span>
                   </li>
                 <?php endif; ?>
-                <?php if( $locationName ): ?>
+                <?php if( $locationNames ): ?>
                   <li class="job-list__item-meta location">
-                    <span class="job-list__item-meta-label"><?php esc_html_e('Location', 'gpw') ?></span>
-                    <span class="job-list__item-meta-value"><?= esc_html( $locationName ) ?></span>
+                    <span class="job-list__item-meta-label"><?php esc_html_e( 'Location', 'gpw' ) ?></span>
+                    <span class="job-list__item-meta-value"><?= esc_html( implode( ', ', $locationNames ) ) ?></span>
                   </li>
                 <?php endif; ?>
-                <?php if( !empty( $deadline )): ?>
+                <?php if( !empty( $deadline ) ): ?>
                   <li class="job-list__item-meta deadline">
-                    <span class="job-list__item-meta-label"><?php esc_html_e('Application Deadline', 'gpw') ?></span>
+                    <span class="job-list__item-meta-label"><?php esc_html_e( 'Application Deadline', 'gpw' ) ?></span>
                     <span class="job-list__item-meta-value"><?= esc_html( $deadline ) ?></span>
                   </li>
                 <?php endif; ?>
               </ul>
               <a href="<?= $permalink ?>" class="job-list__item-view-detail">
-                <span><?php esc_html_e('View detail', 'gpw') ?></span>
+                <span><?php esc_html_e( 'View detail', 'gpw' ) ?></span>
                 <span class="material-symbols-outlined">arrow_forward</span>
               </a>
             </li>
@@ -120,18 +121,18 @@ $jobsQuery = new WP_Query($jobArgs);
       <?php endif ?>
 
     </main>
-    <?php if( $jobsQuery->max_num_pages > 1 ): ?>
+    <?php if( $maxPages > 1 ): ?>
 
       <footer class="job-list__footer" aria-hidden="false">
 
-        <ul class="job-list__pagination" data-max-pages="<?= esc_attr( $jobsQuery->max_num_pages ) ?>">
+        <ul class="job-list__pagination" data-max-pages="<?= esc_attr( $maxPages ) ?>">
 
           <li class="job-list__pagination-item job-list__pagination-item--disabled" data-page="prev">
             <span class="material-symbols-outlined">chevron_left</span>
           </li>
-          <?php for( $i = 1; $i <= $jobsQuery->max_num_pages; $i++ ){
+          <?php for( $i = 1; $i <= $maxPages; $i++ ) {
             $isActive = $i === PAGED;
-            echo sprintf('<li class="job-list__pagination-item%s" data-page="%d"><span>%d</span></li>',
+            echo sprintf( '<li class="job-list__pagination-item%s" data-page="%d"><span>%d</span></li>',
               $isActive ? ' job-list__pagination-item--active' : '',
               $i,
               $i
@@ -151,20 +152,20 @@ $jobsQuery = new WP_Query($jobArgs);
         <h3 class="job-list__item-title"><a href=""></a></h3>
         <ul class="job-list__item-meta-list">
           <li class="job-list__item-meta quantity">
-            <span class="job-list__item-meta-label"><?php esc_html_e('Quantity', 'gpw') ?></span>
+            <span class="job-list__item-meta-label"><?php esc_html_e( 'Quantity', 'gpw' ) ?></span>
             <span class="job-list__item-meta-value"></span>
           </li>
           <li class="job-list__item-meta location">
-            <span class="job-list__item-meta-label"><?php esc_html_e('Location', 'gpw') ?></span>
+            <span class="job-list__item-meta-label"><?php esc_html_e( 'Location', 'gpw' ) ?></span>
             <span class="job-list__item-meta-value"></span>
           </li>
           <li class="job-list__item-meta deadline">
-            <span class="job-list__item-meta-label"><?php esc_html_e('Application Deadline', 'gpw') ?></span>
+            <span class="job-list__item-meta-label"><?php esc_html_e( 'Application Deadline', 'gpw' ) ?></span>
             <span class="job-list__item-meta-value"></span>
           </li>
         </ul>
         <a href="" class="job-list__item-view-detail">
-          <span><?php esc_html_e('View detail', 'gpw') ?></span>
+          <span><?php esc_html_e( 'View detail', 'gpw' ) ?></span>
           <span class="material-symbols-outlined">arrow_forward</span>
         </a>
       </li>

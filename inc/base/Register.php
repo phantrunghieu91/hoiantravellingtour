@@ -120,8 +120,8 @@ class Register extends BaseController {
     if ( is_page( [508, 2310] ) ) {
       $action = \gpweb\inc\controller\CareerController::getInstance()->getAction();
 
-      $this->enqueueScript( 'gpw-careers-page', '1.0.3', true );
-      $this->enqueueStyle( 'gpw-careers-page', '1.0.8' );
+      $this->enqueueScript( 'gpw-careers-page', '1.0.4', true );
+      $this->enqueueStyle( 'gpw-careers-page', '1.0.10' );
       wp_localize_script( 'gpw-careers-page', 'ajaxObj', [
         'url'    => admin_url( 'admin-ajax.php' ),
         'action' => $action,
