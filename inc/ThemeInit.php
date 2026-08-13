@@ -19,6 +19,7 @@ class ThemeInit {
       controller\PostController::class,
       controller\CareerController::class,
       controller\JobAppliedFormModified::class,
+      controller\PopupController::class,
     ];
   }
 
@@ -26,9 +27,9 @@ class ThemeInit {
    ** Register the services.
    */
   public static function register_services() {
-    foreach(self::get_services() as $class) {
-      $service = method_exists($class, 'getInstance') ? $class::getInstance() : self::instantiate($class);
-      if(method_exists($service, 'register')) {
+    foreach( self::get_services() as $class ) {
+      $service = method_exists( $class, 'getInstance' ) ? $class::getInstance() : self::instantiate( $class );
+      if( method_exists( $service, 'register' ) ) {
         $service->register();
       }
     }
@@ -40,7 +41,7 @@ class ThemeInit {
    * @param string $class The class name.
    * @return object An instance of the class.
    */
-  private static function instantiate($class) {
+  private static function instantiate( $class ) {
     return new $class();
   }
 }
